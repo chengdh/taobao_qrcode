@@ -8,6 +8,20 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+<%
+def boxen?; ENV['BOXEN_HOME']; end
+
+socket = [
+  ENV["BOXEN_MYSQL_SOCKET"],        #mac osx boxen
+  "/var/run/mysql5/mysqld.sock",    #centos
+  "/var/run/mysqld/mysqld.sock",    #ubuntu
+  "/var/lib/mysql/mysql.sock",      #centos
+  "/tmp/mysql.sock"                 #mac osx
+].compact.detect { |f| File.exist? f }
+
+port = ENV["BOXEN_MYSQL_PORT"] || "3306"
+%>
+
 development:
   adapter: mysql2
   encoding: utf8
@@ -16,6 +30,8 @@ development:
   username: root
   password:
   host: localhost
+  socket: <%=socket%>
+  port: <%=port%>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,6 +44,8 @@ test:
   username: root
   password:
   host: localhost
+  socket: <%=socket%>
+  port: <%=port%>
 
 production:
   adapter: mysql2

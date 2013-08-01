@@ -59,9 +59,12 @@ gem 'i18n-js'
 gem 'jquery-turbolinks'
 gem 'less-rails'
 gem 'therubyracer'
-gem 'turbolinks'
 gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 'fontawesome-3.2.1'
 gem 'uglifier', '>= 1.3.0'
+
+#taobaoSDK
+#NOTE 现在本地安装
+gem 'taobaoSDK','0.0.1',path: "~/myproject/taobaoSDK/build"
 
 group :development, :test do
   gem 'debugger'

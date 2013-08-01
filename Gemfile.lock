@@ -9,6 +9,11 @@ GIT
       rails (>= 3.1)
       railties (>= 3.1)
 
+PATH
+  remote: ~/myproject/taobaoSDK/build
+  specs:
+    taobaoSDK (0.0.1)
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -305,6 +310,7 @@ DEPENDENCIES
   sdoc
   selenium-webdriver
   simplecov
+  taobaoSDK (= 0.0.1)!
   therubyracer
   turbolinks
   twitter-bootstrap-rails!
