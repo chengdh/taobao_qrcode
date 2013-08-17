@@ -64,7 +64,7 @@ gem 'uglifier', '>= 1.3.0'
 
 #taobaoSDK
 #NOTE 现在本地安装
-gem 'taobaoSDK','0.0.1',path: "~/myproject/taobaoSDK/build"
+gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
 
 group :development, :test do
   gem 'debugger'
@@ -73,6 +73,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'pry-rails'
+  gem 'awesome_print'
 end
 
 group :development do
@@ -80,6 +81,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'rspec-rails'
 end
 
 group :test do
