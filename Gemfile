@@ -47,6 +47,8 @@ gem 'capistrano', group: :development
 # Miscellanea
 # gem 'google-analytics-rails'
 gem 'haml'
+gem 'haml-rails'
+gem "rqrcode", "~> 0.4.2"
 # gem 'http_accept_language'
 gem 'jquery-rails'
 gem 'nokogiri'
@@ -63,8 +65,10 @@ gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 
 gem 'uglifier', '>= 1.3.0'
 
 #taobaoSDK
-#NOTE 现在本地安装
+#NOTE 先在本地安装
 gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
+gem "will_paginate", "~> 3.0.4"
+gem "will_paginate-bootstrap", "~> 0.2.4"
 
 group :development, :test do
   gem 'debugger'

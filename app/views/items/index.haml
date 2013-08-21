@@ -1,0 +1,19 @@
+%h1 商品列表 
+%ul.thumbnails
+  - @items.each do |item|
+    - qr = item_qrcode(item)
+    %li.span2
+      %table.qrcode
+        - qr.modules.each_index do |x|
+          %tr  
+            - qr.modules.each_index do |y|
+              - if qr.dark?(x,y)
+                %td.black
+              - else 
+                %td.white
+        %tr
+          %td(colspan='100')
+            = item.title
+
+%div.pagination
+  = will_paginate @items,renderer: BootstrapPagination::Rails
