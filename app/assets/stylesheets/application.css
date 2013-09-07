@@ -31,4 +31,7 @@
   .qrcode td.black { background-color: #000; }
   .qrcode td.white { background-color: #fff; }
 
-
+  .login-info{
+    float : right;
+    padding : 5px;
+  }

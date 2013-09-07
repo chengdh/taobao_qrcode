@@ -1,19 +1,33 @@
-%h1 商品列表 
-%ul.thumbnails
-  - @items.each do |item|
-    - qr = item_qrcode(item)
-    %li.span2
-      %table.qrcode
-        - qr.modules.each_index do |x|
-          %tr  
-            - qr.modules.each_index do |y|
-              - if qr.dark?(x,y)
-                %td.black
-              - else 
-                %td.white
-        %tr
-          %td(colspan='100')
-            = item.title
+.navbar
+  .navbar-inner
+    %ul.nav
+      %li.active
+        %a(href="#") 出售中的宝贝
+      %li
+        %a(href="#") 橱窗推荐宝贝
 
-%div.pagination
+    %ul.nav.pull-right
+      %li
+        .btn-group
+          %a.btn.btn-items-search(href="#" data-toggle="popover" data-placement="bottom" title="")
+            %i.icon-search
+
+        .btn-group
+          %a.btn(href="#" data-toggle="popover" data-placement="bottom" title="")
+            %i.icon-th-list
+
+
+.alert.alert-info
+  单击商品二维码选择_te
+
+.well.well-large
+  %ul.thumbnails
+    - @items.each do |item|
+      %li.span2
+        = render 'qr_code',:item => item
+
+.pagination
   = will_paginate @items,renderer: BootstrapPagination::Rails
+
+= render 'search'
+= session[:taobao_access_token]

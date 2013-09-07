@@ -1,0 +1,12 @@
+.well.sidebar-nav
+  %h4.Sidebar 
+    = session[:shop].try(:title)
+  = render 'items/qr_code',:item => session[:shop]
+  %ul.nav.nav-list
+    %li
+      = link_to "在店铺左侧栏显示", "/path1"
+    %li
+      = link_to "上传到淘宝图片空间", "/path1"
+    %li
+      = link_to "下载", "/path1"
+

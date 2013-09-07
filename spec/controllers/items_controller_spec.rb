@@ -20,6 +20,7 @@ require 'spec_helper'
 
 describe ItemsController do
 
+  render_views
   # This should return the minimal set of attributes required to create a valid
   # Item. As you add validations to Item, be sure to
   # adjust the attributes here as well.
@@ -28,16 +29,29 @@ describe ItemsController do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ItemsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { session[:taobao_access_token] = {"w2_expires_in" => 1800, 
+                                              "taobao_user_id" => "3600300860", 
+                                              "taobao_user_nick" => "sandbox_cdh", 
+                                              "w1_expires_in" => 12960000, 
+                                              "re_expires_in" => 15552000, 
+                                              "r2_expires_in" => 259200, 
+                                              "expires_in" => 12960000, 
+                                              "token_type" => "Bearer", 
+                                              "refresh_token" => "620110248bdf55ac8ce3d3ef0ed539eeb671584376824683600300860", 
+                                              "access_token" => "6202202fb9ZZ5c14fd720000853757717f856a651ea46463600300860", 
+                                              "r1_expires_in" => 12960000}
+  }
+
+  let!(:items_onsale_get_response) {FactoryGirl.build(:items_onsale_get_response)}
 
   describe "GET index" do
     it "assigns all items as @items" do
-      item = Item.create! valid_attributes
+      TaobaoSDK::Session.should_receive(:invoke).and_return(items_onsale_get_response)
       get :index, {}, valid_session
-      assigns(:items).should eq([item])
+      assigns(:items).should eq(items_onsale_get_response.items)
     end
   end
-
+=begin
   describe "GET show" do
     it "assigns the requested item as @item" do
       item = Item.create! valid_attributes
@@ -156,5 +170,5 @@ describe ItemsController do
       response.should redirect_to(items_url)
     end
   end
-
+=end
 end
