@@ -82,6 +82,7 @@ gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 
 gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
 gem "will_paginate", "~> 3.0.4"
 gem "will_paginate-bootstrap", "~> 0.2.4"
+gem "fancybox2-rails", "~> 0.2.4"
 
 
 group :development, :test do
@@ -100,7 +101,7 @@ group :development do
   gem 'binding_of_caller', "~> 0.7.2"
   gem 'meta_request', "~> 0.2.8"
   gem "rails-footnotes",'~> 3.7.8'
-  gem 'guard-rails_best_practices'
+  #gem 'guard-rails_best_practices'
 end
 
 group :test do

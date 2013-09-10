@@ -11,5 +11,10 @@ require 'spec_helper'
 #   end
 # end
 describe ItemsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each){set_taobao_access_token}
+  let!(:sellercats_list_get_response) {FactoryGirl.build(:sellercats_list_get_response)}
+  it "#sellercats_for_select" do
+    TaobaoSDK::Session.should_receive(:invoke).and_return(sellercats_list_get_response)
+    helper.sellercats_for_select.should_not be_blank
+  end
 end

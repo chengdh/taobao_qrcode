@@ -1,33 +1,20 @@
-.navbar
-  .navbar-inner
-    %ul.nav
-      %li.active
-        %a(href="#") 出售中的宝贝
-      %li
-        %a(href="#") 橱窗推荐宝贝
+%ul.nav.nav-tabs
+  %li.active
+    %a(href="#") 出售中的宝贝
+  %li
+    %a(href="#") 橱窗推荐宝贝
 
-    %ul.nav.pull-right
-      %li
-        .btn-group
-          %a.btn.btn-items-search(href="#" data-toggle="popover" data-placement="bottom" title="")
-            %i.icon-search
-
-        .btn-group
-          %a.btn(href="#" data-toggle="popover" data-placement="bottom" title="")
-            %i.icon-th-list
-
-
-.alert.alert-info
-  单击商品二维码选择_te
-
-.well.well-large
+.well.well-small
   %ul.thumbnails
     - @items.each do |item|
-      %li.span2
+      %li.span2.qr-wrapper
         = render 'qr_code',:item => item
+        = link_to item.title,item_path(:id => item.num_iid)
+        %label.checkbox
+          %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 选择
 
 .pagination
   = will_paginate @items,renderer: BootstrapPagination::Rails
 
-= render 'search'
-= session[:taobao_access_token]
+- content_for :sidebar do
+  = render "sidebar"

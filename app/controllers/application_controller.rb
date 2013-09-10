@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   acts_as_taobao_controller
+  #处理search参数
   #获取店铺信息
   #append_before_filter :get_shop_info
   protected

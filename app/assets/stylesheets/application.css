@@ -8,30 +8,22 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require fancybox
  *= require_self
  *= require_tree .
  */
-  table.qrcode {
-    border-width: 0;
-    border-style: none;
-    border-color: #0000ff;
-    border-collapse: collapse;
-    margin : 10px;
-  }
-  .qrcode td {
-    border-width: 0; 
-    border-style: none;
-    border-color: #0000ff; 
-    border-collapse: collapse; 
-    padding: 0; 
-    margin: 0; 
-    width: 5px; 
-    height: 5px; 
-  }
-  .qrcode td.black { background-color: #000; }
-  .qrcode td.white { background-color: #fff; }
 
-  .login-info{
+/*侧边栏*/
+.sidebar{
+  margin-top : 60px;
+}
+/*主界面登录*/
+.login-info{
     float : right;
     padding : 5px;
-  }
+}
+/*选定商品*/
+.item-selected{
+  border : 1px solid gray;
+}
+

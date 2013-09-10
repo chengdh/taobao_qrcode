@@ -1,0 +1,16 @@
+.sidebar
+  %h4.alert.alert-info.selected-info 请选定商品进行操作
+
+  %ul.nav.nav-list
+    %li
+      %label.checkbox
+        %input(type="checkbox" class='cbx-select-item-all') 选择全部商品
+    %li
+      = link_to "自动更新到宝贝图片", "/path1" 
+    %li
+      = link_to "自动更新到宝贝描述",  update_to_item_describe_item_path(:id => @items[0].num_iid),:method => :put
+    %li
+      = link_to "下载到本地", "/path3" 
+
+  %hr
+  = render "search"

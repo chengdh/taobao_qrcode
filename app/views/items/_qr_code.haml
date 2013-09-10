@@ -1,13 +1,10 @@
 - qr = item_qrcode(item)
-%table.qrcode
+=image_tag item.pic_url,:size => '30x30',:style => 'position : relative;left : 25px;top :50px;cursor : pointer;'
+%table(style='cursor : pointer;border-width: 0;border-style: none;border-color: #0000ff;border-collapse: collapse;margin : 5px;')
   - qr.modules.each_index do |x|
     %tr  
       - qr.modules.each_index do |y|
         - if qr.dark?(x,y)
-          %td.black
+          %td(style='border-width: 0; border-style: none;border-color: #0000ff;border-collapse: collapse;padding: 0;margin: 0; width: 4px; height: 4px;background-color: #000;')
         - else 
-          %td.white
-  %tr
-    %td(colspan='100')
-      = item.title
-
+          %td(style='border-width: 0; border-style: none;border-color: #0000ff;border-collapse: collapse;padding: 0;margin: 0; width: 4px; height: 4px;background-color: #fff;')
