@@ -8,7 +8,9 @@
     %li
       = link_to "自动更新到宝贝图片", "/path1" 
     %li
-      = link_to "自动更新到宝贝描述",  update_to_item_describe_item_path(:id => @items[0].num_iid),:method => :put
+      = link_to_function "自动更新到宝贝描述",  "",:class => 'btn-update-to-items-describe'
+    %li
+      = link_to "自动更新到宝贝描述_test",  img_upload_items_path(:ids => [2000042003886]),:method => :put
     %li
       = link_to "下载到本地", "/path3" 
 

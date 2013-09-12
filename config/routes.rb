@@ -14,8 +14,9 @@ TaobaoQrcode::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :items,:only => [:index,:show] do
-    member do
-      put :update_to_item_describe
+    collection do
+      put :update_to_items_describe
+      put :img_upload
     end
   end
 

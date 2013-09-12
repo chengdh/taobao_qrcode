@@ -10,13 +10,10 @@
  *
  *= require fancybox
  *= require_self
+ *= require jquery.notify_bar
  *= require_tree .
  */
 
-/*侧边栏*/
-.sidebar{
-  margin-top : 60px;
-}
 /*主界面登录*/
 .login-info{
     float : right;
@@ -26,4 +23,3 @@
 .item-selected{
   border : 1px solid gray;
 }
-

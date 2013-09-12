@@ -10,6 +10,13 @@ GIT
       railties (>= 3.1)
 
 GIT
+  remote: git://github.com/rusanu/blockuijs-rails.git
+  revision: 5deb1d36a861327dd54002d559fcd0e6197a3c83
+  specs:
+    blockuijs-rails (0.1.0)
+      rails (>= 3.1)
+
+GIT
   remote: git://github.com/sporkrb/spork-rails.git
   revision: 3224f84d8c31fcb0894e9a43f6c3ac67e3aa0d71
   specs:
@@ -167,6 +174,7 @@ GEM
     i18n (0.6.5)
     i18n-js (2.1.2)
       i18n
+    imgkit (1.3.9)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -176,6 +184,7 @@ GEM
     jquery-turbolinks (2.0.1)
       railties (>= 3.1.0)
       turbolinks
+    jquery_notify_bar (1.0.0)
     json (1.8.0)
     kgio (2.8.0)
     launchy (2.3.0)
@@ -342,6 +351,7 @@ DEPENDENCIES
   awesome_print (~> 1.1.0)
   better_errors
   binding_of_caller (~> 0.7.2)
+  blockuijs-rails!
   bullet (~> 4.6.0)
   capistrano (~> 2.15.5)
   capybara (~> 2.1.0)
@@ -362,9 +372,11 @@ DEPENDENCIES
   haml-rails (~> 0.4)
   haml_assets (~> 0.2.2)
   i18n-js (~> 2.1.2)
+  imgkit (~> 1.3.9)
   jbuilder (~> 1.5.1)
   jquery-rails (~> 3.0.4)
   jquery-turbolinks (~> 2.0.1)
+  jquery_notify_bar (~> 1.0.0)
   launchy (~> 2.3.0)
   less-rails (~> 2.4.0)
   meta_request (~> 0.2.8)

@@ -1,0 +1,29 @@
+/*商品图片*/
+img.item-img{
+  position : relative;
+  cursor : pointer;
+  left : 40px;
+  top : 40px;
+  width : 30px;
+  height : 30px;
+}
+/*条码样式*/
+table.item-qr-code{
+  border : none;
+  border-collapse : collapse;
+  margin : 0;
+  padding : 0;
+  cursor : pointer;
+}
+table.item-qr-code td.black{
+  border : none;
+  height : 4px;
+  width : 8px;
+  background : #000;
+}
+table.item-qr-code td.white{
+  border : none;
+  height : 4px;
+  width : 4px;
+  background : #fff;
+}

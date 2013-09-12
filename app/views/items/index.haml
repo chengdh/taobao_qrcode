@@ -1,17 +1,17 @@
 %ul.nav.nav-tabs
   %li.active
-    %a(href="#") 出售中的宝贝
+    = link_to "出售中的宝贝",items_path
   %li
-    %a(href="#") 橱窗推荐宝贝
+    = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
 
 .well.well-small
   %ul.thumbnails
     - @items.each do |item|
-      %li.span2.qr-wrapper
-        = render 'qr_code',:item => item
-        = link_to item.title,item_path(:id => item.num_iid)
+      %li.span2
+        = link_to image_tag(item.pic_url,size: '150x200',class: "img-rounded"),item_path(:id => item.num_iid)
         %label.checkbox
-          %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 选择
+          %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
+          =item.title
 
 .pagination
   = will_paginate @items,renderer: BootstrapPagination::Rails

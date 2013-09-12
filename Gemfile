@@ -83,6 +83,10 @@ gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
 gem "will_paginate", "~> 3.0.4"
 gem "will_paginate-bootstrap", "~> 0.2.4"
 gem "fancybox2-rails", "~> 0.2.4"
+gem 'jquery_notify_bar', "~> 1.0.0"
+gem 'blockuijs-rails',  :git => 'git://github.com/rusanu/blockuijs-rails.git'
+#可将html转换为图片
+gem "imgkit", "~> 1.3.9"
 
 
 group :development, :test do

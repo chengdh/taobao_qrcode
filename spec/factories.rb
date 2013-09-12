@@ -3,7 +3,8 @@ FactoryGirl.define do
   factory :item,:class => TaobaoSDK::Item do
     num_iid   1
     title     '测试商品'
-    pic_url   ''
+    pic_url "http://127.0.0.1/test_item.jpeg"
+    detail_url "http://127.0.0.1/test_item"
     desc      'this is a mock item'
   end
 
@@ -39,4 +40,13 @@ FactoryGirl.define do
   factory :item_update_response,:class => TaobaoSDK::ItemUpdateResponse do
     item FactoryGirl.build(:item)
   end
+  factory :item_img,:class => TaobaoSDK::ItemImg do
+    id 12345
+    url "http://127.0.0.1/a.png"
+  end
+  #taobao.item.img.upload
+  factory :item_img_upload_response,:class => TaobaoSDK::ItemImgUploadResponse do
+    item_img FactoryGirl.build(:item_img)
+  end
+
 end
