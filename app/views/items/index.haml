@@ -8,10 +8,11 @@
   %ul.thumbnails
     - @items.each do |item|
       %li.span2
-        = link_to image_tag(item.pic_url,size: '150x200',class: "img-rounded"),item_path(:id => item.num_iid)
-        %label.checkbox
-          %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
-          =item.title
+        .thumbnail
+          = render "qr_code",:item => item
+          %label.checkbox
+            %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
+            =item.title
 
 .pagination
   = will_paginate @items,renderer: BootstrapPagination::Rails

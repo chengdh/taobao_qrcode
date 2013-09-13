@@ -122,5 +122,5 @@ CSS
     %w[num_iid title nick detail_url type desc cid seller_cids pic_url num price].join(",")
   end
   #每页显示数据条数
-  def per_page ; 5; end
+  def per_page ; 15; end
 end

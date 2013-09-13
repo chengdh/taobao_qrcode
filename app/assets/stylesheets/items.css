@@ -1,29 +1,48 @@
 /*商品图片*/
-img.item-img{
+.qr-wrapper{
   position : relative;
+}
+/*
+ *商品图在条码图案中居中
+ *参考http://css-tricks.com/snippets/css/absolute-center-vertical-horizontal-an-image/
+ * */
+img.item-img{
   cursor : pointer;
-  left : 40px;
-  top : 40px;
-  width : 30px;
-  height : 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px; /* Half the height */
+  margin-left: -20px; /* Half the width */
 }
 /*条码样式*/
 table.item-qr-code{
-  border : none;
-  border-collapse : collapse;
-  margin : 0;
-  padding : 0;
   cursor : pointer;
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
 }
 table.item-qr-code td.black{
-  border : none;
-  height : 4px;
-  width : 8px;
-  background : #000;
+    border-width: 0; 
+    border-style: none;
+    border-color: #0000ff; 
+    border-collapse: collapse; 
+    padding: 0; 
+    margin: 0; 
+    width: 3px; 
+    height: 3px; 
+    background : #000;
 }
 table.item-qr-code td.white{
-  border : none;
-  height : 4px;
-  width : 4px;
+  border-width: 0; 
+  border-style: none;
+  border-color: #0000ff; 
+  border-collapse: collapse; 
+  padding: 0; 
+  margin: 0; 
+  width: 3px; 
+  height: 3px; 
   background : #fff;
 }

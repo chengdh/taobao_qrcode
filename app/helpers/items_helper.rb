@@ -2,7 +2,7 @@
 module ItemsHelper
   def item_qrcode(item)
     text = item.detail_url
-    RQRCode::QRCode.new(text, size: 6, level:  :m )
+    RQRCode::QRCode.new(text, size: 7, level:  :m )
   end
   #获取店铺类目
   def sellercats_for_select

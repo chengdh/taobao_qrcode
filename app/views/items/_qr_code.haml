@@ -1,6 +1,6 @@
 - qr = item_qrcode(item)
-%div
-  =image_tag item.pic_url,:class => 'item-img'
+.qr-wrapper
+  =image_tag item.pic_url,:class => 'item-img img-rounded'
   %table.item-qr-code
     - qr.modules.each_index do |x|
       %tr  
