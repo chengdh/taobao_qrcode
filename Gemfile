@@ -87,6 +87,8 @@ gem 'jquery_notify_bar', "~> 1.0.0"
 gem 'blockuijs-rails',  :git => 'git://github.com/rusanu/blockuijs-rails.git'
 #可将html转换为图片
 gem "imgkit", "~> 1.3.9"
+#在线打包zip
+gem "zipstream", "~> 0.1.3"
 
 
 group :development, :test do

@@ -9,6 +9,7 @@ $ ->
     else
       el.parents('.qr-wrapper').find('.qr').removeClass('item-selected')
     update_selected_info()
+    update_btn_download_zip_href()
   )
   #选定全部商品
   $('.cbx-select-item-all').on('click',(evt) ->
@@ -18,6 +19,7 @@ $ ->
     else
       $('.cbx-select-item').prop('checked',false)
     update_selected_info()
+    update_btn_download_zip_href()
   )
   
   #更新商品选择信息
@@ -25,17 +27,38 @@ $ ->
     selected_items = $('.cbx-select-item:checked:enabled').length
     if selected_items > 0
       $('.selected-info').html("已选定#{selected_items}个商品")
+      $('.btn-update-to-items-img').parent().removeClass('disabled')
     else
       $('.selected-info').html("请选定商品进行操作")
+      $('.btn-update-to-items-img').parent().addClass('disabled')
   
   #获取当前界面选定的商品的id数组
   get_selected_item_ids = ->
     selected_items = $('.cbx-select-item:checked:enabled')
     selected_ids = $.map(selected_items,(el) -> $(el).val())
   
+  #更新批量下载按钮的href
+  update_btn_download_zip_href = ->
+    ids = get_selected_item_ids()
+    origin_href = $('.btn-download-zip').data('origin-href')
+    if ids.length == 0
+      $('.btn-download-zip').attr('href',origin_href)
+    else
+      params = $.param("ids[]" : ids)
+      $('.btn-download-zip').attr('href',"#{origin_href}?#{params}")
   
-  #更新选定的商品条码到taobao对应的服务器上
-  $('.btn-update-to-items-describe').on('click', ->
+  #更新选定的商品条码到taobao服务器上
+  $('.btn-update-to-items-img').on('click', ->
+    selected_items = $('.cbx-select-item:checked:enabled').length
+    if selected_items <= 0
+      $.notifyBar(
+        cssClass: 'error',
+        html: '请选择商品进行操作',
+        delay: 2000,
+        animationSpeed: "normal"
+      )  
+      return 
+
     setting = 
       data: 
         ids : get_selected_item_ids()
@@ -50,15 +73,3 @@ $ ->
   
     $.ajax("items/img_upload.js",setting).then(hide_loading,hide_loading)
   )
-  
-  #更新条码显示中logo的位置
-  adjust_img_position = (el_img)-> 
-    qr_table = el_img.next('.item-qr-code')
-    width = qr_table.width()
-    height = qr_table.height()
-    el_img.css(
-      left : "#{(width - el_img.width())/2}px"
-      top : "#{(height - el_img.height())/2}px"
-    )
-  
-    #  adjust_img_position($(el_img)) for el_img in $('.item-img')

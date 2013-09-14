@@ -36,6 +36,7 @@ describe ItemsController do
 
   describe "GET index" do
     it "assigns all items as @items" do
+      controller.should_receive(:taobao_items_list_get).and_return(items_onsale_get_response.items)
       TaobaoSDK::Session.should_receive(:invoke).with(
         method: "taobao.sellercats.list.get",
         nick:  'sandbox_cdh' 
@@ -54,17 +55,6 @@ describe ItemsController do
       assigns(:item).should eq(item)
     end
   end
-
-  #更新商品到宝贝描述
-  describe "PUT update_to_items_describe" do
-    it "should success" do
-      item = FactoryGirl.build(:item)
-      item_update_response = FactoryGirl.build(:item_update_response)
-      TaobaoSDK::Session.should_receive(:invoke).and_return(item_update_response)
-      put :update_to_items_describe,{:ids => [item.num_iid]},valid_session
-      response.should be_success
-    end
-  end
   #上传生成的条码到商品图片
   describe "PUT img_upload" do
     it "should success" do
@@ -73,6 +63,27 @@ describe ItemsController do
       controller.should_receive(:taobao_item_get).and_return(item)
       TaobaoSDK::Session.should_receive(:invoke).and_return(item_img_upload_response)
       put :img_upload,{:ids => [item.num_iid]},valid_session
+      response.should be_success
+    end
+  end
+  #单个商品下载到本地
+  #GET items/:id/download
+  describe "GET download_qr" do
+    it "should success" do
+      TaobaoSDK::Session.should_receive(:invoke).and_return(item_get_response)
+      item = item_get_response.item
+      get :download_qr, {:id => item.num_iid}, valid_session
+      assigns(:item).should eq(item)
+      response.should be_success
+    end
+  end
+  #产品二纬码图片打包成zip下载到本地
+  #GET items/download_zip
+  describe "GET download_zip" do
+    it "should success" do
+      item = FactoryGirl.build(:item)
+      controller.should_receive(:taobao_item_get).and_return(item)
+      get :download_zip,{:format => :zip,:ids => [item.num_iid]},valid_session
       response.should be_success
     end
   end

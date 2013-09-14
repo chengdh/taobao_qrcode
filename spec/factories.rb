@@ -48,5 +48,20 @@ FactoryGirl.define do
   factory :item_img_upload_response,:class => TaobaoSDK::ItemImgUploadResponse do
     item_img FactoryGirl.build(:item_img)
   end
+  #Picutre
+  factory :picture,:class => TaobaoSDK::Picture do
+    picture_id 1
+    picture_category_id  0
+    picture_path "http://img07.taobaocdn.com/imgextra/i7/22670458/T2dD0kXb4cXXXXXXXX_!!22670458.jpg"
+    title "测试商品图片"
+    sizes  3000
+    pixel '240x240'
+    status 'unfroze'
+  end
+  #taobao.picture.upload
+  #上传单张图片
+  factory :picture_upload_response,:class => TaobaoSDK::PictureUploadResponse do
+    picture FactoryGirl.build(:picture)
+  end
 
 end

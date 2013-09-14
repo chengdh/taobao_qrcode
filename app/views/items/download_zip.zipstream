@@ -1,0 +1,4 @@
+#coding: utf-8
+@item_qr_codes.each do |qr|
+  zip.write "#{qr.first}.jpg", qr.last
+end

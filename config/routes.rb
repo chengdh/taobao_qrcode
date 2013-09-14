@@ -15,8 +15,12 @@ TaobaoQrcode::Application.routes.draw do
   #   resources :products
   resources :items,:only => [:index,:show] do
     collection do
-      put :update_to_items_describe
       put :img_upload
+      get :download_zip
+    end
+    member do
+      #下载商品条形码
+      get :download_qr
     end
   end
 

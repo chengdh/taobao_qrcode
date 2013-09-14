@@ -9,10 +9,11 @@
     - @items.each do |item|
       %li.span2
         .thumbnail
-          = render "qr_code",:item => item
           %label.checkbox
             %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
             =item.title
+          %a{:href => item_path(:id => item.num_iid),:class =>"fancybox fancybox.ajax"}
+            = render "qr_code",:item => item
 
 .pagination
   = will_paginate @items,renderer: BootstrapPagination::Rails
