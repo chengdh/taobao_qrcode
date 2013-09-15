@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   #GET items/:id
   def show
     @item = taobao_item_get(params[:id])
-    render "show",:layout => false
+    #render "show",:layout => false
   end
   #PUT item/:id/img_upload
   #上传商品图片

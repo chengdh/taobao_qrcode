@@ -1,3 +1,68 @@
-.well
-  = render 'qr_code',:item => @item
+%ul.nav.nav-tabs
+  %li.active
+    = link_to "出售中的宝贝",items_path
+  %li
+    = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
+
+.page-header
+  %h4 
+    = @item.title
+.row
+  .span3
+    .well.well-large.large-qr
+      = render 'qr_code',:item => @item
+  .span6
+    %div
+      %h4 您可这样使用它
+      %ul
+        %li 可以将它放到宝贝展示界面的缩略图中
+        %li 可以将它保存到淘宝图片空间
+        %li 可以将它分享到您的QQ空间/微博,下载到本地等等
+        %li 您使用它的方法很多,试试看?
+
+    .well
+      .btn-group
+        %button.btn{:type =>"button"} 
+          %i.icon-arrow-up
+          更新到宝贝图片
+        %button.btn{:type =>"button"}
+          %i.icon-cloud-upload
+          上传到淘宝图片空间
+        %button.btn{:type =>"button"}
+          %i.icon-download-alt
+          下载
+
+    .well
+      <!-- Baidu Button BEGIN -->
+      #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@item.pic_url}'}"}
+        %a.bds_qzone  QQ空间
+        %a.bds_tsina 新浪微博
+        %a.bds_tqq 腾讯微博
+        %a.bds_renren 人人网
+        %span.bds_more 更多
+      <!-- Baidu Button END -->
+
+.row
+  .span9
+    .alert.alert-info
+      您可复制该二维码链接,然后粘贴到需要显示的地方,它就会显示出来了
+
+  .span9
+    .input-apppend.input-prepend
+      %span.add-on 共享链接
+      %span.span7.uneditable-input 
+        = @item.detail_url
+      %button.btn{:type => "button"} 复制
+
+
+- content_for :sidebar do
+  = render "sidebar"
+
+%script{:type => "text/javascript", :id =>"bdshare_js",:data => "type=tools&mini=1"}
+%script{:type =>"text/javascript", :id => "bdshell_js"}
+
+:javascript
+  //在这里定义bds_config
+  var bds_config = {'bdText':'扫一扫,淘宝5钻产品大优惠!!!'};
+  document.getElementById('bdshell_js').src = "http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
 

@@ -46,3 +46,11 @@ table.item-qr-code td.white{
   height: 3px; 
   background : #fff;
 }
+div.large-qr table.item-qr-code td.white{
+  width : 5px;
+  height : 5px
+}
+div.large-qr table.item-qr-code td.black{
+  width : 5px;
+  height : 5px
+}
