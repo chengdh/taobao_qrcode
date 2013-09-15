@@ -56,13 +56,14 @@ describe ItemsController do
     end
   end
   #上传生成的条码到商品图片
-  describe "PUT img_upload" do
+  #POST items/:id/img_upload
+  describe "POST img_upload" do
     it "should success" do
       item = FactoryGirl.build(:item)
       item_img_upload_response = FactoryGirl.build(:item_img_upload_response)
       controller.should_receive(:taobao_item_get).and_return(item)
       TaobaoSDK::Session.should_receive(:invoke).and_return(item_img_upload_response)
-      put :img_upload,{:ids => [item.num_iid]},valid_session
+      put :img_upload,{:id => item.num_iid},valid_session
       response.should be_success
     end
   end
@@ -84,6 +85,17 @@ describe ItemsController do
       item = FactoryGirl.build(:item)
       controller.should_receive(:taobao_item_get).and_return(item)
       get :download_zip,{:format => :zip,:ids => [item.num_iid]},valid_session
+      response.should be_success
+    end
+  end
+  #将产品图片上传到淘宝图片空间
+  #POST items/picture_upload
+  describe "POST items/picture_upload" do
+    it "should success" do
+      item = FactoryGirl.build(:item)
+      controller.should_receive(:taobao_item_get).and_return(item)
+      TaobaoSDK::Session.should_receive(:invoke).and_return(FactoryGirl.build(:picture_upload_response))
+      post :picture_upload,{:ids => [item.num_iid]},valid_session
       response.should be_success
     end
   end

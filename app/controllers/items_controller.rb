@@ -21,25 +21,24 @@ class ItemsController < ApplicationController
     @item = taobao_item_get(params[:id])
     render "show",:layout => false
   end
-  #PUT items/:id/item_img_upload
+  #PUT item/:id/img_upload
   #上传商品图片
   def img_upload
-    @item_images = []
-    @items = params[:ids].collect {|id| taobao_item_get(id)}
-    @items.each do |old_item|
-      html = render_to_string(:partial => "qr_code",:locals => {:item => old_item},:layout => false)
-      img =  generate_qr_img_stream(html)
-      args = {
-        method: 'taobao.item.img.upload',
-        session: session_key,
-        num_iid: old_item.num_iid,
-        image: img
-      }
-      taobao_response = TaobaoSDK::Session.invoke(args)
-      @item_images.push(taobao_response.item_img)
-    end
+    @item = taobao_item_get(params[:id])
+    html = render_to_string(:partial => "qr_code",:locals => {:item => @item},:layout => false)
+    img =  generate_qr_img_stream(html)
+    args = {
+      method: 'taobao.item.img.upload',
+      session: session_key,
+      num_iid: @item.num_iid,
+      image: img
+    }
+    taobao_response = TaobaoSDK::Session.invoke(args)
+    @item_img = taobao_response.item_img
   end
+
   #GET items/:id/download_qr
+  #下载单个商品的qr_code
   def download_qr
     @item = taobao_item_get(params[:id])
     qr_html = render_to_string(:partial => "qr_code",:locals => {:item => @item},:layout => false)
@@ -47,13 +46,29 @@ class ItemsController < ApplicationController
     send_data item_img,filename: "#{@item.title}.jpg"
   end
   #GET items/download_zip
-  #将选定的商品二纬码打包成zip时再下载
+  #将选定的商品二纬码打包成zip再下载
   def download_zip
     @items = params[:ids].collect {|id| taobao_item_get(id)}
     @item_qr_codes = @items.collect do |item|
       html = render_to_string(:partial => "qr_code",:locals => {:item => item},:layout => false)
       [item.num_iid,generate_qr_img(html)]
     end
+  end
+  #POST item/:id/picture_upload
+  #将条码图片上传到淘宝图片空间
+  def picture_upload
+    @item = taobao_item_get params[:id]
+    html = render_to_string(:partial => "qr_code",:locals => {:item => @item},:layout => false)
+    img =  generate_qr_img_stream(html)
+    args = {
+      method: 'taobao.picture.upload',
+      session: session_key,
+      picture_category_id: 0,
+      image: img,
+      image_input_title: "#{@item.title}.jpg"
+      }
+      taobao_response = TaobaoSDK::Session.invoke(args)
+      @item_picture = taobao_response.picture
   end
 
   private

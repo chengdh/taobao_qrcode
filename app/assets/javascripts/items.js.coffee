@@ -46,30 +46,47 @@ $ ->
     else
       params = $.param("ids[]" : ids)
       $('.btn-download-zip').attr('href',"#{origin_href}?#{params}")
-  
-  #更新选定的商品条码到taobao服务器上
-  $('.btn-update-to-items-img').on('click', ->
+ 
+  #上传二维码图片:a 宝贝图片 b 淘宝图片空间
+  #param  url_upload items/{:id}/img_upload.js 或
+  #       url_upload items/{:id}/picture_upload.js
+  upload_img = (upload_url) ->
     selected_items = $('.cbx-select-item:checked:enabled').length
     if selected_items <= 0
       $.notifyBar(
         cssClass: 'error',
         html: '请选择商品进行操作',
-        delay: 2000,
+        delay: 3000,
         animationSpeed: "normal"
       )  
       return 
 
-    setting = 
-      data: 
-        ids : get_selected_item_ids()
-      type: 'PUT'
-      dataType: 'script'
-    $.fancybox.showLoading()
-    $.blockUI(message : '正在更新,请稍候...')
+    settings = []     
+    for id in get_selected_item_ids()
+      settings.push(
+        data :
+          id : id
+        type: 'POST'
+        dataType : 'script')
   
     hide_loading = ->
       $.unblockUI()
-      $.fancybox.hideLoading()
-  
-    $.ajax("items/img_upload.js",setting).then(hide_loading,hide_loading)
+      #$.fancybox.hideLoading()
+
+    ajax_array = []
+    ajax_array.push($.ajax(upload_url.replace("{:id}",s.data.id),s)) for s  in  settings
+
+    #$.fancybox.showLoading()
+    $.blockUI(message : '处理中...')
+
+    $.when.apply($,ajax_array).then(hide_loading,hide_loading)
+
+  #更新选定的商品条码到taobao服务器上
+  $('.btn-update-to-items-img').on('click', ->
+    upload_img("items/{:id}/img_upload.js")
   )
+  #上传选定的商品二维码图片到淘宝图片空间
+  $('.btn-upload-picture').on('click', ->
+    upload_img("items/{:id}/picture_upload.js")
+  )
+

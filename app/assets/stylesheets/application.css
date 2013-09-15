@@ -9,8 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require fancybox
- *= require_self
  *= require jquery.notify_bar
+ *= require_self
  *= require_tree .
  */
 
