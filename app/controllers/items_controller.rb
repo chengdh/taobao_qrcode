@@ -1,6 +1,7 @@
 #coding: utf-8
 #商品管理界面
 class ItemsController < ApplicationController
+  before_filter :auto_taobao_picture_upload,only: :show
   #GET items
   def index
     args = {
@@ -19,7 +20,7 @@ class ItemsController < ApplicationController
   #GET items/:id
   def show
     @item = taobao_item_get(params[:id])
-    #render "show",:layout => false
+    @picture = PictureUploadLog.last_upload_picture(params[:id])
   end
   #PUT item/:id/img_upload
   #上传商品图片
@@ -57,18 +58,7 @@ class ItemsController < ApplicationController
   #POST item/:id/picture_upload
   #将条码图片上传到淘宝图片空间
   def picture_upload
-    @item = taobao_item_get params[:id]
-    html = render_to_string(:partial => "qr_code",:locals => {:item => @item},:layout => false)
-    img =  generate_qr_img_stream(html)
-    args = {
-      method: 'taobao.picture.upload',
-      session: session_key,
-      picture_category_id: 0,
-      image: img,
-      image_input_title: "#{@item.title}.jpg"
-      }
-      taobao_response = TaobaoSDK::Session.invoke(args)
-      @item_picture = taobao_response.picture
+    @item,@item_picture = taobao_picture_upload params[:id]
   end
 
   private
@@ -164,6 +154,35 @@ class ItemsController < ApplicationController
 CSS
       )
       kit.to_img(:jpeg) 
+  end
+  #上传商品二维码到淘宝图片空间
+  def taobao_picture_upload(num_iid)
+    item = taobao_item_get num_iid
+    html = render_to_string(:partial => "qr_code",:locals => {:item => item},:layout => false)
+    img =  generate_qr_img_stream(html)
+    args = {
+      method: 'taobao.picture.upload',
+      session: session_key,
+      picture_category_id: 0,
+      image: img,
+      image_input_title: "#{item.title}.jpg"
+      }
+    taobao_response = TaobaoSDK::Session.invoke(args)
+    item_picture = taobao_response.picture
+    return item,item_picture
+  end
+  #显示宝贝详细界面时,自动将二维码上传到淘宝图片空间
+  def auto_taobao_picture_upload
+    p_upload_log = PictureUploadLog.last_upload_picture(params[:id])
+    if p_upload_log.blank?
+      item,picture = taobao_picture_upload(params[:id]) 
+
+      nick = session[:taobao_access_token]['taobao_user_nick']
+      PictureUploadLog.create(nick: nick, 
+                              num_iid: params[:id].to_i,
+                              picture_id: picture.picture_id,
+                              picture_path: picture.picture_path)
+    end
   end
   #每页显示数据条数
   def per_page ; 15; end

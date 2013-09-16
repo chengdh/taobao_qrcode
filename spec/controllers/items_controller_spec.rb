@@ -90,12 +90,12 @@ describe ItemsController do
   end
   #将产品图片上传到淘宝图片空间
   #POST items/picture_upload
-  describe "POST items/picture_upload" do
+  describe "POST item/:id/picture_upload" do
     it "should success" do
       item = FactoryGirl.build(:item)
       controller.should_receive(:taobao_item_get).and_return(item)
       TaobaoSDK::Session.should_receive(:invoke).and_return(FactoryGirl.build(:picture_upload_response))
-      post :picture_upload,{:ids => [item.num_iid]},valid_session
+      post :picture_upload,{:id => item.num_iid},valid_session
       response.should be_success
     end
   end

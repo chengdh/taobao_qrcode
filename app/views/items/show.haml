@@ -34,7 +34,7 @@
 
     .well
       <!-- Baidu Button BEGIN -->
-      #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@item.pic_url}'}"}
+      #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@picture.try(:picture_path)}'}"}
         %a.bds_qzone  QQ空间
         %a.bds_tsina 新浪微博
         %a.bds_tqq 腾讯微博
@@ -51,18 +51,9 @@
     .input-apppend.input-prepend
       %span.add-on 共享链接
       %span.span7.uneditable-input 
-        = @item.detail_url
+        = @picture.try(:picture_path)
       %button.btn{:type => "button"} 复制
 
 
 - content_for :sidebar do
   = render "sidebar"
-
-%script{:type => "text/javascript", :id =>"bdshare_js",:data => "type=tools&mini=1"}
-%script{:type =>"text/javascript", :id => "bdshell_js"}
-
-:javascript
-  //在这里定义bds_config
-  var bds_config = {'bdText':'扫一扫,淘宝5钻产品大优惠!!!'};
-  document.getElementById('bdshell_js').src = "http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
-

@@ -89,4 +89,9 @@ $ ->
   $('.btn-upload-picture').on('click', ->
     upload_img("items/{:id}/picture_upload.js")
   )
+  #百度分享相关代码
+  #在这里定义bds_config
+  bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'
+  $('#bdshell_js').attr('src',"http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
+
 
