@@ -1,4 +1,5 @@
 $ ->
+  new ZeroClipboard $("#btn_clip")
   $('.fancybox').fancybox()
   #绑定商品选择事件
   
@@ -89,6 +90,8 @@ $ ->
   $('.btn-upload-picture').on('click', ->
     upload_img("items/{:id}/picture_upload.js")
   )
+  #上传单张qr到商品图片
+  #上传单张qr到图片空间
   #百度分享相关代码
   #在这里定义bds_config
   bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'

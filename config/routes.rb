@@ -20,10 +20,8 @@ TaobaoQrcode::Application.routes.draw do
     member do
       #下载商品条形码
       get :download_qr
-      post :img_upload
-      get :download_zip
-      post :picture_upload
-
+      put :img_upload
+      put :picture_upload
     end
   end
 

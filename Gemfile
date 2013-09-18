@@ -89,7 +89,8 @@ gem 'blockuijs-rails',  :git => 'git://github.com/rusanu/blockuijs-rails.git'
 gem "imgkit", "~> 1.3.9"
 #在线打包zip
 gem "zipstream", "~> 0.1.3"
-
+#浏览器拷贝gem
+gem "zeroclipboard-rails", "~> 0.0.7"
 
 group :development, :test do
   gem 'debugger', "~> 1.6.1"

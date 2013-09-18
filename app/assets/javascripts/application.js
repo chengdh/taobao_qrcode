@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require jquery.blockUI
 //= require jquery.notify_bar
+//= require zeroclipboard
 //= require_tree .

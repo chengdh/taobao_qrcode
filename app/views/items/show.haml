@@ -4,34 +4,45 @@
   %li
     = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
 
-.page-header
-  %h4 
-    = @item.title
 .row
   .span3
-    .well.well-large.large-qr
+    .well.well-small.large-qr
       = render 'qr_code',:item => @item
-  .span6
-    %div
-      %h4 您可这样使用它
+      %h4{:style => "text-align : center;"}
+        %span.label.label-info 
+          = @item.title
+
+
+  .span9
+    .hero-unit
+      %h4 如何使用它?
       %ul
         %li 可以将它放到宝贝展示界面的缩略图中
         %li 可以将它保存到淘宝图片空间
-        %li 可以将它分享到您的QQ空间/微博,下载到本地等等
-        %li 您使用它的方法很多,试试看?
-
+        %li 可以将它分享到您的QQ空间/微博...
+        %li 方法很多,何不尝试一下?
+.row
+  .span12
     .well
       .btn-group
-        %button.btn{:type =>"button"} 
+        %a.btn{:href => img_upload_item_path(:id => @item.num_iid,:format => :js),
+        "data-method" => :put,"data-remote" => true,:rel => "nofollow",
+        "data-toggle" => "tooltip",:title => "将二维码放入宝贝详情页面的图片中"}
           %i.icon-arrow-up
           更新到宝贝图片
-        %button.btn{:type =>"button"}
+
+        %a.btn{:href => picture_upload_item_path(:id => @item.num_iid,:format => :js),
+        "data-method" => :put,"data-remote" => true,:rel => "nofollow",
+        "data-toggle" => "tooltip",:title => "将二维码放入淘宝图片空间"}
           %i.icon-cloud-upload
           上传到淘宝图片空间
-        %button.btn{:type =>"button"}
-          %i.icon-download-alt
-          下载
 
+        %a.btn{:href => download_qr_item_path(:id => @item.num_iid),
+        "data-toggle" => "tooltip",:title => "下载二维码图片到本地"}
+          %i.icon-download-alt
+          下载到本地
+
+  .span12
     .well
       <!-- Baidu Button BEGIN -->
       #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@picture.try(:picture_path)}'}"}
@@ -41,19 +52,15 @@
         %a.bds_renren 人人网
         %span.bds_more 更多
       <!-- Baidu Button END -->
-
 .row
-  .span9
+  .span12
     .alert.alert-info
-      您可复制该二维码链接,然后粘贴到需要显示的地方,它就会显示出来了
+      该二维码已自动上传到您的淘宝图片空间
 
-  .span9
-    .input-apppend.input-prepend
-      %span.add-on 共享链接
-      %span.span7.uneditable-input 
+  .span12
+    .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
+      %span.add-on 链接
+      %span#taobao_pic_url.span8.uneditable-input 
         = @picture.try(:picture_path)
-      %button.btn{:type => "button"} 复制
-
-
-- content_for :sidebar do
-  = render "sidebar"
+      %a#btn_clip.btn{"data-clipboard-target" => 'taobao_pic_url',:type => :button}
+        %i.icon-copy

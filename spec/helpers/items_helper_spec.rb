@@ -13,8 +13,8 @@ require 'spec_helper'
 describe ItemsHelper do
   before(:each){set_taobao_access_token}
   let!(:sellercats_list_get_response) {FactoryGirl.build(:sellercats_list_get_response)}
-  it "#sellercats_for_select" do
+  it "#grouped_sellercats" do
     TaobaoSDK::Session.should_receive(:invoke).and_return(sellercats_list_get_response)
-    helper.sellercats_for_select.should_not be_blank
+    helper.grouped_sellercats.should_not be_blank
   end
 end

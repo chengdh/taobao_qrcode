@@ -22,7 +22,8 @@ class ItemsController < ApplicationController
     @item = taobao_item_get(params[:id])
     @picture = PictureUploadLog.last_upload_picture(params[:id])
   end
-  #PUT item/:id/img_upload
+
+  #POST item/:id/img_upload
   #上传商品图片
   def img_upload
     @item = taobao_item_get(params[:id])

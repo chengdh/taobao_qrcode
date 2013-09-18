@@ -15,7 +15,12 @@ module ItemsHelper
     grouped_seller_cats = origin_seller_cats.group_by {|c| c.parent_cid}
     ret = {}
     grouped_seller_cats.each do |k,v|
-      ret[origin_seller_cats.detect{|c| c.cid == k}.try(:name)] = v.collect {|cat| [cat.name,cat.cid]} if k > 0
+      #判断是否有二级分类,如果有二级分类,需要删除parent_cid = 0的分类
+      if origin_seller_cats.detect {|c| c.parent_cid > 0}.present?
+        ret[origin_seller_cats.detect{|c| c.cid == k}.try(:name)] = v.collect {|cat| [cat.name,cat.cid]} if k > 0
+      else
+        ret[origin_seller_cats.detect{|c| c.cid == k}.try(:name)] = v.collect {|cat| [cat.name,cat.cid]}
+      end
     end
     ret
   end

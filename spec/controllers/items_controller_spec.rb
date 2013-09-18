@@ -50,6 +50,7 @@ describe ItemsController do
   describe "GET show" do
     it "assigns the requested item as @item" do
       TaobaoSDK::Session.should_receive(:invoke).and_return(item_get_response)
+      controller.should_receive(:auto_taobao_picture_upload)
       item = item_get_response.item
       get :show, {:id => item.num_iid}, valid_session
       assigns(:item).should eq(item)
@@ -90,12 +91,12 @@ describe ItemsController do
   end
   #将产品图片上传到淘宝图片空间
   #POST items/picture_upload
-  describe "POST item/:id/picture_upload" do
+  describe "PUT item/:id/picture_upload" do
     it "should success" do
       item = FactoryGirl.build(:item)
       controller.should_receive(:taobao_item_get).and_return(item)
       TaobaoSDK::Session.should_receive(:invoke).and_return(FactoryGirl.build(:picture_upload_response))
-      post :picture_upload,{:id => item.num_iid},valid_session
+      put :picture_upload,{:id => item.num_iid},valid_session
       response.should be_success
     end
   end

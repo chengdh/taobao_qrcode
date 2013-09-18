@@ -1,22 +1,22 @@
-%ul.nav.nav-tabs
-  %li.active
-    = link_to "出售中的宝贝",items_path
-  %li
-    = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
+.span9
+  %ul.nav.nav-tabs
+    %li.active
+      = link_to "出售中的宝贝",items_path
+    %li
+      = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
 
-.well.well-small
-  %ul.thumbnails
-    - @items.each do |item|
-      %li.span2
-        .thumbnail
-          %label.checkbox
-            %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
-            =item.title
-          %a{:href => item_path(:id => item.num_iid),:class =>""}
-            = render "qr_code",:item => item
+  .well.well-small
+    %ul.thumbnails
+      - @items.each do |item|
+        %li.span2
+          .thumbnail
+            %label.checkbox
+              %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
+              =item.title
+            %a{:href => item_path(:id => item.num_iid),:class =>""}
+              = render "qr_code",:item => item
+  .pagination
+    = will_paginate @items,renderer: BootstrapPagination::Rails
 
-.pagination
-  = will_paginate @items,renderer: BootstrapPagination::Rails
-
-- content_for :sidebar do
+.span3
   = render "sidebar"
