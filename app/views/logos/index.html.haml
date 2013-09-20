@@ -1,0 +1,19 @@
+%h1 Listing logos
+
+%table
+  %tr
+    %th Nick
+    %th
+    %th
+    %th
+
+  - @logos.each do |logo|
+    %tr
+      %td= logo.nick
+      %td= link_to 'Show', logo
+      %td= link_to 'Edit', edit_logo_path(logo)
+      %td= link_to 'Destroy', logo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Logo', new_logo_path

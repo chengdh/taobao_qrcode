@@ -7,20 +7,9 @@
 .row
   .span3
     .well.well-small.large-qr
-      = render 'qr_code',:item => @item
-      %h4{:style => "text-align : center;"}
-        %span.label.label-info 
-          = @item.title
-
-
+      = render 'shared/qr',:item => @item
   .span9
-    .hero-unit
-      %h4 如何使用它?
-      %ul
-        %li 可以将它放到宝贝展示界面的缩略图中
-        %li 可以将它保存到淘宝图片空间
-        %li 可以将它分享到您的QQ空间/微博...
-        %li 方法很多,何不尝试一下?
+    = render "shared/qr_config"
 .row
   .span12
     .well
@@ -64,3 +53,15 @@
         = @picture.try(:picture_path)
       %a#btn_clip.btn{"data-clipboard-target" => 'taobao_pic_url',:type => :button}
         %i.icon-copy
+
+
+.row
+  .span12
+    .hero-unit
+      %h4 如何使用它?
+      %ul
+        %li 可以将它放到宝贝展示界面的缩略图中
+        %li 可以将它保存到淘宝图片空间
+        %li 可以将它分享到您的QQ空间/微博...
+        %li 方法很多,何不尝试一下?
+

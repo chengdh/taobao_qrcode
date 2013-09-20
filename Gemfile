@@ -91,6 +91,10 @@ gem "imgkit", "~> 1.3.9"
 gem "zipstream", "~> 0.1.3"
 #浏览器拷贝gem
 gem "zeroclipboard-rails", "~> 0.0.7"
+gem "jquery-simplecolorpicker-rails", "~> 0.4.0"
+gem "jquery-fileupload-rails", "~> 0.4.1"
+gem "paperclip", "~> 3.5.1"
+gem 'rails-i18n', '~> 4.0.0.pre'
 
 group :development, :test do
   gem 'debugger', "~> 1.6.1"

@@ -10,6 +10,8 @@
  *
  *= require fancybox
  *= require jquery.notify_bar
+ *= require jquery.simplecolorpicker
+ *= require jquery.fileupload-ui
  *= require_self
  *= require_tree .
  */

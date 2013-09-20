@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Nick:
+  = @logo.nick
+
+= link_to 'Edit', edit_logo_path(@logo)
+\|
+= link_to 'Back', logos_path

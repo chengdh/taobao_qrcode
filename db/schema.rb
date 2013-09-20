@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130916134822) do
+ActiveRecord::Schema.define(version: 20130918143422) do
+
+  create_table "logos", force: true do |t|
+    t.string   "nick",             limit: 60, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+  end
+
+  add_index "logos", ["nick"], name: "index_logos_on_nick", using: :btree
 
   create_table "picture_upload_logs", force: true do |t|
     t.string   "nick",         limit: 60,  null: false

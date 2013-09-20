@@ -1,4 +1,6 @@
 TaobaoQrcode::Application.routes.draw do
+  resources :logos
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

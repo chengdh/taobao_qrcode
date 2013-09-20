@@ -1,0 +1,94 @@
+<!--设置qr的样式--!>
+.tabbable.qr-config
+  %ul.nav.nav-tabs
+    %li.active
+      %a{:href => "#tab_basic", "data-toggle" => "tab"} 基本样式
+    %li
+      %a{:href => "#tab_insert", "data-toggle" => "tab"} 文本
+
+    %li
+      %a{:href => "#tab_logo", "data-toggle" => "tab"} 图标
+
+  .tab-content
+    .tab-pane#tab_basic.active
+      %form.form-horizontal
+        .control-group
+          %label.control-label  前景色 
+          .controls
+            %select.colorpicker.front-colorpicker
+              <!-- Colors from Google Calendar -->
+              %option(value="#7bd148") Green
+              %option(value="#5484ed") Bold blue
+              %option(value="#a4bdfc") Blue
+              %option(value="#46d6db") Turquoise
+              %option(value="#7ae7bf") Light green
+              %option(value="#51b749") Bold green
+              %option(value="#fbd75b") Yellow
+              %option(value="#ffb878") Orange
+              %option(value="#ff887c") Red
+              %option(value="#dc2127") Bold red
+              %option(value="#dbadff") Purple
+              %option(value="#e1e1e1") Gray
+
+        .control-group
+          %label.control-label  背景色 
+          .controls
+            %select.colorpicker.back-colorpicker
+              <!-- Colors from Google Calendar -->
+              %option(value="#7bd148") Green
+              %option(value="#5484ed") Bold blue
+              %option(value="#a4bdfc") Blue
+              %option(value="#46d6db") Turquoise
+              %option(value="#7ae7bf") Light green
+              %option(value="#51b749") Bold green
+              %option(value="#fbd75b") Yellow
+              %option(value="#ffb878") Orange
+              %option(value="#ff887c") Red
+              %option(value="#dc2127") Bold red
+              %option(value="#dbadff") Purple
+              %option(value="#e1e1e1") Gray
+
+        .control-group
+          %label.control-label  大小
+          .controls
+            .noUiSlider.unit-size-slider{:style => "margin-top : 12px;"}
+
+        .control-group
+          %label.control-label  圆角 
+          .controls
+            .noUiSlider.radius-slider{:style => "margin-top : 12px;width : 30px;"}
+
+
+
+    .tab-pane#tab_insert
+      %form.form-horizontal
+        .control-group
+          %label.control-label 文本
+          .controls
+            %input.txt-qr-label(type='text')
+
+        .control-group
+          %label.control-label 字体大小
+          .controls
+            .noUiSlider.font-size-slider{:style => "margin-top : 12px;"}
+
+        .control-group
+          %label.control-label   字体颜色
+          .controls
+            %select.colorpicker.font-colorpicker
+              <!-- Colors from Google Calendar -->
+              %option(value="#7bd148") Green
+              %option(value="#5484ed") Bold blue
+              %option(value="#a4bdfc") Blue
+              %option(value="#46d6db") Turquoise
+              %option(value="#7ae7bf") Light green
+              %option(value="#51b749") Bold green
+              %option(value="#fbd75b") Yellow
+              %option(value="#ffb878") Orange
+              %option(value="#ff887c") Red
+              %option(value="#dc2127") Bold red
+              %option(value="#dbadff") Purple
+              %option(value="#e1e1e1") Gray
+ 
+    .tab-pane#tab_logo
+      = render "shared/fileupload"

@@ -1,0 +1,19 @@
+- qr = item_qrcode(item)
+.qr-wrapper{:position => 'relative',"data-width" => qr.modules.size,"data-height" => qr.modules.size}
+  %img.qr-logo{:src => item.pic_url}
+  %table.qr-table
+    - qr.modules.each_index do |x|
+      %tr
+        - qr.modules.each_index do |y|
+          - if qr.dark?(x,y)
+            %td.qr-black
+              .qr-unit
+          - else 
+            %td.qr-white
+              .qr-unit
+  
+    %tr
+      %td.qr-label(colspan=100)
+        %span
+          = item.title
+

@@ -19,4 +19,7 @@
 //= require jquery.blockUI
 //= require jquery.notify_bar
 //= require zeroclipboard
+//= require jquery.nouislider
+//= require jquery.simplecolorpicker
+//= require jquery-fileupload
 //= require_tree .
