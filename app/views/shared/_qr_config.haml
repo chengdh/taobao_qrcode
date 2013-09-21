@@ -11,7 +11,7 @@
 
   .tab-content
     .tab-pane#tab_basic.active
-      %form.form-horizontal
+      %form.form-horizontal{:onsubmit => "return false;"}
         .control-group
           %label.control-label  前景色 
           .controls
@@ -61,7 +61,7 @@
 
 
     .tab-pane#tab_insert
-      %form.form-horizontal
+      %form.form-horizontal{:onsubmit => "return false;"}
         .control-group
           %label.control-label 文本
           .controls

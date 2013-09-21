@@ -6,11 +6,11 @@
       %tr
         - qr.modules.each_index do |y|
           - if qr.dark?(x,y)
-            %td.qr-black
-              .qr-unit
+            %td.qr-td
+              .qr-unit-black
           - else 
-            %td.qr-white
-              .qr-unit
+            %td.qr-td
+              .qr-unit-white
   
     %tr
       %td.qr-label(colspan=100)

@@ -5,42 +5,42 @@
     = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
 
 .row
-  .span3
+  .span4
     .well.well-small.large-qr
       = render 'shared/qr',:item => @item
-  .span9
+  .span8
     = render "shared/qr_config"
 .row
   .span12
     .well
-      .btn-group
-        %a.btn{:href => img_upload_item_path(:id => @item.num_iid,:format => :js),
-        "data-method" => :put,"data-remote" => true,:rel => "nofollow",
-        "data-toggle" => "tooltip",:title => "将二维码放入宝贝详情页面的图片中"}
-          %i.icon-arrow-up
-          更新到宝贝图片
+      .pull-left
+        .btn-group
+          %a.btn{:href => img_upload_item_path(:id => @item.num_iid,:format => :js),
+          "data-method" => :put,"data-remote" => true,:rel => "nofollow",
+          "data-toggle" => "tooltip",:title => "将二维码放入宝贝详情页面的图片中"}
+            %i.icon-arrow-up
+            更新到宝贝图片
 
-        %a.btn{:href => picture_upload_item_path(:id => @item.num_iid,:format => :js),
-        "data-method" => :put,"data-remote" => true,:rel => "nofollow",
-        "data-toggle" => "tooltip",:title => "将二维码放入淘宝图片空间"}
-          %i.icon-cloud-upload
-          上传到淘宝图片空间
+          %a.btn{:href => picture_upload_item_path(:id => @item.num_iid,:format => :js),
+          "data-method" => :put,"data-remote" => true,:rel => "nofollow",
+          "data-toggle" => "tooltip",:title => "将二维码放入淘宝图片空间"}
+            %i.icon-cloud-upload
+            上传到淘宝图片空间
 
-        %a.btn{:href => download_qr_item_path(:id => @item.num_iid),
-        "data-toggle" => "tooltip",:title => "下载二维码图片到本地"}
-          %i.icon-download-alt
-          下载到本地
+          %a.btn{:href => download_qr_item_path(:id => @item.num_iid),
+          "data-toggle" => "tooltip",:title => "下载二维码图片到本地"}
+            %i.icon-download-alt
+            下载到本地
 
-  .span12
-    .well
-      <!-- Baidu Button BEGIN -->
-      #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@picture.try(:picture_path)}'}"}
-        %a.bds_qzone  QQ空间
-        %a.bds_tsina 新浪微博
-        %a.bds_tqq 腾讯微博
-        %a.bds_renren 人人网
-        %span.bds_more 更多
-      <!-- Baidu Button END -->
+      .pull-right
+        <!-- Baidu Button BEGIN -->
+        #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@picture.try(:picture_path)}'}"}
+          %a.bds_qzone  QQ空间
+          %a.bds_tsina 新浪微博
+          %a.bds_tqq 腾讯微博
+          %a.bds_renren 人人网
+          %span.bds_more 更多
+        <!-- Baidu Button END -->
 .row
   .span12
     .alert.alert-info

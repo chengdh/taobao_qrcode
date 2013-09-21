@@ -6,7 +6,7 @@ $ ->
     constructor: (@height,@width)->
       #@height 二维码高度
       #@width 二维码宽度
-      @unit_size = 2          #单个点的大小,以px为单位
+      @unit_size = 4          #单个点的大小,以px为单位
       @is_radius = false      #是否圆角
       @b_color = '#FFFFFF'    #背景色
       @f_color = '#000000'    #前景色
@@ -34,32 +34,37 @@ $ ->
         "qr-table" :
           border : 'none'
           'border-collapse' : 'collapse'
-        "qr-black" :
+        "qr-td" :
           'border-style'  : 'none'
           'border-color'  : '#0000FF'
           'padding'       : 0
           'margin'        : 0
           'border-collapse': 'collapse'
+        "qr-unit-black" :
+          "padding"  : 0
+          "margin"   : 0 
+          "width"    : "4px"
+          "height"   : "4px"
           'background'    : '#000000'
-        "qr-white" :
-          'border-style'  : 'none'
-          'border-color'  : '#0000FF'
-          'padding'       : 0
-          'margin'        : 0
-          'border-collapse': 'collapse'
-          'background'    : '#FFFFFF'
-        "qr-unit" :
+          "border-radius" : 0
+        "qr-unit-white" :
           "padding"  : 0
           "margin"   : 0 
           "width"    : "4px"
           "height"   : "4px"
           "border-radius" : 0
+          'background'    : '#FFFFFF'
+
         "qr-label" :
           "text-align" : 'center'
           "font-size"  : '12px'
           "color"      :  '#000000'
-  
-    set_unit_size: (@unit_size) =>  @generate_css()         #单个点的大小,以px为单位
+
+    #单个点的大小,以px为单位
+    set_unit_size: (@unit_size) =>  
+      @unit_size = Math.floor(@unit_size)
+      @generate_css()         
+
     set_is_radius: (@is_radius) =>   @generate_css()        #是否圆角
     set_b_color: (@b_color) =>   @generate_css()            #背景色
     set_f_color: (@f_color) =>  @generate_css()             #前景色
@@ -77,16 +82,21 @@ $ ->
     #返回object {'selector' : css_object}
     generate_css: =>
       #设置大小
-      @css['qr-unit']['width'] = "#{@unit_size}px"
-      @css['qr-unit']['height'] = "#{@unit_size}px"
+      @css['qr-unit-black']['width'] = "#{@unit_size}px"
+      @css['qr-unit-black']['height'] = "#{@unit_size}px"
+      @css['qr-unit-white']['width'] = "#{@unit_size}px"
+      @css['qr-unit-white']['height'] = "#{@unit_size}px"
+
       #设置颜色
-      @css['qr-black']['background'] = "#{@b_color}"
-      @css['qr-white']['background'] = "#{@f_color}"
+      @css['qr-unit-black']['background'] = "#{@f_color}"
+      @css['qr-unit-white']['background'] = "#{@b_color}"
       #设置圆角
       if @is_radius
-        @css['qr-unit']['border-radius'] = '5px'
+        @css['qr-unit-black']['border-radius'] = '5px'
+        @css['qr-unit-white']['border-radius'] = '5px'
       else
-        @css['qr-unit']['border-radius'] = 0
+        @css['qr-unit-black']['border-radius'] = 0
+        @css['qr-unit-white']['border-radius'] = 0
   
       #设置显示文字
       if @label
@@ -140,7 +150,7 @@ $ ->
       )
   
       $(@el).on('radius-slide','.radius-slider', =>
-        is_radius = $('.radius_slider').val()
+        is_radius = $('.radius-slider').val()
         @qr_config.set_is_radius(is_radius)
       )
   
@@ -157,6 +167,12 @@ $ ->
         font_color = $('.font-colorpicker').val()
         @qr_config.set_font_color(font_color)
       )
+      #设置图标
+      $(@el).on('click','.btn-set-logo',(evt) =>
+        target_el = $(evt.currentTarget)
+        logo_url = $(target_el).data('logo-url')
+        @qr_config.set_logo_url(logo_url)
+      )
   
   #二维码显示
   class QrView
@@ -167,6 +183,7 @@ $ ->
     on_qr_config_change : =>
       style_hash = QrConfig.css2style(@qr_config.css)
       $(@qr_wrapper_el).find(".qr-label").html(@qr_config.label)
+      $(@qr_wrapper_el).find(".qr-logo").attr('src',@qr_config.logo_url)
       for selector of style_hash
         $(@qr_wrapper_el).find(".#{selector}").attr('style','').attr('style',style_hash[selector])
   

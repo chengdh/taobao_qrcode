@@ -18,9 +18,8 @@ $ ->
     slide : -> $(this).trigger('font-size-slide')
   )
   $(".unit-size-slider").noUiSlider(
-    range: [2, 10]
-    start: 2
-    step : 1
+    range: [4, 8]
+    start: 4
     handles: 1
     connect: "lower"
     slide : -> $(this).trigger('unit-size-slide')
