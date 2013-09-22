@@ -23,12 +23,12 @@ class ItemsController < ApplicationController
     @picture = PictureUploadLog.last_upload_picture(params[:id])
   end
 
-  #POST item/:id/img_upload
+  #PUT item/:id/img_upload
   #上传商品图片
   def img_upload
     @item = taobao_item_get(params[:id])
-    html = render_to_string(:partial => "qr_code",:locals => {:item => @item},:layout => false)
-    img =  generate_qr_img_stream(html)
+    html = render_to_string(:partial => "shared/qr",:locals => {:item => @item,:logo_url => params[:logo_url]},:layout => false)
+    img =  generate_qr_img_stream(html,params[:css],params[:qr_width],params[:qr_height])
     args = {
       method: 'taobao.item.img.upload',
       session: session_key,
@@ -43,8 +43,8 @@ class ItemsController < ApplicationController
   #下载单个商品的qr_code
   def download_qr
     @item = taobao_item_get(params[:id])
-    qr_html = render_to_string(:partial => "qr_code",:locals => {:item => @item},:layout => false)
-    item_img =  generate_qr_img(qr_html)
+    qr_html = render_to_string(:partial => "shared/qr",:locals => {:item => @item,:logo_url => params[:logo_url]},:layout => false)
+    item_img =  generate_qr_img(qr_html,params[:css],params[:qr_width],params[:height])
     send_data item_img,filename: "#{@item.title}.jpg"
   end
   #GET items/download_zip
@@ -52,11 +52,11 @@ class ItemsController < ApplicationController
   def download_zip
     @items = params[:ids].collect {|id| taobao_item_get(id)}
     @item_qr_codes = @items.collect do |item|
-      html = render_to_string(:partial => "qr_code",:locals => {:item => item},:layout => false)
+      html = render_to_string(:partial => "shared/qr",:locals => {:item => item},:layout => false)
       [item.num_iid,generate_qr_img(html)]
     end
   end
-  #POST item/:id/picture_upload
+  #PUT item/:id/picture_upload
   #将条码图片上传到淘宝图片空间
   def picture_upload
     @item,@item_picture = taobao_picture_upload params[:id]
@@ -90,77 +90,25 @@ class ItemsController < ApplicationController
     %w[num_iid title nick detail_url type desc cid seller_cids pic_url num price].join(",")
   end
 
-
   #生成二维码图片并转换为StringIO
-  def generate_qr_img_stream(qr_html)
-    img = generate_qr_img(qr_html)
+  def generate_qr_img_stream(qr_html,css=nil,qr_width = 240,qr_height = 240)
+    img = generate_qr_img(qr_html,css,qr_width,qr_height)
     #NOTE 参考代码https://gist.github.com/Burgestrand/850377
     img_stream = StringIO.new(img)
     def img_stream.path ; "http://localhost/qr_img.jpg" ; end
     img_stream
   end
   #生成商品二维码图像
-  def generate_qr_img(qr_html)
-      kit = IMGKit.new(qr_html, 
-                        :quality => 94,
-                        :height => 240,
-                        :width => 240
-                      )
-      kit.stylesheets << StringIO.new(
-<<CSS
-  .qr-wrapper{
-    position : relative;
-  }
-  img.item-img{
-    cursor : pointer;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin-top: -20px; /* Half the height */
-    margin-left: -20px; /* Half the width */
-  }
-  table.item-qr-code{
-    cursor : pointer;
-    border-width: 0;
-    border-style: none;
-    border-color: #0000ff;
-    border-collapse: collapse;
-    width : 240px;
-    height : 240px;
-  }
-  table.item-qr-code td.black{
-    border-width: 0; 
-    border-style: none;
-    border-color: #0000ff; 
-    border-collapse: collapse; 
-    padding: 0; 
-    margin: 0; 
-    width: 4px; 
-    height: 4px; 
-    background : #000;
-  }
-  table.item-qr-code td.white{
-    border-width: 0; 
-    border-style: none;
-    border-color: #0000ff; 
-    border-collapse: collapse; 
-    padding: 0; 
-    margin: 0; 
-    width: 4px; 
-    height: 4px; 
-    background : #fff;
-  }
-CSS
-      )
-      kit.to_img(:jpeg) 
+  def generate_qr_img(qr_html,css=nil,qr_width = 240,qr_height = 240)
+    kit = IMGKit.new(qr_html, :quality => 94,:width => qr_width,:height => qr_height)
+    kit.stylesheets << StringIO.new(css) if css.present?
+    kit.to_img(:jpeg) 
   end
   #上传商品二维码到淘宝图片空间
   def taobao_picture_upload(num_iid)
     item = taobao_item_get num_iid
-    html = render_to_string(:partial => "qr_code",:locals => {:item => item},:layout => false)
-    img =  generate_qr_img_stream(html)
+    html = render_to_string(:partial => "shared/qr",:locals => {:item => item,:logo_url => params[:logo_url]},:layout => false)
+    img =  generate_qr_img_stream(html,params[:css],params[:qr_width],params[:qr_height])
     args = {
       method: 'taobao.picture.upload',
       session: session_key,

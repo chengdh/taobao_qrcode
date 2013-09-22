@@ -3,9 +3,12 @@
 #二维码设置类
 $ ->
   class QrConfig
-    constructor: (@height,@width)->
-      #@height 二维码高度
-      #@width 二维码宽度
+    constructor: (options)->
+      #options object 二维码初始化参数
+      #width 宽度
+      #height 高度
+      #其他与实例变量相同
+      #------------------------------------------------------
       @unit_size = 4          #单个点的大小,以px为单位
       @is_radius = false      #是否圆角
       @b_color = '#FFFFFF'    #背景色
@@ -15,12 +18,19 @@ $ ->
       @font_size = 12         #字体大小
       @font_color = "#000000" #字体颜色
   
-      @logo_url = ""          #图标
+      @logo_url = ""          #图标url
   
       @logo_width = 40
       @logo_height = 40
       @logo_left = 0          #图标左方位坐标
       @logo_top = 0           #上方位坐标
+
+      #根据传入的options覆盖默认值
+      for attr of options
+        this[attr] = options[attr]
+
+      @qr_width = @unit_size*@width
+      @qr_height = @unit_size*@height
   
   
       #默认的css样式
@@ -63,6 +73,8 @@ $ ->
     #单个点的大小,以px为单位
     set_unit_size: (@unit_size) =>  
       @unit_size = Math.floor(@unit_size)
+      @qr_height = @unit_size*@height 
+      @qr_width = @unit_size*@width
       @generate_css()         
 
     set_is_radius: (@is_radius) =>   @generate_css()        #是否圆角
@@ -73,7 +85,7 @@ $ ->
     set_font_size: (@font_size) =>  @generate_css()         #字体大小
     set_font_color: (@font_color) =>  @generate_css()       #字体颜色
   
-    set_logo_url: (@logo_url) =>  @generate_css()          #图标
+    set_logo_url: (@logo_url) =>  @generate_css()           #图标
   
     set_logo_width: (@logo_width) => @generate_css()
     set_logo_height: (@logo_height) =>  @generate_css()
@@ -111,23 +123,34 @@ $ ->
       @css['qr-logo']['height'] = "#{@logo_height}px"
       $(this).trigger('css_change')
   
-    @css2style:  (css_object)->
+    css2style:  =>
       ret =  new Object()
-      for selector of css_object
+      for selector of @css
         style = ""
-        for att of css_object[selector]
-          style += "#{att} : #{css_object[selector][att]};"
+        for att of @css[selector]
+          style += "#{att} : #{@css[selector][att]};"
   
         ret[selector] = style
   
       ret
+
+    #将css对象转换为字符串
+    to_string:  =>
+      ret = ""
+      for selector of @css
+        ret +=".#{selector} {"
+        for att of @css[selector]
+          ret += "#{att} : #{@css[selector][att]};\n\r"
+
+        ret += "}\n\r"
+      ret
+
+
   
     #计算Logo图标所在位置
     calculate_logo_xy: =>
-      qr_height = @unit_size * @height
-      qr_width = @unit_size * @width
-      @logo_left = (qr_width - @logo_width) / 2
-      @logo_top = (qr_height - @logo_height) / 2
+      @logo_left = Math.floor((@qr_width - @logo_width) / 2)
+      @logo_top = Math.floor((@qr_height - @logo_height) / 2)
   
   #二维码设置显示
   class QrConfigView 
@@ -170,7 +193,7 @@ $ ->
       #设置图标
       $(@el).on('click','.btn-set-logo',(evt) =>
         target_el = $(evt.currentTarget)
-        logo_url = $(target_el).data('logo-url')
+        logo_url = $(target_el).data('absolute-logo-url')
         @qr_config.set_logo_url(logo_url)
       )
   
@@ -181,15 +204,56 @@ $ ->
   
     #二维码设这变化处理
     on_qr_config_change : =>
-      style_hash = QrConfig.css2style(@qr_config.css)
+      style_hash = @qr_config.css2style()
       $(@qr_wrapper_el).find(".qr-label").html(@qr_config.label)
       $(@qr_wrapper_el).find(".qr-logo").attr('src',@qr_config.logo_url)
       for selector of style_hash
         $(@qr_wrapper_el).find(".#{selector}").attr('style','').attr('style',style_hash[selector])
   
   #以下初始化代码
-  qr_config = new QrConfig($('.qr-wrapper').data('width'),$('.qr-wrapper').data('height'))
+  options = 
+    width :   $('.qr-wrapper').data('width')
+    height:   $('.qr-wrapper').data('height')
+    label :   $('.qr-wrapper').data('label')
+    logo_url: $('.qr-wrapper').data('logo-url')
+ 
+
+  qr_config = new QrConfig(options)
   qr_config_view = new QrConfigView($('.qr-config'),qr_config)
-  qr_view = new QrView($('.qr-wrapper'),qr_config)
+  new QrView(qr_wrapper,qr_config) for qr_wrapper in $('.qr-wrapper')
+  #qr_view = new QrView($('.qr-wrapper'),qr_config)
   #trigger event
-  $(qr_config).trigger('css_change')
+  qr_config.generate_css()
+
+  #绑定上传到宝贝图片按钮事件
+  $(qr_config).on('css_change', ->
+    css_string = qr_config.to_string()
+    params = $.param(
+      css : css_string
+      qr_width : qr_config.qr_width+20
+      qr_height : qr_config.qr_height+20
+      logo_url  : qr_config.logo_url
+    )
+    origin_btn_img_upload_href = $('.btn-img-upload-single').data('origin-href')
+    origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
+    origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
+    $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
+    $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
+    $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
+  )
+  #针对批量上传图片时,只能使用默认样式
+  default_qr_config = new QrConfig(
+    width : 60
+    height : 60)
+ 
+  $(default_qr_config).on('css_change', ->
+    default_qr_object = 
+      css : default_qr_config.to_string()
+      qr_width : default_qr_config.qr_width + 20
+      qr_height : default_qr_config.qr_height + 20
+ 
+    $('.btn-upload-to-items-img').data('qr-config',default_qr_object)
+    $('.btn-upload-picture').data('qr-config',default_qr_object)
+  )
+
+  default_qr_config.generate_css()

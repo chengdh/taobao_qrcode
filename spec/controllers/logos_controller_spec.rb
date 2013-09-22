@@ -19,44 +19,23 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe LogosController do
+  render_views
+  let_valid_session
 
-  # This should return the minimal set of attributes required to create a valid
-  # Logo. As you add validations to Logo, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "nick" => "MyString" } }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # LogosController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let!(:valid_attributes) { {:img => FactoryGirl.build(:logo).img}}
 
   describe "GET index" do
     it "assigns all logos as @logos" do
-      logo = Logo.create! valid_attributes
-      get :index, {}, valid_session
+      logo = FactoryGirl.create(:logo)
+      get :index, {:format => :json},valid_session
       assigns(:logos).should eq([logo])
     end
   end
 
   describe "GET show" do
     it "assigns the requested logo as @logo" do
-      logo = Logo.create! valid_attributes
+      logo = FactoryGirl.create(:logo)
       get :show, {:id => logo.to_param}, valid_session
-      assigns(:logo).should eq(logo)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new logo as @logo" do
-      get :new, {}, valid_session
-      assigns(:logo).should be_a_new(Logo)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested logo as @logo" do
-      logo = Logo.create! valid_attributes
-      get :edit, {:id => logo.to_param}, valid_session
       assigns(:logo).should eq(logo)
     end
   end
@@ -65,96 +44,31 @@ describe LogosController do
     describe "with valid params" do
       it "creates a new Logo" do
         expect {
-          post :create, {:logo => valid_attributes}, valid_session
+          post :create, {:logo => valid_attributes,:format => :json}, valid_session
         }.to change(Logo, :count).by(1)
       end
 
       it "assigns a newly created logo as @logo" do
-        post :create, {:logo => valid_attributes}, valid_session
+        post :create, {:logo =>  valid_attributes,:format => :json}, valid_session
         assigns(:logo).should be_a(Logo)
         assigns(:logo).should be_persisted
       end
 
-      it "redirects to the created logo" do
-        post :create, {:logo => valid_attributes}, valid_session
-        response.should redirect_to(Logo.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved logo as @logo" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Logo.any_instance.stub(:save).and_return(false)
-        post :create, {:logo => { "nick" => "invalid value" }}, valid_session
-        assigns(:logo).should be_a_new(Logo)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Logo.any_instance.stub(:save).and_return(false)
-        post :create, {:logo => { "nick" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested logo" do
-        logo = Logo.create! valid_attributes
-        # Assuming there are no other logos in the database, this
-        # specifies that the Logo created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Logo.any_instance.should_receive(:update).with({ "nick" => "MyString" })
-        put :update, {:id => logo.to_param, :logo => { "nick" => "MyString" }}, valid_session
-      end
-
-      it "assigns the requested logo as @logo" do
-        logo = Logo.create! valid_attributes
-        put :update, {:id => logo.to_param, :logo => valid_attributes}, valid_session
-        assigns(:logo).should eq(logo)
-      end
-
-      it "redirects to the logo" do
-        logo = Logo.create! valid_attributes
-        put :update, {:id => logo.to_param, :logo => valid_attributes}, valid_session
-        response.should redirect_to(logo)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the logo as @logo" do
-        logo = Logo.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Logo.any_instance.stub(:save).and_return(false)
-        put :update, {:id => logo.to_param, :logo => { "nick" => "invalid value" }}, valid_session
-        assigns(:logo).should eq(logo)
-      end
-
-      it "re-renders the 'edit' template" do
-        logo = Logo.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Logo.any_instance.stub(:save).and_return(false)
-        put :update, {:id => logo.to_param, :logo => { "nick" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested logo" do
-      logo = Logo.create! valid_attributes
+      logo = FactoryGirl.create(:logo)
       expect {
         delete :destroy, {:id => logo.to_param}, valid_session
       }.to change(Logo, :count).by(-1)
     end
 
     it "redirects to the logos list" do
-      logo = Logo.create! valid_attributes
+      logo = FactoryGirl.create(:logo)
       delete :destroy, {:id => logo.to_param}, valid_session
       response.should redirect_to(logos_url)
     end
   end
-
 end

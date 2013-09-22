@@ -51,7 +51,7 @@ $ ->
   #上传二维码图片:a 宝贝图片 b 淘宝图片空间
   #param  url_upload items/{:id}/img_upload.js 或
   #       url_upload items/{:id}/picture_upload.js
-  upload_img = (upload_url) ->
+  upload_img = (upload_url,qr_config) ->
     selected_items = $('.cbx-select-item:checked:enabled').length
     if selected_items <= 0
       $.notifyBar(
@@ -65,9 +65,9 @@ $ ->
     settings = []     
     for id in get_selected_item_ids()
       settings.push(
-        data :
-          id : id
-        type: 'POST'
+        id : id
+        data : qr_config
+        type: 'PUT'
         dataType : 'script')
   
     hide_loading = ->
@@ -75,7 +75,7 @@ $ ->
       #$.fancybox.hideLoading()
 
     ajax_array = []
-    ajax_array.push($.ajax(upload_url.replace("{:id}",s.data.id),s)) for s  in  settings
+    ajax_array.push($.ajax(upload_url.replace("{:id}",s.id),s)) for s  in  settings
 
     #$.fancybox.showLoading()
     $.blockUI(message : '处理中...')
@@ -83,12 +83,12 @@ $ ->
     $.when.apply($,ajax_array).then(hide_loading,hide_loading)
 
   #更新选定的商品条码到taobao服务器上
-  $('.btn-update-to-items-img').on('click', ->
-    upload_img("items/{:id}/img_upload.js")
+  $('.btn-upload-to-items-img').on('click', ->
+    upload_img("items/{:id}/img_upload.js",$(this).data('qr-config'))
   )
   #上传选定的商品二维码图片到淘宝图片空间
   $('.btn-upload-picture').on('click', ->
-    upload_img("items/{:id}/picture_upload.js")
+    upload_img("items/{:id}/picture_upload.js",$(this).data('qr-config'))
   )
   #上传单张qr到商品图片
   #上传单张qr到图片空间
@@ -96,5 +96,3 @@ $ ->
   #在这里定义bds_config
   bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'
   $('#bdshell_js').attr('src',"http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
-
-

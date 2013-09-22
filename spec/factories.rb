@@ -64,4 +64,9 @@ FactoryGirl.define do
     picture FactoryGirl.build(:picture)
   end
 
+  #logo
+  factory :logo do
+    nick 'sandbox_cdh'
+    img Rack::Test::UploadedFile.new(Rails.root.join('spec', 'photos', 'test.jpg'), 'image/jpg')
+  end
 end

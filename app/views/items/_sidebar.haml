@@ -7,13 +7,10 @@
         %input(type="checkbox" class='cbx-select-item-all') 选择全部商品
 
     %li
-      = link_to "添加到宝贝图片",  "",:class => 'btn-upload-to-items-img'
+      = link_to "添加到宝贝图片",  "#",:class => 'btn-upload-to-items-img'
     %li
-      = link_to "批量上传到淘宝图片空间",  "",:class => 'btn-upload-picture'
+      = link_to "批量上传到淘宝图片空间",  "#",:class => 'btn-upload-picture'
     %li
       = link_to "批量下载到本地", download_zip_items_path(:format => :zip),"data-origin-href" => download_zip_items_path(:format => :zip),:class => "btn-download-zip"
-    %li
-      = link_to "下载到本地", download_qr_item_path(:id => 2000042003886) 
-
   %hr
   = render "search"

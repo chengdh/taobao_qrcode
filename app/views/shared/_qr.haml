@@ -1,6 +1,9 @@
 - qr = item_qrcode(item)
-.qr-wrapper{:position => 'relative',"data-width" => qr.modules.size,"data-height" => qr.modules.size}
-  %img.qr-logo{:src => item.pic_url}
+- logo_src = item.pic_url
+- logo_src =  logo_url if local_assigns.has_key? :logo_url
+.qr-wrapper{:position => 'relative',"data-label" => item.title,"data-logo-url" => item.pic_url,
+                                    "data-width" => qr.modules.size,"data-height" => qr.modules.size}
+  %img.img-rounded.qr-logo{src: logo_src}
   %table.qr-table
     - qr.modules.each_index do |x|
       %tr
@@ -15,5 +18,3 @@
     %tr
       %td.qr-label(colspan=100)
         %span
-          = item.title
-

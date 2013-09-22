@@ -8,13 +8,13 @@
   .well.well-small
     %ul.thumbnails
       - @items.each do |item|
-        %li.span2
+        %li.span3
           .thumbnail
             %label.checkbox
               %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
               =item.title
             %a{:href => item_path(:id => item.num_iid),:class =>""}
-              = render "qr_code",:item => item
+              = render "shared/qr",:item => item
   .pagination
     = will_paginate @items,renderer: BootstrapPagination::Rails
 
