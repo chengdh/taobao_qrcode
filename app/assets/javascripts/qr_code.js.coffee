@@ -18,8 +18,8 @@ $ ->
       @font_size = 12         #字体大小
       @font_color = "#000000" #字体颜色
   
+      @show_logo = true       #是否显示logo
       @logo_url = ""          #图标url
-  
       @logo_width = 40
       @logo_height = 40
       @logo_left = 0          #图标左方位坐标
@@ -85,6 +85,7 @@ $ ->
     set_font_size: (@font_size) =>  @generate_css()         #字体大小
     set_font_color: (@font_color) =>  @generate_css()       #字体颜色
   
+    set_show_logo: (@show_logo) => @generate_css()
     set_logo_url: (@logo_url) =>  @generate_css()           #图标
   
     set_logo_width: (@logo_width) => @generate_css()
@@ -113,7 +114,7 @@ $ ->
       #设置显示文字
       if @label
         @css['qr-label']['font-size'] = "#{@font_size}px"
-        @css['qr-label']['color'] = "'#{@font_color}'"
+        @css['qr-label']['color'] = "#{@font_color}"
   
       #设置logo居中
       @calculate_logo_xy()
@@ -121,8 +122,18 @@ $ ->
       @css['qr-logo']['top'] = "#{@logo_top}px"
       @css['qr-logo']['width'] = "#{@logo_width}px"
       @css['qr-logo']['height'] = "#{@logo_height}px"
+      if @show_logo
+        @css['qr-logo']['display'] = ""
+      else
+        @css['qr-logo']['display'] = "none"
+
       $(this).trigger('css_change')
-  
+
+    #计算Logo图标所在位置
+    calculate_logo_xy: =>
+      @logo_left = Math.floor((@qr_width - @logo_width) / 2)
+      @logo_top = Math.floor((@qr_height - @logo_height) / 2)
+ 
     css2style:  =>
       ret =  new Object()
       for selector of @css
@@ -147,14 +158,19 @@ $ ->
 
 
   
-    #计算Logo图标所在位置
-    calculate_logo_xy: =>
-      @logo_left = Math.floor((@qr_width - @logo_width) / 2)
-      @logo_top = Math.floor((@qr_height - @logo_height) / 2)
   
   #二维码设置显示
   class QrConfigView 
     constructor: (@el,@qr_config) ->
+      #根据qr_config设置view的初始值
+      $(@el).find('.front-colorpicker').val(@qr_config.f_color)
+      $(@el).find('.back-colorpicker').val(@qr_config.b_color)
+      $(@el).find('.unit-size-slider').val(@qr_config.unit_size)
+      $(@el).find('.radius-slider').val(if @qr_config.is_radius then 1 else 0)
+      $(@el).find('.font-size-slider').val(@qr_config.font_size)
+      $(@el).find('.font-colorpicker').val(@qr_config.font_color)
+      $(@el).find('.show-logo-slider').val(if @qr_config.show_logo then 1 else 0)
+      $(@el).find('.txt-qr-label').val(@qr_config.label)
       @start()
   
     start : =>
@@ -176,7 +192,11 @@ $ ->
         is_radius = $('.radius-slider').val()
         @qr_config.set_is_radius(is_radius)
       )
-  
+      $(@el).on('show-logo-slide','.show-logo-slider', =>
+        show_logo = $('.show-logo-slider').val()
+        @qr_config.set_show_logo(show_logo)
+      )
+ 
       $(@el).on('change','.txt-qr-label', =>
         qr_label = $('.txt-qr-label').val()
         @qr_config.set_label(qr_label)
@@ -212,16 +232,17 @@ $ ->
   
   #以下初始化代码
   options = 
-    width :   $('.qr-wrapper').data('width')
-    height:   $('.qr-wrapper').data('height')
-    label :   $('.qr-wrapper').data('label')
-    logo_url: $('.qr-wrapper').data('logo-url')
+    width :   $('.large-qr .qr-wrapper').data('width')
+    height:   $('.large-qr .qr-wrapper').data('height')
+    label :   $('.large-qr .qr-wrapper').data('label')
+    logo_url: $('.large-qr .qr-wrapper').data('logo-url')
+    is_radius : true
+    unit_size : 6
  
 
   qr_config = new QrConfig(options)
   qr_config_view = new QrConfigView($('.qr-config'),qr_config)
-  new QrView(qr_wrapper,qr_config) for qr_wrapper in $('.qr-wrapper')
-  #qr_view = new QrView($('.qr-wrapper'),qr_config)
+  qr_view = new QrView($('.large-qr'),qr_config)
   #trigger event
   qr_config.generate_css()
 
@@ -242,18 +263,19 @@ $ ->
     $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
   )
   #针对批量上传图片时,只能使用默认样式
-  default_qr_config = new QrConfig(
-    width : 60
-    height : 60)
- 
-  $(default_qr_config).on('css_change', ->
-    default_qr_object = 
-      css : default_qr_config.to_string()
-      qr_width : default_qr_config.qr_width + 20
-      qr_height : default_qr_config.qr_height + 20
- 
-    $('.btn-upload-to-items-img').data('qr-config',default_qr_object)
-    $('.btn-upload-picture').data('qr-config',default_qr_object)
-  )
+  for qr_el in $('.small-qr .qr-wrapper')
+    options = 
+      width :   $(qr_el).data('width')
+      height:   $(qr_el).data('height')
+      logo_url: $(qr_el).data('logo-url')
+      label:    ""
 
-  default_qr_config.generate_css()
+    qr_config = new QrConfig(options)
+    qr_view = new QrView($(qr_el),qr_config)
+    qr_config.generate_css()
+    qr_object = 
+      css : qr_config.to_string()
+      qr_width : qr_config.qr_width + 20
+      qr_height : qr_config.qr_height + 20
+
+    $(qr_el).data('qr-object',qr_object)

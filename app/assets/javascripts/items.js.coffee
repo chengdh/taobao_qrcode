@@ -51,9 +51,9 @@ $ ->
   #上传二维码图片:a 宝贝图片 b 淘宝图片空间
   #param  url_upload items/{:id}/img_upload.js 或
   #       url_upload items/{:id}/picture_upload.js
-  upload_img = (upload_url,qr_config) ->
-    selected_items = $('.cbx-select-item:checked:enabled').length
-    if selected_items <= 0
+  upload_img = (upload_url) ->
+    selected_items = $('.cbx-select-item:checked:enabled')
+    if selected_items.length <= 0
       $.notifyBar(
         cssClass: 'error',
         html: '请选择商品进行操作',
@@ -63,10 +63,11 @@ $ ->
       return 
 
     settings = []     
-    for id in get_selected_item_ids()
+    for s_item in selected_items
+      qr_object = $(s_item).parents('.small-qr').find('.qr-wrapper').data('qr-object')
       settings.push(
-        id : id
-        data : qr_config
+        id : $(s_item).val()
+        data : qr_object
         type: 'PUT'
         dataType : 'script')
   
@@ -84,11 +85,11 @@ $ ->
 
   #更新选定的商品条码到taobao服务器上
   $('.btn-upload-to-items-img').on('click', ->
-    upload_img("items/{:id}/img_upload.js",$(this).data('qr-config'))
+    upload_img("items/{:id}/img_upload.js")
   )
   #上传选定的商品二维码图片到淘宝图片空间
   $('.btn-upload-picture').on('click', ->
-    upload_img("items/{:id}/picture_upload.js",$(this).data('qr-config'))
+    upload_img("items/{:id}/picture_upload.js")
   )
   #上传单张qr到商品图片
   #上传单张qr到图片空间

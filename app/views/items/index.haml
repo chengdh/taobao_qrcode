@@ -9,7 +9,7 @@
     %ul.thumbnails
       - @items.each do |item|
         %li.span3
-          .thumbnail
+          .thumbnail.small-qr
             %label.checkbox
               %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
               =item.title

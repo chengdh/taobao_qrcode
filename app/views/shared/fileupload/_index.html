@@ -21,11 +21,11 @@
             </td>
         {% } %}
         <td class="delete">
-            <a class="btn btn-set-logo btn-success" title='设为二维码图标' data-toggle='tooltip' data-logo-url="{%=file.thumbnail_url%}" data-absolute-logo-url="{%=file.absolute_thumbnail_url%}">
+            <a class="btn btn-set-logo btn-success btn-mini" title='设为二维码图标' data-toggle='tooltip' data-logo-url="{%=file.thumbnail_url%}" data-absolute-logo-url="{%=file.absolute_thumbnail_url%}">
                 <i class='icon-asterisk'></i>
             </a>
 
-            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}" data-toggle='tooltip' title="删除上传文件">
+            <button class="btn btn-danger btn-mini" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}" data-toggle='tooltip' title="删除上传文件">
                 <i class="icon-trash icon-white"></i>
             </button>
             <input type="checkbox" name="delete" value="1">

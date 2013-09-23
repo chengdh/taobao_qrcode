@@ -34,4 +34,14 @@ $ ->
     handles: 1
     slide : -> $(this).trigger('radius-slide')
   )
+  #是否显示logo
+  $(".show-logo-slider").noUiSlider(
+    range: [0, 1]
+    start: 0
+    step: 1
+    handles: 1
+    slide : -> $(this).trigger('show-logo-slide')
+  )
+
+
 

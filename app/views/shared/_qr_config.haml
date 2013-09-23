@@ -17,6 +17,7 @@
           .controls
             %select.colorpicker.front-colorpicker
               <!-- Colors from Google Calendar -->
+              %option(value="#000000") black
               %option(value="#7bd148") Green
               %option(value="#5484ed") Bold blue
               %option(value="#a4bdfc") Blue
@@ -29,12 +30,14 @@
               %option(value="#dc2127") Bold red
               %option(value="#dbadff") Purple
               %option(value="#e1e1e1") Gray
+              %option(value="#ffffff") white
 
         .control-group
           %label.control-label  背景色 
           .controls
             %select.colorpicker.back-colorpicker
               <!-- Colors from Google Calendar -->
+              %option(value="#000000") black
               %option(value="#7bd148") Green
               %option(value="#5484ed") Bold blue
               %option(value="#a4bdfc") Blue
@@ -47,6 +50,7 @@
               %option(value="#dc2127") Bold red
               %option(value="#dbadff") Purple
               %option(value="#e1e1e1") Gray
+              %option(value="#ffffff") white
 
         .control-group
           %label.control-label  大小
@@ -57,6 +61,11 @@
           %label.control-label  圆角 
           .controls
             .noUiSlider.radius-slider{:style => "margin-top : 12px;width : 30px;"}
+
+        .control-group
+          %label.control-label  显示Logo 
+          .controls
+            .noUiSlider.show-logo-slider{:style => "margin-top : 12px;width : 30px;"}
 
 
 
