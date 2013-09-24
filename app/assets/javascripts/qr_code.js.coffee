@@ -243,25 +243,29 @@ $ ->
   qr_config = new QrConfig(options)
   qr_config_view = new QrConfigView($('.qr-config'),qr_config)
   qr_view = new QrView($('.large-qr'),qr_config)
-  #trigger event
-  qr_config.generate_css()
-
   #绑定上传到宝贝图片按钮事件
   $(qr_config).on('css_change', ->
     css_string = qr_config.to_string()
-    params = $.param(
+    qr_object = 
       css : css_string
       qr_width : qr_config.qr_width+20
       qr_height : qr_config.qr_height+20
       logo_url  : qr_config.logo_url
-    )
+ 
+    params = $.param(qr_object)
     origin_btn_img_upload_href = $('.btn-img-upload-single').data('origin-href')
     origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
     origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
     $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
     $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
     $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
+    #复制二维码地址
+    origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
+    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+$.param(qr_options : qr_object))
   )
+  #trigger event
+  qr_config.generate_css()
+
   #针对批量上传图片时,只能使用默认样式
   for qr_el in $('.small-qr .qr-wrapper')
     options = 

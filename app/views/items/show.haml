@@ -7,7 +7,7 @@
 .row
   .span4
     .well.well-small.large-qr
-      = render 'shared/qr',:item => @item
+      = render "shared/qr",:content => @item.detail_url,:qr_label => nil,:logo_url => @item.pic_url
   .span8
     = render "shared/qr_config"
 .row
@@ -39,7 +39,7 @@
 
       .pull-right
         <!-- Baidu Button BEGIN -->
-        #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{@picture.try(:picture_path)}'}"}
+        #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{qr_code_img_item_url(:id => @item.num_iid)}'}"}
           %a.bds_qzone  QQ空间
           %a.bds_tsina 新浪微博
           %a.bds_tqq 腾讯微博
@@ -47,16 +47,16 @@
           %span.bds_more 更多
         <!-- Baidu Button END -->
 .row
-  .span12
+  .span8
     .alert.alert-info
-      该二维码已自动上传到您的淘宝图片空间
+      您可复制该URL到需要显示的地方
 
   .span12
     .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
       %span.add-on 链接
-      %span#taobao_pic_url.span8.uneditable-input 
-        = @picture.try(:picture_path)
-      %a#btn_clip.btn{"data-clipboard-target" => 'taobao_pic_url',:type => :button}
+      %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => qr_code_img_item_url(:id => @item.num_iid)} 
+        = qr_code_img_item_url(:id => @item.num_iid,a: 1)
+      %a#btn_clip.btn{"data-clipboard-target" => 'qr_code_img_url',:type => :button}
         %i.icon-copy
 
 

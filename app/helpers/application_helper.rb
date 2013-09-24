@@ -14,4 +14,8 @@ module ApplicationHelper
     img_data = ::Base64.encode64(img_binary).gsub("\n", '')
     "data:image/#{img_type};base64,#{img_data}"
   end
+  def qrcode(content,size = 7,level = :m)
+    RQRCode::QRCode.new(content, size: size, level:  level )
+  end
+
 end

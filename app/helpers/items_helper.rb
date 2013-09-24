@@ -1,9 +1,5 @@
 #coding: utf-8
 module ItemsHelper
-  def item_qrcode(item)
-    text = item.detail_url
-    RQRCode::QRCode.new(text, size: 7, level:  :m )
-  end
   #获取店铺类目
   def grouped_sellercats
     args = {

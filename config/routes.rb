@@ -24,6 +24,7 @@ TaobaoQrcode::Application.routes.draw do
       get :download_qr
       put :img_upload
       put :picture_upload
+      get :qr_code_img
     end
   end
 
