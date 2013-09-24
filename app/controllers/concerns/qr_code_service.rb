@@ -16,17 +16,16 @@ module QrCodeService
   end
   #生成二维码图片并转换为StringIO
   def get_qr_img_stream(content="",format = :jpeg,qr_options ={})
-    img = get_qr_img(content,format,qr_options)
+    qr_img = get_qr_img(content,format,qr_options)
     #NOTE 参考代码https://gist.github.com/Burgestrand/850377
-    img_stream = StringIO.new(img)
-    def img_stream.path ; "http://localhost/qr_img.#{format}" ; end
+    img_stream = StringIO.new(qr_img)
+    def img_stream.path ; "http://localhost:3000/qr_code.jpg" ; end
     img_stream
   end
 
   private
   #生成商品二维码图像
   def generate_qr_img(qr_html,img_format,css=nil,qr_width = 240,qr_height = 240)
-    puts css
     kit = IMGKit.new(qr_html, :quality => 94,:width => qr_width,:height => qr_height)
     kit.stylesheets << StringIO.new(css) if css.present?
     kit.to_img(img_format) 

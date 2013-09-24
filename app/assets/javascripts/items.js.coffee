@@ -42,10 +42,22 @@ $ ->
   update_btn_download_zip_href = ->
     ids = get_selected_item_ids()
     origin_href = $('.btn-download-zip').data('origin-href')
-    if ids.length == 0
-      $('.btn-download-zip').attr('href',origin_href)
-    else
-      params = $.param("ids[]" : ids)
+    $('.btn-download-zip').attr('href',origin_href)  if ids.length == 0
+
+    selected_items = $('.cbx-select-item:checked:enabled')
+
+    qr_options = new Object()
+    for s_item in selected_items
+      qr_object = $(s_item).parents('.small-qr').find('.qr-wrapper').data('qr-object')
+      id = $(s_item).val()
+      qr_options[id] = qr_object
+
+      params = $.param(
+        "ids[]" : ids
+        qr_options : qr_options
+      )
+      
+
       $('.btn-download-zip').attr('href',"#{origin_href}?#{params}")
  
   #上传二维码图片:a 宝贝图片 b 淘宝图片空间

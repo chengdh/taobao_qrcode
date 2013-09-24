@@ -10,7 +10,7 @@ $ ->
       #其他与实例变量相同
       #------------------------------------------------------
       @unit_size = 4          #单个点的大小,以px为单位
-      @is_radius = false      #是否圆角
+      @is_radius = true      #是否圆角
       @b_color = '#FFFFFF'    #背景色
       @f_color = '#000000'    #前景色
   
@@ -261,7 +261,7 @@ $ ->
     $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
     #复制二维码地址
     origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
-    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+$.param(qr_options : qr_object))
+    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
   )
   #trigger event
   qr_config.generate_css()
@@ -281,5 +281,6 @@ $ ->
       css : qr_config.to_string()
       qr_width : qr_config.qr_width + 20
       qr_height : qr_config.qr_height + 20
+      logo_url: qr_config.logo_url
 
     $(qr_el).data('qr-object',qr_object)

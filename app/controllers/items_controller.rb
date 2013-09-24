@@ -2,7 +2,6 @@
 #商品管理界面
 class ItemsController < ApplicationController
   include QrCodeService
-  before_filter :auto_taobao_picture_upload,only: :show
   #GET items
   def index
     args = {
@@ -26,11 +25,8 @@ class ItemsController < ApplicationController
   #get items/:id/qr_code_img
   #根据传入的参数获取qr_img
   def qr_code_img
-    puts params
     @item = taobao_item_get(params[:id])
-    qr_options = HashWithIndifferentAccess.new({qr_label: @item.title,logo_url: @item.pic_url})
-    qr_options.merge!(params[:qr_options]) if params[:qr_options].present?
-    qr_img = get_qr_img(@item.detail_url,:jpeg,qr_options)
+    qr_img = get_qr_img(@item.detail_url,:jpeg,params)
     send_data qr_img,type: :jpeg,disposition: :inline
   end
 
@@ -62,7 +58,9 @@ class ItemsController < ApplicationController
   def download_zip
     @items = params[:ids].collect {|id| taobao_item_get(id)}
     @item_qr_codes = @items.collect do |item|
-      item_img =  get_qr_img(item.detail_url,:jpeg,params)
+      qr_options = HashWithIndifferentAccess.new(params[:qr_options][item.num_iid.to_s])
+      puts qr_options
+      item_img =  get_qr_img(item.detail_url,:jpeg,qr_options)
       [item.num_iid,item_img]
     end
   end
@@ -114,19 +112,6 @@ class ItemsController < ApplicationController
     taobao_response = TaobaoSDK::Session.invoke(args)
     item_picture = taobao_response.picture
     return item,item_picture
-  end
-  #显示宝贝详细界面时,自动将二维码上传到淘宝图片空间
-  def auto_taobao_picture_upload
-    p_upload_log = PictureUploadLog.last_upload_picture(params[:id])
-    if p_upload_log.blank?
-      item,picture = taobao_picture_upload(params[:id]) 
-
-      nick = session[:taobao_access_token]['taobao_user_nick']
-      PictureUploadLog.create(nick: nick, 
-                              num_iid: params[:id].to_i,
-                              picture_id: picture.picture_id,
-                              picture_path: picture.picture_path)
-    end
   end
   #每页显示数据条数
   def per_page ; 15; end
