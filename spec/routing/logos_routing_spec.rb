@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe LogosController do
   describe "routing" do
-
     it "routes to #index" do
       get("/logos").should route_to("logos#index")
     end
@@ -30,6 +29,5 @@ describe LogosController do
     it "routes to #destroy" do
       delete("/logos/1").should route_to("logos#destroy", :id => "1")
     end
-
   end
 end

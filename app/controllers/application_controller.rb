@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def create_paginate_collection(taobao_response,objects_or_sym_method,page = 1,per_page = 5)
     page = 1 if page.blank?
     per_page = 10 if per_page.blank?
-    paginate_collection = WillPaginate::Collection.create(page, per_page) do |pager|
+    WillPaginate::Collection.create(page, per_page) do |pager|
       # inject the result array into the paginated collection:
       pager.replace(taobao_response.send(objects_or_sym_method)) if objects_or_sym_method.is_a? Symbol
       pager.replace(objects_or_sym_method) if objects_or_sym_method.is_a? Array
@@ -23,17 +23,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  def get_shop_info
-    unless session[:shop].present?
-      args = {
-        method: 'taobao.shop.get',
-        session: session_key,
-        nick: session[:taobao_access_token]['taobao_user_nick'],
-        fields: 'sid,cid,nick,title,desc,bulletin,pic_path,created,modified,shop_score,remain_count,all_count,used_count'
-      }
-      resp = TaobaoSDK::Session.invoke(args)
-      shop = resp.shop
-      session[:shop] = shop
-    end
+  def taobao_nick
+    session[:taobao_access_token]['taobao_user_nick']
   end
 end

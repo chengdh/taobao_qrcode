@@ -19,10 +19,9 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe LogosController do
-  render_views
   let_valid_session
-
-  let!(:valid_attributes) { {:img => FactoryGirl.build(:logo).img}}
+  let!(:valid_attributes) {ActionController::Parameters.new(:img => FactoryGirl.build(:logo).img)}
+  stub_paperclip(Logo)
 
   describe "GET index" do
     it "assigns all logos as @logos" do

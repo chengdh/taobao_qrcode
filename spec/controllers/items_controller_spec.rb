@@ -50,15 +50,14 @@ describe ItemsController do
   describe "GET show" do
     it "assigns the requested item as @item" do
       TaobaoSDK::Session.should_receive(:invoke).and_return(item_get_response)
-      controller.should_receive(:auto_taobao_picture_upload)
       item = item_get_response.item
       get :show, {:id => item.num_iid}, valid_session
       assigns(:item).should eq(item)
     end
   end
   #上传生成的条码到商品图片
-  #POST items/:id/img_upload
-  describe "POST img_upload" do
+  #PUT items/:id/img_upload
+  describe "PUT img_upload" do
     it "should success" do
       item = FactoryGirl.build(:item)
       item_img_upload_response = FactoryGirl.build(:item_img_upload_response)
@@ -85,7 +84,7 @@ describe ItemsController do
     it "should success" do
       item = FactoryGirl.build(:item)
       controller.should_receive(:taobao_item_get).and_return(item)
-      get :download_zip,{:format => :zip,:ids => [item.num_iid]},valid_session
+      get :download_zip,{:format => :zip,:ids => [item.num_iid],:qr_options => {item.num_iid.to_s => {}}},valid_session
       response.should be_success
     end
   end
@@ -97,6 +96,16 @@ describe ItemsController do
       controller.should_receive(:taobao_item_get).and_return(item)
       TaobaoSDK::Session.should_receive(:invoke).and_return(FactoryGirl.build(:picture_upload_response))
       put :picture_upload,{:id => item.num_iid},valid_session
+      response.should be_success
+    end
+  end
+  #GET items/:id/qr_code_img
+  #获取商品图片
+  describe "GET items/:id/qr_code_img" do
+    it "should success" do
+      item = FactoryGirl.build(:item)
+      controller.should_receive(:taobao_item_get).and_return(item)
+      get :qr_code_img,{id: item.num_iid},valid_session
       response.should be_success
     end
   end

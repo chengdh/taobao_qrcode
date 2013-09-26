@@ -69,4 +69,16 @@ FactoryGirl.define do
     nick 'sandbox_cdh'
     img Rack::Test::UploadedFile.new(Rails.root.join('spec', 'photos', 'test.jpg'), 'image/jpg')
   end
+  #shop
+  factory :shop,:class => TaobaoSDK::Shop do
+    sid 1024
+    cid 1024
+    nick "sandbox_cdh"
+    title "my shop"
+    bulletin "bulletin"
+    pic_path "/pic/my_shop.jpg"
+  end
+  factory :shop_get_response,:class => TaobaoSDK::ShopGetResponse do
+    shop FactoryGirl.build(:shop)
+  end
 end

@@ -25,3 +25,7 @@
 .item-selected{
   border : 1px solid gray;
 }
+/*拷贝到剪贴板按钮*/
+.btn-clip:hover{
+  background-color : #eee;
+}

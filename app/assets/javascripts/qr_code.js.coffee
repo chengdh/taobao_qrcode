@@ -262,6 +262,8 @@ $ ->
     #复制二维码地址
     origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
     $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
+    #百度分析链接
+    $('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
   )
   #trigger event
   qr_config.generate_css()

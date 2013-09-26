@@ -80,7 +80,7 @@ class ItemsController < ApplicationController
       num_iid: num_iid
     }
     taobao_response = TaobaoSDK::Session.invoke(args)
-    item = taobao_response.item
+    taobao_response.item
   end
   #根据num_iids批量返回商品详细信息
   def taobao_items_list_get(num_iids)
@@ -91,7 +91,7 @@ class ItemsController < ApplicationController
       num_iids: num_iids.join(",")
     }
     taobao_response = TaobaoSDK::Session.invoke(args)
-    items = taobao_response.items
+    taobao_response.items
   end
   #商品字段
   def item_fields

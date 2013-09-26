@@ -28,6 +28,16 @@ TaobaoQrcode::Application.routes.draw do
     end
   end
 
+  resources :shops,:only => [:index,:show] do
+    collection do
+      #获取当前登录用户的店铺信息
+      get :current
+      get :current_download_qr
+      put :current_qr_upload
+      get :current_qr_code_img
+    end
+  end
+
   # Example resource route with options:
   #   resources :products do
   #     member do

@@ -27,8 +27,7 @@ class LogosController < ApplicationController
   # POST /logos.json
   def create
     @logo = Logo.new(logo_params)
-    @logo.nick = session[:taobao_access_token]['taobao_user_nick']
-
+    @logo.nick = taobao_nick
     respond_to do |format|
       if @logo.save
         format.html { redirect_to @logo, notice: 'Logo was successfully created.' }
@@ -72,6 +71,6 @@ class LogosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def logo_params
-      params.require(:logo).permit(:img)
+      params.require(:logo).permit!
     end
 end

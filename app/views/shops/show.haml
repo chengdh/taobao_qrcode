@@ -1,15 +1,15 @@
 %ul.nav.nav-tabs
   %li.active
-    = link_to "出售中的宝贝",items_path
+    = link_to "店铺网址",current_shops_path
   %li
-    = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
+    = link_to "店铺名片",items_path("search[has_showcase]" => true)
 
 %h3 
-  = @item.title
+  = @shop.title
 .row
   .span4
     .large-qr
-      = render "shared/qr",:content => @item.detail_url,:qr_label => nil,:logo_url => @item.pic_url
+      = render "shared/qr",:content => shop_url(@shop.sid),:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)
   .span8
     = render "shared/qr_config"
 .row
@@ -17,31 +17,23 @@
     .well
       .pull-left
         .btn-group
-          %a.btn.btn-img-upload-single{:href => img_upload_item_path(:id => @item.num_iid,:format => :js),
-          "data-origin-href" =>  img_upload_item_path(:id => @item.num_iid,:format => :js),
-          "data-method" => :put,
-          "data-remote" => true,:rel => "nofollow",
-          "data-toggle" => "tooltip",:title => "将二维码放入宝贝详情页面的图片中"}
-            %i.icon-arrow-up
-            更新到宝贝图片
-
-          %a.btn.btn-picture-upload-single{:href => picture_upload_item_path(:id => @item.num_iid,:format => :js),
-          "data-origin-href" =>  picture_upload_item_path(:id => @item.num_iid,:format => :js),
+          %a.btn.btn-picture-upload-single{:href => current_qr_upload_shops_path(:format => :js),
+          "data-origin-href" =>  current_qr_upload_shops_path(:format => :js),
           "data-method" => :put,
           "data-remote" => true,:rel => "nofollow",
           "data-toggle" => "tooltip",:title => "将二维码放入淘宝图片空间"}
             %i.icon-cloud-upload
             上传到淘宝图片空间
 
-          %a.btn.btn-download-qr-single{:href => download_qr_item_path(:id => @item.num_iid),
-          "data-origin-href" =>  download_qr_item_path(:id => @item.num_iid),
+          %a.btn.btn-download-qr-single{:href => current_download_qr_shops_path,
+          "data-origin-href" =>   current_download_qr_shops_path,
           "data-toggle" => "tooltip",:title => "下载二维码图片到本地"}
             %i.icon-download-alt
             下载到本地
 
       .pull-right
         <!-- Baidu Button BEGIN -->
-        #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{qr_code_img_item_url(:id => @item.num_iid)}'}"}
+        #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{current_qr_code_img_shops_url}'}"}
           %a.bds_qzone  QQ空间
           %a.bds_tsina 新浪微博
           %a.bds_tqq 腾讯微博
@@ -56,8 +48,8 @@
   .span12
     .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
       %span.add-on 链接
-      %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => qr_code_img_item_url(:id => @item.num_iid)} 
-        = qr_code_img_item_url(:id => @item.num_iid)
+      %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => current_qr_code_img_shops_url} 
+        = current_qr_code_img_shops_url
       %a#btn_clip.btn.btn-clip{"data-clipboard-target" => 'qr_code_img_url',:type => :button}
         %i.icon-copy
 

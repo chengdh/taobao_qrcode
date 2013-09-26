@@ -7,6 +7,7 @@ $ ->
   #  el = $(evt.target)
   #  el.parent('li').addClass('active')
   #)
+
   $('[data-toggle="tooltip"]').tooltip()
   $('.colorpicker').simplecolorpicker()
   $(".font-size-slider").noUiSlider(

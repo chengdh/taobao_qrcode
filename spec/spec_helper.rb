@@ -83,6 +83,7 @@ Spork.prefork do
     #     --seed 1234
     config.order = "random"
 
+    config.extend PaperclipMacros
     config.extend Taobao,:type => :controller
     config.include Taobao,:type => :helper
   end
