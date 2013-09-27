@@ -8,7 +8,7 @@
   .well.well-small
     %ul.thumbnails
       - @items.each do |item|
-        %li.span3
+        %li
           .thumbnail.small-qr
             %label.checkbox
               %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 

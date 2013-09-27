@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130918143422) do
+ActiveRecord::Schema.define(version: 20130927014733) do
 
   create_table "logos", force: true do |t|
     t.string   "nick",             limit: 60, null: false
@@ -37,5 +37,23 @@ ActiveRecord::Schema.define(version: 20130918143422) do
   add_index "picture_upload_logs", ["nick"], name: "index_picture_upload_logs_on_nick", using: :btree
   add_index "picture_upload_logs", ["num_iid"], name: "index_picture_upload_logs_on_num_iid", using: :btree
   add_index "picture_upload_logs", ["picture_id"], name: "index_picture_upload_logs_on_picture_id", using: :btree
+
+  create_table "shop_cards", force: true do |t|
+    t.integer  "sid",        limit: 8,   null: false
+    t.string   "nick",       limit: 60,  null: false
+    t.string   "title",      limit: 60,  null: false
+    t.string   "email",      limit: 60
+    t.string   "phone",      limit: 30
+    t.string   "qq",         limit: 30
+    t.string   "wangwang",   limit: 30
+    t.string   "weixin",     limit: 30
+    t.string   "sina_weibo", limit: 30
+    t.string   "shop_url",   limit: 200
+    t.string   "address",    limit: 60
+    t.text     "qr_options"
+    t.text     "shop_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

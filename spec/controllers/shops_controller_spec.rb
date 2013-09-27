@@ -15,6 +15,36 @@ describe ShopsController do
       assigns(:shop).should eq(shop)
     end
   end
+  #获取当前店铺名片信息
+  describe "GET current_card" do
+    it "get shop card will success" do
+      TaobaoSDK::Session.should_receive(:invoke).and_return(shop_get_response)
+      shop = shop_get_response.shop
+      get :current_card,{},valid_session
+      assigns(:shop).should eq(shop)
+      assigns(:shop_card).sid.should eq(shop.sid)
+    end
+  end
+  #生成店铺名片操作
+  describe "PUT generate_card" do
+    it "should create or update shop_card" do
+      shop_card = FactoryGirl.build(:shop_card)
+      put :generate_card,{shop_card: shop_card.attributes},valid_session
+      assigns(:shop_card).sid.should eq(shop_card.sid)
+    end
+    it "should render action current_card" do
+      shop_card = FactoryGirl.build(:shop_card)
+      put :generate_card,{shop_card: shop_card.attributes},valid_session
+      response.should render(action: current_card)
+    end
+
+    it "should success" do
+      shop_card = FactoryGirl.build(:shop_card)
+      put :generate_card,{shop_card: shop_card.attributes},valid_session
+      response.should be_success
+    end
+  end
+
   #更新店铺二维码到淘宝图片空间
   describe "PUT current_qr_upload" do
     it "should success" do

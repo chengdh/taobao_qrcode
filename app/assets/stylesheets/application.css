@@ -12,6 +12,7 @@
  *= require jquery.notify_bar
  *= require jquery.simplecolorpicker
  *= require jquery.fileupload-ui
+ *= reqiore vcard/style
  *= require_self
  *= require_tree .
  */

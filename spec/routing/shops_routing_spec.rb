@@ -11,6 +11,9 @@ describe ShopsController do
     it "routes to current_qr_upload" do
       put("/shops/current_qr_upload").should route_to("shops#current_qr_upload")
     end
+    it "routes to generate_card" do
+      put("/shops/generate_card").should route_to("shops#generate_card")
+    end
 
   end
 end

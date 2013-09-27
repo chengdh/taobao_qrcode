@@ -32,8 +32,10 @@ TaobaoQrcode::Application.routes.draw do
     collection do
       #获取当前登录用户的店铺信息
       get :current
+      get :current_card
       get :current_download_qr
       put :current_qr_upload
+      put :generate_card
       get :current_qr_code_img
     end
   end

@@ -8,6 +8,24 @@ class ShopsController < ApplicationController
     @shop = current_shop_get
     render action: :show
   end
+  #GET shops/current_card
+  def current_card
+    @shop = current_shop_get
+    #获取shop card 信息
+    @shop_card = ShopCard.find_by_sid(@shop.sid)
+    @shop_card ||= ShopCard.new(nick: @shop.nick,sid: @shop.sid,
+                                title: @shop.nick,shop_url: shop_url(@shop.sid),
+                                shop_desc: @shop.desc
+                               )
+  end
+  #PUT shops/generate_card
+  #生成店铺名片二维码
+  def generate_card
+    @shop = current_shop_get
+    @shop_card = ShopCard.find_or_create_by_nick_and_sid_and_title(@shop.nick,@shop.sid,@shop.title)
+    @shop_card.update_attributes(shop_card_params)
+    render action: :current_card
+  end
   #PUT shops/current_qr_upload
   #上传店铺网址二维码到淘宝图片空间
   def current_qr_upload
@@ -53,4 +71,9 @@ class ShopsController < ApplicationController
     taobao_response = TaobaoSDK::Session.invoke(args)
     taobao_response.shop
   end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def shop_card_params
+      params.require(:shop_card).permit!
+    end
+
 end

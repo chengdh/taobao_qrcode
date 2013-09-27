@@ -81,4 +81,16 @@ FactoryGirl.define do
   factory :shop_get_response,:class => TaobaoSDK::ShopGetResponse do
     shop FactoryGirl.build(:shop)
   end
+  factory :shop_card do
+    sid 100004
+    title 'sandbox cdh shop'
+    nick 'sandbox_cdh'
+    phone '13676997527'
+    qq    '542340109'
+    wangwang 'chengdh'
+    weixin '542340109'
+    sina_weibo 'chengdh'
+    shop_url   'http://shop12345.taobao.com'
+    shop_desc  'this is my shop'
+  end
 end

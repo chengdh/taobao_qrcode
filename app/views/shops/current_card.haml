@@ -4,15 +4,22 @@
   %li
     = link_to "店铺名片",current_card_shops_path
 
-%h3 
-  = @shop.title
+%h3 生成店铺名片二维码
+
+.row
+  .span8
+    = render "vcard",shop_card: @shop_card
+  .span4
+    = render "vcard_tip"
+
 .row
   .span4
-    .large-qr
-      = render "shared/qr",:content => shop_url(@shop.sid),:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)
+    .shop-card-qr
+      = render "shared/qr",:content => @shop_card.build_vcard.to_s,:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)
+
   .span8
     = render "shared/qr_config"
-.row
+ 
   .span12
     .well
       .pull-left

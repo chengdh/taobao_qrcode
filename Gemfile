@@ -95,6 +95,8 @@ gem "jquery-simplecolorpicker-rails", "~> 0.4.0"
 gem "jquery-fileupload-rails", "~> 0.4.1"
 gem "paperclip", "~> 3.5.1"
 gem 'rails-i18n', '~> 4.0.0.pre'
+#vcard及vcalendar生成
+gem "vpim", "~> 0.695"
 
 group :development, :test do
   gem 'debugger', "~> 1.6.1"

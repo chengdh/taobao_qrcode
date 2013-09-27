@@ -1,0 +1,35 @@
+= form_for shop_card,url: {action: :generate_card,format: :js},method: :put,remote: true,html: {class: "vcard-wrapper vcard-form"} do |f|
+  .vcard.row
+    .vcard-header.span8
+      .input-prepend
+        %span.add-on 店铺名称
+        = f.text_field :title,class: :span7
+  .row
+    .vcard-contact.span3
+      .input-prepend
+        %span.add-on 电话
+        = f.text_field :phone,class: "span2"
+        
+      .input-prepend
+        %span.add-on &nbsp;QQ
+        = f.text_field :qq,class: "span2"
+        
+      .input-prepend
+        %span.add-on 旺旺 
+        = f.text_field :wangwang,class: "span2"
+        
+      .input-prepend
+        %span.add-on 微信 
+        = f.text_field :weixin,class: "span2"
+
+    .vcard-intro.span5
+      = f.text_area :shop_desc,rows: 7
+  .row
+    .vcard-address.span8
+      .input-prepend
+        %span.add-on 店铺网址
+        = f.text_field :shop_url,class: "span7",readonly: true
+       
+      .input-prepend
+        %span.add-on 实店地址
+        = f.text_field :address,class: "span7"
