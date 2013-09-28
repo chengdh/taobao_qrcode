@@ -1,8 +1,5 @@
 $ ->
-  new ZeroClipboard $("#btn_clip")
-  $('.fancybox').fancybox()
   #绑定商品选择事件
-  
   $('.cbx-select-item').on('click',(evt) ->
     el = $(evt.target)
     if el.prop('checked')

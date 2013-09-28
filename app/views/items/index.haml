@@ -5,7 +5,7 @@
     %li
       = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
 
-  .well.well-small
+  .wrapper
     %ul.thumbnails
       - @items.each do |item|
         %li
