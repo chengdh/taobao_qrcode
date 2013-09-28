@@ -35,7 +35,7 @@ describe ShopsController do
     it "should render action current_card" do
       shop_card = FactoryGirl.build(:shop_card)
       put :generate_card,{shop_card: shop_card.attributes},valid_session
-      response.should render(action: current_card)
+      response.should render_template(:current_card)
     end
 
     it "should success" do

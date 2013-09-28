@@ -2,6 +2,7 @@
 #商品管理界面
 class ItemsController < ApplicationController
   include QrCodeService
+  after_filter :save_picture_upload_log,only: :picture_upload
   #GET items
   def index
     args = {
@@ -20,7 +21,6 @@ class ItemsController < ApplicationController
   #GET items/:id
   def show
     @item = taobao_item_get(params[:id])
-    @picture = PictureUploadLog.last_upload_picture(params[:id])
   end
   #get items/:id/qr_code_img
   #根据传入的参数获取qr_img
@@ -115,4 +115,11 @@ class ItemsController < ApplicationController
   end
   #每页显示数据条数
   def per_page ; 15; end
+  #记录图片上传记录
+  def save_picture_upload_log
+    ItemPictureUploadLog.create(num_iid: @item.num_iid,nick: taobao_nick,
+                                picture_path: @item_picture.picture_path,
+                                picture_id: @item_picture.picture_id,
+                                title: @item_picture.title)
+  end
 end

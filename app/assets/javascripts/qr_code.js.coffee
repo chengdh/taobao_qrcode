@@ -238,7 +238,7 @@ $ ->
     label :   $('.large-qr .qr-wrapper').data('label')
     logo_url: $('.large-qr .qr-wrapper').data('logo-url')
     is_radius : true
-    unit_size : 6)
+    unit_size : 4)
   qr_config_view = new QrConfigView($('.qr-config'),qr_config)
   qr_view = new QrView($('.large-qr'),qr_config)
   #绑定上传到宝贝图片按钮事件
@@ -273,6 +273,7 @@ $ ->
       height:   $(qr_el).data('height')
       logo_url: $(qr_el).data('logo-url')
       label:    ""
+      unit_size : 2
 
     qr_config = new QrConfig(options)
     qr_view = new QrView($(qr_el),qr_config)

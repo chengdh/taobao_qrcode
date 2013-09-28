@@ -3,6 +3,7 @@
 class ShopsController < ApplicationController
   include QrCodeService
   include ShopsHelper
+  after_filter :save_shop_picture_upload_log,only: :current_qr_upload
   #GET shops/current
   def current
     @shop = current_shop_get
@@ -22,7 +23,7 @@ class ShopsController < ApplicationController
   #生成店铺名片二维码
   def generate_card
     @shop = current_shop_get
-    @shop_card = ShopCard.find_or_create_by_nick_and_sid_and_title(@shop.nick,@shop.sid,@shop.title)
+    @shop_card = ShopCard.find_or_create_by(nick: @shop.nick,sid: @shop.sid,title: @shop.title)
     @shop_card.update_attributes(shop_card_params)
     render action: :current_card
   end
@@ -72,8 +73,14 @@ class ShopsController < ApplicationController
     taobao_response.shop
   end
     # Never trust parameters from the scary internet, only allow the white list through.
-    def shop_card_params
-      params.require(:shop_card).permit!
-    end
-
+  def shop_card_params
+    params.require(:shop_card).permit!
+  end
+  #记录图片上传记录
+  def save_shop_picture_upload_log
+    ShopPictureUploadLog.create(sid: @shop.sid,nick: taobao_nick,
+                                picture_path: @picture.picture_path,
+                                picture_id: @picture.picture_id,
+                                title: @picture.title)
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130927014733) do
+ActiveRecord::Schema.define(version: 20130928135827) do
 
   create_table "logos", force: true do |t|
     t.string   "nick",             limit: 60, null: false
@@ -27,11 +27,14 @@ ActiveRecord::Schema.define(version: 20130927014733) do
 
   create_table "picture_upload_logs", force: true do |t|
     t.string   "nick",         limit: 60,  null: false
-    t.integer  "num_iid",      limit: 8,   null: false
+    t.integer  "num_iid",      limit: 8
     t.integer  "picture_id",   limit: 8,   null: false
     t.string   "picture_path", limit: 300, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type",         limit: 60,  null: false
+    t.integer  "sid",          limit: 8
+    t.string   "title",        limit: 60
   end
 
   add_index "picture_upload_logs", ["nick"], name: "index_picture_upload_logs_on_nick", using: :btree

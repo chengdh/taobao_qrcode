@@ -9,9 +9,10 @@ $ ->
   #)
   new ZeroClipboard $("#btn_clip")
   $('.fancybox').fancybox()
+  $('.popover').popover('show')
   #feeback buton
   fm_options = 
-        position : "right-top"
+        position : "right-bottom"
         show_email : true
         message_required : true
         show_asterisk_for_required : true
