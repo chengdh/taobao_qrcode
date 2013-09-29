@@ -1,35 +1,18 @@
 .row
   .span12
-    .hero-unit
-      %h4 新建店铺名片二维码
-      %p 
-        店铺名片二维码将您的淘宝店铺所有信息打包成为一个二维码,您使用手机扫描该二维码时,
-        以下信息将自动作为联系人加入到手机通讯录中
-        %ul
-          %li 店铺名称
-          %li 联系电话/QQ号码/旺旺号码
-          %li 店铺网址/实体店地址
-          %li 店铺简介信息
-
-        您还没有上传过店铺名片二维码,点击这里新建一个
-
-      %p
-        %a.btn.btn-large.btn-primary{href: '#'}
-          %i.icon-plus.icon-white
-          点击新建二维码上传
-
-
+    .well
+      - if  @shop_card_logs.blank?
+        = render 'init_shop_card'
+      - else
+        = render 'shop_card_list'
 .row
   .span12
-    .well.well-small
-      %h4 最近上传的商品维码
-      %ul.thumbnails
-        %li
-          %a.thumbnail{href: "#"}
+    .well
+      - if  @item_logs.blank?
+        = render 'init_item'
+      - else
+        = render 'item_list'
 .row
   .span12
-    .well.well-small
-      %h4 社交网络
-      %ul.thumbnails
-        %li
-          %a.thumbnail{href: "#"} qq
+    .well
+      = render "sn_list"

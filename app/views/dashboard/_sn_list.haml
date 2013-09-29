@@ -1,0 +1,18 @@
+%h4.clearfix
+  .pull-left
+    您的社交工具二维码
+  .pull-right
+    %a.btn{:href => current_card_shops_path,"data-toggle"=>"tooltip",
+      "data-placement" => "bottom", :title => "修改社交工具信息"} 
+      %i.icon-pencil.icon-white
+      修改
+%hr
+%ul.thumbnails.sn-qr
+  - @sn_list.each do |k,v|
+    - if v.present?
+      %li
+        %a.thumbnail{href: '#',class: "fancybox"}
+          = render "shared/qr",:content => v,:qr_label => "",:logo_url => ""
+        .text-center
+          %span.label.label-info
+            = k

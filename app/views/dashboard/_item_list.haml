@@ -1,0 +1,17 @@
+%h4.clearfix
+  .pull-left
+    最近上传的商品二维码
+  .pull-right
+    %a.btn{:href => items_path,"data-toggle"=>"tooltip",
+      "data-placement" => "bottom", :title => "新建商品二维码"} 
+      %i.icon-plus
+      新建
+%hr
+%ul.thumbnails
+  - @item_logs.each do |i|
+    %li
+      %a.thumbnail{href: i.picture_path,title: i.title,class: "fancybox"}
+        = image_tag i.picture_path,size: "150x150"
+      .text-center
+        %span.label.label-info
+          = i.title

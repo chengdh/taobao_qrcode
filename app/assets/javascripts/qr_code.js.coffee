@@ -286,8 +286,29 @@ $ ->
 
     $(qr_el).data('qr-object',qr_object)
 
+  #dashboard sn_list 社交工具二维码
+  for qr_el in $('.sn-qr .qr-wrapper')
+    options = 
+      width :   $(qr_el).data('width')
+      height:   $(qr_el).data('height')
+      logo_url: $(qr_el).data('logo-url')
+      label:    ""
+      unit_size : 2
+
+    qr_config = new QrConfig(options)
+    qr_view = new QrView($(qr_el),qr_config)
+    qr_config.generate_css()
+    qr_object = 
+      css : qr_config.to_string()
+      qr_width : qr_config.qr_width + 20
+      qr_height : qr_config.qr_height + 20
+      logo_url: qr_config.logo_url
+
+    $(qr_el).data('qr-object',qr_object)
+
+
+
   #店铺名片二维码
-  #单个商品二维码
   shop_card_qr_config = new QrConfig(    
     width :   $('.shop-card-qr .qr-wrapper').data('width')
     height:   $('.shop-card-qr .qr-wrapper').data('height')
