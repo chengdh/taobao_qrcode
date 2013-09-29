@@ -2,6 +2,33 @@
 #提供条码生成服务
 module QrCodeService
   extend ActiveSupport::Concern
+  private
+  #各个controller公用方法
+  #上传至淘宝图片空间
+  #返回 picture对象
+  def qr_picture_upload(content="",title="",format = :jpeg,qr_options = {})
+    img =  get_qr_img_stream(content,format,qr_options)
+    args = {
+      method: 'taobao.picture.upload',
+      session: session_key,
+      picture_category_id: 0,
+      image: img,
+      image_input_title: "#{title}.jpg"
+      }
+    taobao_response = TaobaoSDK::Session.invoke(args)
+    item_picture = taobao_response.picture
+  end
+
+  #下载二维码图案
+  def qr_download(content="",title="",format=:jpeg,qr_options={})
+    item_img =  get_qr_img(content,format,qr_options)
+    send_data item_img,filename: "#{title}.#{:format}"
+  end
+  #获取二维码图案
+  def qr_img(content="",format=:jpeg,qr_options={})
+    qr_img = get_qr_img(content,format,qr_options)
+    send_data qr_img,type: format,disposition: :inline
+  end
   #根据传入的文本生成二维码img
   #param: content 二维文本信息
   #option: 二维码显示样式
@@ -23,7 +50,6 @@ module QrCodeService
     img_stream
   end
 
-  private
   #生成商品二维码图像
   def generate_qr_img(qr_html,img_format,css=nil,qr_width = 240,qr_height = 240)
     kit = IMGKit.new(qr_html, :quality => 94,:width => qr_width,:height => qr_height)

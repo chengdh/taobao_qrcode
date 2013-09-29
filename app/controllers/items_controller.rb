@@ -26,8 +26,7 @@ class ItemsController < ApplicationController
   #根据传入的参数获取qr_img
   def qr_code_img
     @item = taobao_item_get(params[:id])
-    qr_img = get_qr_img(@item.detail_url,:jpeg,params)
-    send_data qr_img,type: :jpeg,disposition: :inline
+    qr_img(@item.detail_url,:jpeg,params)
   end
 
   #PUT item/:id/img_upload
@@ -49,12 +48,10 @@ class ItemsController < ApplicationController
   #下载单个商品的qr_code
   def download_qr
     @item = taobao_item_get(params[:id])
-    item_img =  get_qr_img(@item.detail_url,:jpeg,params)
-    send_data item_img,filename: "#{@item.title}.jpg"
+    qr_download(@item.detail_url,@item.title,:jpeg,params)
   end
   #GET items/download_zip
   #将选定的商品二纬码打包成zip再下载
-  #FIXME 还须修改
   def download_zip
     @items = params[:ids].collect {|id| taobao_item_get(id)}
     @item_qr_codes = @items.collect do |item|
@@ -67,7 +64,8 @@ class ItemsController < ApplicationController
   #PUT item/:id/picture_upload
   #将条码图片上传到淘宝图片空间
   def picture_upload
-    @item,@item_picture = taobao_picture_upload params[:id]
+    @item = taobao_item_get params[:id]
+    @item_picture = qr_picture_upload(@item.detail_url,@item.title,:jpeg,params)
   end
 
   private
@@ -96,22 +94,6 @@ class ItemsController < ApplicationController
   #商品字段
   def item_fields
     %w[num_iid title nick detail_url type desc cid seller_cids pic_url num price].join(",")
-  end
-
-  #上传商品二维码到淘宝图片空间
-  def taobao_picture_upload(num_iid)
-    item = taobao_item_get num_iid
-    img =  get_qr_img_stream(item.detail_url,:jpeg,params)
-    args = {
-      method: 'taobao.picture.upload',
-      session: session_key,
-      picture_category_id: 0,
-      image: img,
-      image_input_title: "#{item.title}.jpg"
-      }
-    taobao_response = TaobaoSDK::Session.invoke(args)
-    item_picture = taobao_response.picture
-    return item,item_picture
   end
   #每页显示数据条数
   def per_page ; 15; end

@@ -74,4 +74,37 @@ describe ShopsController do
       response.should be_success
     end
   end
+  #更新店铺名片二维码到淘宝图片空间
+  describe "PUT current_card_qr_upload" do
+    it "should success" do
+      shop = FactoryGirl.build(:shop)
+      controller.should_receive(:current_shop_get).and_return(shop)
+      ShopCard.should_receive(:find_by_sid).with(shop.sid).and_return(FactoryGirl.create(:shop_card))
+      TaobaoSDK::Session.should_receive(:invoke).and_return(FactoryGirl.build(:picture_upload_response))
+      put :current_card_qr_upload,{},valid_session
+      response.should be_success
+    end
+  end
+  #下载店铺名片二维码
+  describe "GET current_card_download_qr" do
+    it "should success" do
+      shop = FactoryGirl.build(:shop)
+      controller.should_receive(:current_shop_get).and_return(shop)
+
+      ShopCard.should_receive(:find_by_sid).with(shop.sid).and_return(FactoryGirl.create(:shop_card))
+      get :current_card_download_qr,{},valid_session
+      response.should be_success
+    end
+  end
+  #GET shops/current_card_qr_code_img
+  #获取店铺名片二维码图片
+  describe "GET shops/current_card_qr_code_img" do
+    it "should success" do
+      shop = FactoryGirl.build(:shop)
+      controller.should_receive(:current_shop_get).and_return(shop)
+      ShopCard.should_receive(:find_by_sid).with(shop.sid).and_return(FactoryGirl.create(:shop_card))
+      get :current_card_qr_code_img,{},valid_session
+      response.should be_success
+    end
+  end
 end
