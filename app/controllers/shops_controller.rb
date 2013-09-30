@@ -46,7 +46,6 @@ class ShopsController < ApplicationController
     @shop = current_shop_get
     @shop_card = ShopCard.find_or_create_by(nick: @shop.nick,sid: @shop.sid,title: @shop.title)
     @shop_card.update_attributes(shop_card_params)
-    render action: :current_card
   end
 
   #PUT shops/current_qr_upload

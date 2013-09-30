@@ -22,4 +22,5 @@
 //= require jquery.nouislider
 //= require jquery.simplecolorpicker
 //= require jquery-fileupload
+//= require qr_code
 //= require_tree .

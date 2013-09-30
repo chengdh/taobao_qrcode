@@ -106,3 +106,59 @@ $ ->
   #在这里定义bds_config
   bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'
   $('#bdshell_js').attr('src',"http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
+
+  #二维码相关功能
+  #单个商品二维码
+  qr_config = new window.qr_code.QrConfig(    
+    width :   $('.large-qr .qr-wrapper').data('width')
+    height:   $('.large-qr .qr-wrapper').data('height')
+    label :   $('.large-qr .qr-wrapper').data('label')
+    logo_url: $('.large-qr .qr-wrapper').data('logo-url')
+    is_radius : true
+    unit_size : 4)
+  qr_config_view = new  window.qr_code.QrConfigView($('.qr-config'),qr_config)
+  qr_view = new  window.qr_code.QrView($('.large-qr'),qr_config)
+  #绑定上传到宝贝图片按钮事件
+  $(qr_config).on('css_change', ->
+    css_string = qr_config.to_string()
+    qr_object = 
+      css : css_string
+      qr_width : qr_config.qr_width+20
+      qr_height : qr_config.qr_height+20
+      logo_url  : qr_config.logo_url
+ 
+    params = $.param(qr_object)
+    origin_btn_img_upload_href = $('.btn-img-upload-single').data('origin-href')
+    origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
+    origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
+    $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
+    $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
+    $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
+    #复制二维码地址
+    origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
+    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
+    #百度分析链接
+    $('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
+  )
+  #trigger event
+  qr_config.generate_css()
+
+  #针对批量上传图片时,只能使用默认样式
+  for qr_el in $('.small-qr .qr-wrapper')
+    options = 
+      width :   $(qr_el).data('width')
+      height:   $(qr_el).data('height')
+      logo_url: $(qr_el).data('logo-url')
+      label:    ""
+      unit_size : 2
+
+    qr_config = new  window.qr_code.QrConfig(options)
+    qr_view = new  window.qr_code.QrView($(qr_el),qr_config)
+    qr_config.generate_css()
+    qr_object = 
+      css : qr_config.to_string()
+      qr_width : qr_config.qr_width + 20
+      qr_height : qr_config.qr_height + 20
+      logo_url: qr_config.logo_url
+
+    $(qr_el).data('qr-object',qr_object)

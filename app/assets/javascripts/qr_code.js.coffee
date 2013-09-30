@@ -2,6 +2,8 @@
 #
 #二维码设置类
 $ ->
+  window.qr_code ||= new Object()
+  window.qr_code.QrConfig ||= 
   class QrConfig
     constructor: (options)->
       #options object 二维码初始化参数
@@ -160,6 +162,7 @@ $ ->
   
   
   #二维码设置显示
+  window.qr_code.QrConfigView ||= 
   class QrConfigView 
     constructor: (@el,@qr_config) ->
       #根据qr_config设置view的初始值
@@ -218,11 +221,12 @@ $ ->
       )
   
   #二维码显示
+  window.qr_code.QrView ||= 
   class QrView
     constructor : (@qr_wrapper_el,@qr_config) ->
       $(@qr_config).on("css_change",@on_qr_config_change)
   
-    #二维码设这变化处理
+    #二维码设置变化处理
     on_qr_config_change : =>
       style_hash = @qr_config.css2style()
       $(@qr_wrapper_el).find(".qr-label").html(@qr_config.label)
@@ -230,118 +234,3 @@ $ ->
       for selector of style_hash
         $(@qr_wrapper_el).find(".#{selector}").attr('style','').attr('style',style_hash[selector])
   
-
-  #单个商品二维码
-  qr_config = new QrConfig(    
-    width :   $('.large-qr .qr-wrapper').data('width')
-    height:   $('.large-qr .qr-wrapper').data('height')
-    label :   $('.large-qr .qr-wrapper').data('label')
-    logo_url: $('.large-qr .qr-wrapper').data('logo-url')
-    is_radius : true
-    unit_size : 4)
-  qr_config_view = new QrConfigView($('.qr-config'),qr_config)
-  qr_view = new QrView($('.large-qr'),qr_config)
-  #绑定上传到宝贝图片按钮事件
-  $(qr_config).on('css_change', ->
-    css_string = qr_config.to_string()
-    qr_object = 
-      css : css_string
-      qr_width : qr_config.qr_width+20
-      qr_height : qr_config.qr_height+20
-      logo_url  : qr_config.logo_url
- 
-    params = $.param(qr_object)
-    origin_btn_img_upload_href = $('.btn-img-upload-single').data('origin-href')
-    origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
-    origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
-    $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
-    $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
-    $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
-    #复制二维码地址
-    origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
-    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
-    #百度分析链接
-    $('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
-  )
-  #trigger event
-  qr_config.generate_css()
-
-  #针对批量上传图片时,只能使用默认样式
-  for qr_el in $('.small-qr .qr-wrapper')
-    options = 
-      width :   $(qr_el).data('width')
-      height:   $(qr_el).data('height')
-      logo_url: $(qr_el).data('logo-url')
-      label:    ""
-      unit_size : 2
-
-    qr_config = new QrConfig(options)
-    qr_view = new QrView($(qr_el),qr_config)
-    qr_config.generate_css()
-    qr_object = 
-      css : qr_config.to_string()
-      qr_width : qr_config.qr_width + 20
-      qr_height : qr_config.qr_height + 20
-      logo_url: qr_config.logo_url
-
-    $(qr_el).data('qr-object',qr_object)
-
-  #dashboard sn_list 社交工具二维码
-  for qr_el in $('.sn-qr .qr-wrapper')
-    options = 
-      width :   $(qr_el).data('width')
-      height:   $(qr_el).data('height')
-      logo_url: $(qr_el).data('logo-url')
-      label:    ""
-      unit_size : 2
-
-    qr_config = new QrConfig(options)
-    qr_view = new QrView($(qr_el),qr_config)
-    qr_config.generate_css()
-    qr_object = 
-      css : qr_config.to_string()
-      qr_width : qr_config.qr_width + 20
-      qr_height : qr_config.qr_height + 20
-      logo_url: qr_config.logo_url
-
-    $(qr_el).data('qr-object',qr_object)
-
-
-
-  #店铺名片二维码
-  shop_card_qr_config = new QrConfig(    
-    width :   $('.shop-card-qr .qr-wrapper').data('width')
-    height:   $('.shop-card-qr .qr-wrapper').data('height')
-    label :   $('.shop-card-qr .qr-wrapper').data('label')
-    logo_url: $('.ship-card-qr .qr-wrapper').data('logo-url')
-    is_radius : true
-    unit_size : 4)
-  shop_card_qr_config_view = new QrConfigView($('.qr-config'),shop_card_qr_config)
-  shop_card_qr_view = new QrView($('.shop-card-qr'),shop_card_qr_config)
- 
-  #店铺名片二维码样式调整时,需要更新对应的按钮
-  $(shop_card_qr_config).on('css_change', ->
-    css_string = shop_card_qr_config.to_string()
-    qr_object = 
-      css : css_string
-      qr_width : shop_card_qr_config.qr_width+20
-      qr_height : shop_card_qr_config.qr_height+20
-      logo_url  : shop_card_qr_config.logo_url
- 
-    params = $.param(qr_object)
-    origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
-    origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
-    $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
-    $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
-    #复制二维码地址
-    origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
-    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
-    #百度分析链接
-    $('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
-  )
-  #trigger event
-  shop_card_qr_config.generate_css()
-  #生成店铺名片二维码
-  $('.btn-generate-shop-vcard').on('click', -> $('.vcard-form').submit())
-
-
