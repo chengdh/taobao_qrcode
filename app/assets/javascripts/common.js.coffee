@@ -1,3 +1,7 @@
+#turbolinks spinner
+$(document).on('page:fetch', -> $.blockUI(message : "处理中,稍等..."))
+$(document).on('page:change', -> $.unblockUI())
+
 #通用操作
 $ ->
 
@@ -9,10 +13,9 @@ $ ->
   #)
   new ZeroClipboard $("#btn_clip")
   $('.fancybox').fancybox()
-  $('.popover').popover('show')
   #feeback buton
   fm_options = 
-        position : "right-bottom"
+        position : "right-top"
         show_email : true
         message_required : true
         show_asterisk_for_required : true
@@ -27,7 +30,7 @@ $ ->
         message_placeholder: "填写您的宝贵意见,便于我们改进软件"
         submit_label: "确认发送"
 
-  fm.init(fm_options);
+  fm.init(fm_options)
 
   $('[data-toggle="tooltip"]').tooltip()
   $('.colorpicker').simplecolorpicker()

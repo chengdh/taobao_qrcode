@@ -12,7 +12,9 @@
     - if v.present?
       %li
         %a.thumbnail{href: '#',class: "fancybox"}
-          = render "shared/qr",:content => v,:qr_label => "",:logo_url => ""
+          = render "shared/qr",:content => v,:qr_label => "",:logo_url => asset_path("#{k}.png") 
         .text-center
           %span.label.label-info
             = k
+.alert.alert-info
+  这些二维码是根据您在店铺名片中的设置信息生成的

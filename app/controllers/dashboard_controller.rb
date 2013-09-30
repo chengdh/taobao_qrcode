@@ -13,7 +13,7 @@ class DashboardController < ApplicationController
   def get_sn_list
     shop_card = ShopCard.find_by(nick: taobao_nick)
     ret = {}
-    ret = {"QQ" => shop_card.try(:qq),
+    ret = {"qq" => shop_card.try(:qq),
       "phone" => shop_card.try(:phone),
       "wangwang" => shop_card.try(:wangwang),
       "weixin" => shop_card.try(:weixin),

@@ -1,7 +1,7 @@
 - qr = qrcode(content)
 .qr-wrapper{:position => 'relative',"data-label" => qr_label,"data-logo-url" => logo_url,
                                     "data-width" => qr.modules.size,"data-height" => qr.modules.size}
-  %img.img-rounded.qr-logo{src: logo_url}
+  %img.img-rounded.qr-logo{src: logo_url,style: "width : 40px;height: 40px;"}
   %table.qr-table
     - qr.modules.each_index do |x|
       %tr
