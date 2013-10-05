@@ -23,4 +23,5 @@
 //= require jquery.simplecolorpicker
 //= require jquery-fileupload
 //= require qr_code
+//= require helps
 //= require_tree .

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130928135827) do
+ActiveRecord::Schema.define(version: 20131005112505) do
 
   create_table "logos", force: true do |t|
     t.string   "nick",             limit: 60, null: false
@@ -58,5 +58,17 @@ ActiveRecord::Schema.define(version: 20130928135827) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "visit_logs", force: true do |t|
+    t.string   "nick",       limit: 60, null: false
+    t.string   "controller", limit: 60, null: false
+    t.string   "action",     limit: 60, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visit_logs", ["action"], name: "index_visit_logs_on_action", using: :btree
+  add_index "visit_logs", ["controller"], name: "index_visit_logs_on_controller", using: :btree
+  add_index "visit_logs", ["nick"], name: "index_visit_logs_on_nick", unique: true, using: :btree
 
 end

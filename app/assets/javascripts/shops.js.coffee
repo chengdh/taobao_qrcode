@@ -40,3 +40,6 @@ $ ->
     $('.shop-card-qr').block(message : "正在生成...")
     $('.vcard-form').submit()
   )
+  $('.shop-card-qr').on('refresh',->  shop_card_qr_config.generate_css())
+
+

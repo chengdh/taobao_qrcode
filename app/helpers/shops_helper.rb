@@ -6,6 +6,6 @@ module ShopsHelper
   end
   #得到店标url
   def shop_logo_url(logo_path)
-    "ttp://logo.taobao.com/shop-logo#{logo_path}"
+    "http://logo.taobao.com/shop-logo#{logo_path}"
   end
 end

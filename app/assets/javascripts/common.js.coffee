@@ -1,6 +1,12 @@
 #turbolinks spinner
-$(document).on('page:fetch', -> $.blockUI(message : "处理中,稍等..."))
-$(document).on('page:change', -> $.unblockUI())
+$(document).on('page:fetch', -> 
+  $.blockUI(message : "")
+  $.fancybox.showLoading()
+)
+$(document).on('page:change', -> 
+  $.unblockUI()
+  $.fancybox.hideLoading()
+)
 
 #通用操作
 $ ->
@@ -11,7 +17,10 @@ $ ->
   #  el = $(evt.target)
   #  el.parent('li').addClass('active')
   #)
-  new ZeroClipboard $("#btn_clip")
+
+  clip = new ZeroClipboard $("#btn_clip")
+  clip.on('complete', -> $('.clip-success').show())
+
   $('.fancybox').fancybox()
   #feeback buton
   fm_options = 

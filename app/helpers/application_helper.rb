@@ -17,5 +17,11 @@ module ApplicationHelper
   def qrcode(content,size = 14,level = :m)
     RQRCode::QRCode.new(content, size: size, level:  level )
   end
-
+  #判断是否第一次进入action
+  def first_visit?
+    ret = false
+    nick = taobao_nick
+    ret = VisitLog.exists?(nick: nick,controller: params[:controller],action: params[:action]) if nick.present?
+    not ret
+  end
 end

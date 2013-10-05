@@ -82,13 +82,13 @@ $ ->
   
     hide_loading = ->
       $.unblockUI()
-      #$.fancybox.hideLoading()
+      $.fancybox.hideLoading()
 
     ajax_array = []
     ajax_array.push($.ajax(upload_url.replace("{:id}",s.id),s)) for s  in  settings
 
-    #$.fancybox.showLoading()
-    $.blockUI(message : '处理中...')
+    $.blockUI(message : '')
+    $.fancybox.showLoading()
 
     $.when.apply($,ajax_array).then(hide_loading,hide_loading)
 
@@ -162,3 +162,5 @@ $ ->
       logo_url: qr_config.logo_url
 
     $(qr_el).data('qr-object',qr_object)
+
+

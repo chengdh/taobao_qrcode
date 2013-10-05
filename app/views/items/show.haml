@@ -55,6 +55,11 @@
             = qr_code_img_item_url(:id => @item.num_iid)
           %a#btn_clip.btn.btn-clip{"data-clipboard-target" => 'qr_code_img_url',:type => :button}
             %i.icon-copy
+
+        .alert.alert-success.clip-success{style: 'display : none;'}
+          %button.close{type: "button","data-dismiss" => "alert"} &times;
+          已将二维码网址复制到剪贴版
+
         .alert.alert-info
           您可复制该URL到需要显示的地方
 

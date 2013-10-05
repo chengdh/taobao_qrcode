@@ -1,3 +1,4 @@
 var qr = '<%= escape_javascript(render "shared/qr",:content => @shop_card.build_vcard.to_s,:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)) %>';
 $('.shop-card-qr').html(qr);
 $('.shop-card-qr').unblock();
+$('.shop-card-qr').trigger('refresh')
