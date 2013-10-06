@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require fancybox
-//= require turbolinks
 //= require jquery.blockUI
 //= require jquery.notify_bar
 //= require zeroclipboard
@@ -25,3 +24,4 @@
 //= require qr_code
 //= require helps
 //= require_tree .
+//= require turbolinks

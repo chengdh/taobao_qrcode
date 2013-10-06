@@ -7,18 +7,17 @@ $(document).on('page:change', ->
   $.unblockUI()
   $.fancybox.hideLoading()
 )
-
 #通用操作
 $ ->
+  load_baidu_shared = ->
+    #先删除上次的css
+    $('link[href*="bdsstyle.css"').remove()
+    bdshell_js_url = "http://bdimg.share.baidu.com/static/js/bds_s_v2.js?cdnversion="+Math.ceil(new Date()/3600000)
+    $.getScript(bdshell_js_url)
 
-  #$('.nav').on('click','li', (evt) -> 
-  #  delegate_el = $(evt.delegateTarget)
-  #  delegate_el.find('li').removeClass('active')
-  #  el = $(evt.target)
-  #  el.parent('li').addClass('active')
-  #)
+  load_baidu_shared()
 
-  clip = new ZeroClipboard $("#btn_clip")
+  clip = new ZeroClipboard($("#btn_clip"))
   clip.on('complete', -> $('.clip-success').show())
 
   $('.fancybox').fancybox()
@@ -76,6 +75,3 @@ $ ->
     handles: 1
     slide : -> $(this).trigger('show-logo-slide')
   )
-
-
-

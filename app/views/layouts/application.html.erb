@@ -33,15 +33,11 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
-    <!-- Javascripts
-    ================================================== -->
-    <script type="text/javascript" id="bdshare_js" data="type=tools&mini=1" data-turbolinks-track></script>
-    <script type="text/javascript" id="bdshell_js" data-turbolinks-track></script>
-    <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+    <script type="text/javascript" id="bdshare_js" data="type=tools&mini=1"></script>
+    <script type="text/javascript" id="bdshell_js_obsolete"></script>
   </head>
   <body>
-
     <div class="navbar navbar-application-top">
       <div class="navbar-inner">
         <div class="container">

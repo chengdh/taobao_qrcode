@@ -34,7 +34,7 @@
 
         .pull-right.qr-operates-share
           <!-- Baidu Button BEGIN -->
-          #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{current_qr_code_img_shops_url}'}"}
+          #bdshare.bdshare_t.bds_tools.get-codes-bdshare.shop-url-share{:data => "{\"pic\": \"#{current_qr_code_img_shops_url}\",\"text\" : \"#{@shop.title}-诚信卖家,扫描二维码进店选购\",\"url\": \"#{current_qr_code_img_shops_url}\",\"comment\" : \"#{@shop.desc}\"}"}
             %a.bds_qzone  QQ空间
             %a.bds_tsina 新浪微博
             %a.bds_tqq 腾讯微博

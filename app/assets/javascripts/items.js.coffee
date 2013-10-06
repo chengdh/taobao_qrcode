@@ -104,8 +104,11 @@ $ ->
   #上传单张qr到图片空间
   #百度分享相关代码
   #在这里定义bds_config
-  bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'
-  $('#bdshell_js').attr('src',"http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
+  #bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'
+  #$('#bdshell_js').attr('src',"http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
+  #$.getScript("http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
+  #$.getScript("http://bdimg.share.baidu.com/static/js/bds_s_v2.js?cdnversion="+Math.ceil(new Date()/3600000))
+  #alert(bds_config)
 
   #二维码相关功能
   #单个商品二维码
@@ -138,7 +141,7 @@ $ ->
     origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
     $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
     #百度分析链接
-    $('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
+    #$('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
   )
   #trigger event
   qr_config.generate_css()
