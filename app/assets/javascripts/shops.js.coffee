@@ -29,11 +29,15 @@ $ ->
     $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
     #复制二维码地址
     origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
-    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
+    $('#qr_code_img_url').html(origin_qr_code_img_url+"&"+params)
+
     #百度分享链接
-    bdshare_data = $.parseJSON($('.shop-url-share').attr('data'))
-    bdshare_data.pic = "#{origin_qr_code_img_url}?#{params}"
-    $('.shop-url-share').attr('data',JSON.stringify(bdshare_data))
+    set_bdshare = (el_class,attach_params)-> 
+      bdshare_data = $.parseJSON($(el_class).attr('data'))
+      bdshare_data.pic = "#{bdshare_data.pic}&#{attach_params}"
+      $(el_class).attr('data',JSON.stringify(bdshare_data))
+
+    set_bdshare('.shop-card-share',params) if $('.shop-card-share').length
   )
   #trigger event
   shop_card_qr_config.generate_css()
@@ -43,5 +47,3 @@ $ ->
     $('.vcard-form').submit()
   )
   $('.shop-card-qr').on('refresh',->  shop_card_qr_config.generate_css())
-
-

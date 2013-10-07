@@ -100,17 +100,8 @@ $ ->
   $('.btn-upload-picture').on('click', ->
     upload_img("items/{:id}/picture_upload.js")
   )
-  #上传单张qr到商品图片
-  #上传单张qr到图片空间
-  #百度分享相关代码
-  #在这里定义bds_config
-  #bds_config = 'bdText':'扫一扫,淘宝5钻产品大优惠!!!'
-  #$('#bdshell_js').attr('src',"http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
-  #$.getScript("http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000))
-  #$.getScript("http://bdimg.share.baidu.com/static/js/bds_s_v2.js?cdnversion="+Math.ceil(new Date()/3600000))
-  #alert(bds_config)
 
-  #二维码相关功能
+  #二维码相关功能:单个商品二维码和店铺url使用了同样的逻辑
   #单个商品二维码
   qr_config = new window.qr_code.QrConfig(    
     width :   $('.large-qr .qr-wrapper').data('width')
@@ -137,11 +128,19 @@ $ ->
     $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
     $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
     $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
+
     #复制二维码地址
     origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
-    $('#qr_code_img_url').html(origin_qr_code_img_url+"?"+params)
-    #百度分析链接
-    #$('#bdshare').attr('data',"{pic : '#{origin_qr_code_img_url}?#{params}'}")
+    $('#qr_code_img_url').html(origin_qr_code_img_url+"&"+params)
+
+    #百度分享链接
+    set_bdshare = (el_class,attach_params)-> 
+      bdshare_data = $.parseJSON($(el_class).attr('data'))
+      bdshare_data.pic = "#{bdshare_data.pic}&#{attach_params}"
+      $(el_class).attr('data',JSON.stringify(bdshare_data))
+
+    set_bdshare('.shop-url-share',params) if $('.shop-url-share').length
+    set_bdshare('.item-share',params) if $('.item-share').length
   )
   #trigger event
   qr_config.generate_css()
@@ -165,5 +164,3 @@ $ ->
       logo_url: qr_config.logo_url
 
     $(qr_el).data('qr-object',qr_object)
-
-

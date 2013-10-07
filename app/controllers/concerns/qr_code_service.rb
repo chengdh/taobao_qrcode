@@ -2,6 +2,11 @@
 #提供条码生成服务
 module QrCodeService
   extend ActiveSupport::Concern
+  #GET public_qr_code_service
+  #公共二维码服务
+  def public_qr_code_service
+    qr_img(params[:content],:jpeg,params)
+  end
   private
   #各个controller公用方法
   #上传至淘宝图片空间

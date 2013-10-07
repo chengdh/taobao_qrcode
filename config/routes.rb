@@ -15,7 +15,13 @@ TaobaoQrcode::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :items,:only => [:index,:show] do
+  #公共二维码服务
+  concern :public_qr_code_service do
+    collection do
+      get :public_qr_code_service
+    end
+  end
+  resources :items,concerns: :public_qr_code_service,:only => [:index,:show] do
     collection do
       get :download_zip
     end
@@ -28,7 +34,7 @@ TaobaoQrcode::Application.routes.draw do
     end
   end
 
-  resources :shops,:only => [:index,:show] do
+  resources :shops,concerns: :public_qr_code_service,:only => [:index,:show] do
     collection do
       #获取当前登录用户的店铺信息
       get :current

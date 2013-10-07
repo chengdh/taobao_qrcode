@@ -20,4 +20,14 @@ module ItemsHelper
     end
     ret
   end
+  #百度分享json字符串
+  def item_share_json(item)
+    {
+      pic:    public_qr_code_service_items_url(content: item.detail_url),
+      text:   "#{item.title}-热卖中,亲,扫描二维码即可抢购!!!",
+      url:    public_qr_code_service_items_url(content: item.detail_url),
+      comment: item.desc
+    }.to_json
+  end
+
 end

@@ -20,6 +20,7 @@ $ ->
   clip = new ZeroClipboard($("#btn_clip"))
   clip.on('complete', -> $('.clip-success').show())
 
+
   $('.fancybox').fancybox()
   #feeback buton
   fm_options = 

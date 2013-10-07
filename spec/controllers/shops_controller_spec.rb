@@ -29,18 +29,18 @@ describe ShopsController do
   describe "PUT generate_card" do
     it "should create or update shop_card" do
       shop_card = FactoryGirl.build(:shop_card)
-      put :generate_card,{shop_card: shop_card.attributes},valid_session
+      put :generate_card,{shop_card: shop_card.attributes,format: :js},valid_session
       assigns(:shop_card).sid.should eq(shop_card.sid)
     end
     it "should render action current_card" do
       shop_card = FactoryGirl.build(:shop_card)
-      put :generate_card,{shop_card: shop_card.attributes},valid_session
-      response.should render_template(:current_card)
+      put :generate_card,{shop_card: shop_card.attributes,format: :js},valid_session
+      response.should render_template("shared/_qr")
     end
 
     it "should success" do
       shop_card = FactoryGirl.build(:shop_card)
-      put :generate_card,{shop_card: shop_card.attributes},valid_session
+      put :generate_card,{shop_card: shop_card.attributes,format: :js},valid_session
       response.should be_success
     end
   end

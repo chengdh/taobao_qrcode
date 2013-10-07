@@ -1,7 +1,7 @@
 %ul.nav.nav-tabs
-  %li.active
-    = link_to "店铺网址",current_shops_path
   %li
+    = link_to "店铺网址",current_shops_path
+  %li.active
     = link_to "店铺名片",current_card_shops_path
 
 %h3 生成店铺名片二维码
@@ -43,7 +43,7 @@
 
         .pull-right.qr-operates-share
           <!-- Baidu Button BEGIN -->
-          #bdshare.bdshare_t.bds_tools.get-codes-bdshare{:data => "{'pic':'#{current_qr_code_img_shops_url}'}"}
+          #bdshare.bdshare_t.bds_tools.get-codes-bdshare.shop-card-share{:data => "#{shop_card_share_json(@shop_card)}"}
             %a.bds_qzone  QQ空间
             %a.bds_tsina 新浪微博
             %a.bds_tqq 腾讯微博
@@ -53,8 +53,9 @@
       .well.well-small.qr-url
         .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
           %span.add-on 链接
-          %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => current_card_qr_code_img_shops_url} 
-            = current_qr_code_img_shops_url
+          %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => public_qr_code_service_shops_url(content: @shop_card.build_vcard.to_s)} 
+            = public_qr_code_service_shops_url(content: @shop_card.build_vcard.to_s)
+
           %a#btn_clip.btn.btn-clip{"data-clipboard-target" => 'qr_code_img_url',:type => :button}
             %i.icon-copy
 
