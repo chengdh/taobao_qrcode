@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  acts_as_taobao_controller
+  acts_as_taobao_controller except: [:public_qr_code_service]
   #保存访问记录
-  after_filter :save_visit_log
+  after_filter :save_visit_log,except: :public_qr_code_service
   protected
   #创建will_paginate collection
   def create_paginate_collection(taobao_response,objects_or_sym_method,page = 1,per_page = 5)

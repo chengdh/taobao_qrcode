@@ -1,4 +1,9 @@
 #turbolinks spinner
+#参考http://stackoverflow.com/questions/14045428/zeroclipboard-not-working-in-a-rails-app-flash-bridge-error-works-locally-of
+#ZeroClipboard在使用turbolinks需要先销毁
+$(document).on("page:before-change", ->
+  ZeroClipboard.destroy()
+)
 $(document).on('page:fetch', -> 
   $.blockUI(message : "")
   $.fancybox.showLoading()
@@ -17,6 +22,7 @@ $ ->
 
   load_baidu_shared()
 
+  #ZeroClipboard.destroy()
   clip = new ZeroClipboard($("#btn_clip"))
   clip.on('complete', -> $('.clip-success').show())
 

@@ -27,7 +27,7 @@ module QrCodeService
   #下载二维码图案
   def qr_download(content="",title="",format=:jpeg,qr_options={})
     item_img =  get_qr_img(content,format,qr_options)
-    send_data item_img,filename: "#{title}.#{:format}"
+    send_data item_img,filename: "#{title}.#{format}"
   end
   #获取二维码图案
   def qr_img(content="",format=:jpeg,qr_options={})

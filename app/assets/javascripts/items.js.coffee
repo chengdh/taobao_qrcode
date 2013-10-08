@@ -101,49 +101,56 @@ $ ->
     upload_img("items/{:id}/picture_upload.js")
   )
 
-  #二维码相关功能:单个商品二维码和店铺url使用了同样的逻辑
-  #单个商品二维码
-  qr_config = new window.qr_code.QrConfig(    
-    width :   $('.large-qr .qr-wrapper').data('width')
-    height:   $('.large-qr .qr-wrapper').data('height')
-    label :   $('.large-qr .qr-wrapper').data('label')
-    logo_url: $('.large-qr .qr-wrapper').data('logo-url')
-    is_radius : true
-    unit_size : 4)
-  qr_config_view = new  window.qr_code.QrConfigView($('.qr-config'),qr_config)
-  qr_view = new  window.qr_code.QrView($('.large-qr'),qr_config)
-  #绑定上传到宝贝图片按钮事件
-  $(qr_config).on('css_change', ->
-    css_string = qr_config.to_string()
-    qr_object = 
-      css : css_string
-      qr_width : qr_config.qr_width+20
-      qr_height : qr_config.qr_height+20
-      logo_url  : qr_config.logo_url
+  if $('.large-qr').length
+    #二维码相关功能:单个商品二维码和店铺url使用了同样的逻辑
+    #单个商品二维码
+    qr_config = new window.qr_code.QrConfig(    
+      width :   $('.large-qr .qr-wrapper').data('width')
+      height:   $('.large-qr .qr-wrapper').data('height')
+      label :   $('.large-qr .qr-wrapper').data('label')
+      logo_url: $('.large-qr .qr-wrapper').data('logo-url')
+      is_radius : true
+      unit_size : 4)
+
+    qr_config_view = new  window.qr_code.QrConfigView($('.qr-config'),qr_config)
+    qr_view = new  window.qr_code.QrView($('.large-qr'),qr_config)
+    #绑定上传到宝贝图片按钮事件
+    $(qr_config).on('css_change', ->
+      css_string = qr_config.to_string()
+      qr_object = 
+        css : css_string
+        qr_width : qr_config.qr_width+20
+        qr_height : qr_config.qr_height+20
+        logo_url  : qr_config.logo_url
  
-    params = $.param(qr_object)
-    origin_btn_img_upload_href = $('.btn-img-upload-single').data('origin-href')
-    origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
-    origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
-    $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
-    $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
-    $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
+      params = $.param(qr_object)
+      origin_btn_img_upload_href = $('.btn-img-upload-single').data('origin-href')
+      origin_btn_picture_upload_href = $('.btn-picture-upload-single').data('origin-href')
+      origin_btn_download_qr_href = $('.btn-download-qr-single').data('origin-href')
+      $('.btn-img-upload-single').attr('href',origin_btn_img_upload_href+"?"+params)
+      $('.btn-picture-upload-single').attr('href',origin_btn_picture_upload_href+"?"+params)
+      $('.btn-download-qr-single').attr('href',origin_btn_download_qr_href+"?"+params)
 
-    #复制二维码地址
-    origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
-    $('#qr_code_img_url').html(origin_qr_code_img_url+"&"+params)
+      #复制二维码地址
+      origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
+      new_share_url = origin_qr_code_img_url+"&"+params 
+      $('#qr_code_img_url').html(new_share_url)
 
-    #百度分享链接
-    set_bdshare = (el_class,attach_params)-> 
-      bdshare_data = $.parseJSON($(el_class).attr('data'))
-      bdshare_data.pic = "#{bdshare_data.pic}&#{attach_params}"
-      $(el_class).attr('data',JSON.stringify(bdshare_data))
+      #百度分享链接
+      set_bdshare = (el_class,share_url)-> 
+        bdshare_data = $.parseJSON($(el_class).attr('data'))
+        bdshare_data.pic = share_url
+        bdshare_data.url = share_url
+        $(el_class).attr('data',JSON.stringify(bdshare_data))
 
-    set_bdshare('.shop-url-share',params) if $('.shop-url-share').length
-    set_bdshare('.item-share',params) if $('.item-share').length
-  )
-  #trigger event
-  qr_config.generate_css()
+      set_bdshare('.shop-url-share',new_share_url) if $('.shop-url-share').length
+      set_bdshare('.item-share',new_share_url) if $('.item-share').length
+    )
+    #trigger event
+    qr_config.generate_css()
+
+  ## end process .large-qr
+
 
   #针对批量上传图片时,只能使用默认样式
   for qr_el in $('.small-qr .qr-wrapper')
