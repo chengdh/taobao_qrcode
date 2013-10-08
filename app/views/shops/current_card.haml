@@ -20,7 +20,8 @@
       .clearfix
         .well.well-small.pull-left
           .shop-card-qr
-            = render "shared/qr",:content => @shop_card.build_vcard.to_s,:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)
+            -# 对于含有中文字符的二维码,需要强制转换为cp852
+            = render "shared/qr",:content => @shop_card.build_vcard.to_s.force_encoding('cp852'),:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)
         .qr-config.pull-left
           = render "shared/qr_config"
 
@@ -30,6 +31,7 @@
             %a.btn.btn-picture-upload-single{:href => current_qr_upload_shops_path(:format => :js),
             "data-origin-href" =>  current_card_qr_upload_shops_path(:format => :js),
             "data-method" => :put,
+            "data-disable-with" => "正在上传...",
             "data-remote" => true,:rel => "nofollow",
             "data-toggle" => "tooltip",:title => "将二维码放入淘宝图片空间"}
               %i.icon-cloud-upload
@@ -43,14 +45,14 @@
               下载到本地
 
         .pull-right.qr-operates-share
-          <!-- Baidu Button BEGIN -->
+          -# Baidu Button BEGIN 
           #bdshare.bdshare_t.bds_tools.get-codes-bdshare.shop-card-share{:data => "#{shop_card_share_json(@shop_card)}"}
             %a.bds_qzone  QQ空间
             %a.bds_tsina 新浪微博
             %a.bds_tqq 腾讯微博
             %a.bds_renren 人人网
             %span.bds_more 更多
-          <!-- Baidu Button END -->
+          -# Baidu Button END
       .well.well-small.qr-url
         .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
           %span.add-on 链接
