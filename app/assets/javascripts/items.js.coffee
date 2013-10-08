@@ -25,10 +25,8 @@ $ ->
     selected_items = $('.cbx-select-item:checked:enabled').length
     if selected_items > 0
       $('.selected-info').html("已选定#{selected_items}个商品")
-      $('.btn-update-to-items-img').parent().removeClass('disabled')
     else
       $('.selected-info').html("请选定商品进行操作")
-      $('.btn-update-to-items-img').parent().addClass('disabled')
   
   #获取当前界面选定的商品的id数组
   get_selected_item_ids = ->

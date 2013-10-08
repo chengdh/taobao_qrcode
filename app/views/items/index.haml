@@ -1,12 +1,12 @@
 .row
   .span9
-    %ul.nav.nav-tabs
-      %li.active
+    %ul.nav.nav-tabs.items-toggle
+      %li{class: check_items_active}
         = link_to "出售中的宝贝",items_path
-      %li
+      %li{class: check_showcase_active}
         = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
   
-    .well.well-small
+    .well.well-small.items-list
       %ul.thumbnails
         - @items.each do |item|
           %li

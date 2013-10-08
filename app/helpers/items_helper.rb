@@ -29,5 +29,13 @@ module ItemsHelper
       comment: item.desc
     }.to_json
   end
-
+  #设置tab的active
+  def check_showcase_active
+    ""
+    "active" if params["search"].try(:[],"has_showcase").present?
+  end
+  def check_items_active
+    ""
+    "active" if params["search"].try(:[],"has_showcase").blank?
+  end
 end

@@ -31,10 +31,11 @@ $ ->
   #feeback buton
   fm_options = 
         position : "right-top"
-        show_email : true
+        show_email : false
         message_required : true
+        name_required : false
         show_asterisk_for_required : true
-        feedback_url : "send_feedback"
+        feedback_url : "/feedbacks.js"
         title_label : ""
         name_label : ""
         email_label : ""
@@ -44,6 +45,7 @@ $ ->
         email_placeholder : "a@b.com"
         message_placeholder: "填写您的宝贵意见,便于我们改进软件"
         submit_label: "确认发送"
+        close_on_click_outisde: true	
 
   fm.init(fm_options)
 

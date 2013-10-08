@@ -15,7 +15,7 @@
         .qr-config.pull-left
           = render "shared/qr_config"
       .well.well-small-clearfix
-        .pull-left
+        .pull-left.qr-operates-upload
           .btn-group
             %a.btn.btn-img-upload-single{:href => img_upload_item_path(:id => @item.num_iid,:format => :js),
             "data-origin-href" =>  img_upload_item_path(:id => @item.num_iid,:format => :js),
@@ -39,7 +39,7 @@
               %i.icon-download-alt
               下载到本地
 
-        .pull-right
+        .pull-right.qr-operates-share
           <!-- Baidu Button BEGIN -->
           #bdshare.bdshare_t.bds_tools.get-codes-bdshare.item-share{:data => "#{item_share_json(@item)}"}
             %a.bds_qzone  QQ空间
@@ -48,7 +48,7 @@
             %a.bds_renren 人人网
             %span.bds_more 更多
           <!-- Baidu Button END -->
-      .well.well-small
+      .well.well-small.qr-url
         .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
           %span.add-on 链接
           %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => public_qr_code_service_items_url(content: @item.detail_url)}

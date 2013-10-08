@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005112505) do
+ActiveRecord::Schema.define(version: 20131008074621) do
+
+  create_table "feedbacks", force: true do |t|
+    t.string   "nick",             limit: 60, null: false
+    t.string   "feedback_name",    limit: 60
+    t.text     "feedback_message",            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedbacks", ["nick"], name: "index_feedbacks_on_nick", using: :btree
 
   create_table "logos", force: true do |t|
     t.string   "nick",             limit: 60, null: false
@@ -69,6 +79,6 @@ ActiveRecord::Schema.define(version: 20131005112505) do
 
   add_index "visit_logs", ["action"], name: "index_visit_logs_on_action", using: :btree
   add_index "visit_logs", ["controller"], name: "index_visit_logs_on_controller", using: :btree
-  add_index "visit_logs", ["nick"], name: "index_visit_logs_on_nick", unique: true, using: :btree
+  add_index "visit_logs", ["nick"], name: "index_visit_logs_on_nick", using: :btree
 
 end

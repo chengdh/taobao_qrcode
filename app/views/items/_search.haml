@@ -1,5 +1,5 @@
 %h4.alert.alert-info 查询
-=form_tag items_path,method: :get do
+=form_tag items_path,method: :get,class: "items-search-form" do
   %fieldset
     =text_field_tag("search[q]",nil, :placeholder => "宝贝名称")
     =select_tag("search[seller_cids]",grouped_options_for_select(grouped_sellercats),:include_blank => true)

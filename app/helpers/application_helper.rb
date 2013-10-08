@@ -24,4 +24,9 @@ module ApplicationHelper
     ret = VisitLog.exists?(nick: nick,controller: params[:controller],action: params[:action]) if nick.present?
     not ret
   end
+  #设置nav tab的active
+  def  set_nav_active(cur_controller_name)
+    ""
+    "active" if cur_controller_name.eql?(controller_name)
+  end
 end

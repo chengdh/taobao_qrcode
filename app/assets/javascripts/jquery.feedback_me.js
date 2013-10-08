@@ -409,6 +409,7 @@ var fm = (function () {
 			type: 'POST',
 			url: fm.getFmOptions().feedback_url,
 			data: { name: $("#feedback_name").val(), message: $("#feedback_message").val(), email: $("#feedback_email").val(), radio_list_value: $("#feedback_me_form input[name=feedback_radio]:checked").val()},
+      dataType : 'script',
 			beforeSend: function (xhr) {
 
 				var animation_hide = {};

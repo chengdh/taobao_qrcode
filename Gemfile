@@ -80,6 +80,7 @@ gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 
 #taobaoSDK
 #NOTE 先在本地安装
 gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
+
 gem "will_paginate", "~> 3.0.4"
 gem "will_paginate-bootstrap", "~> 0.2.4"
 gem "fancybox2-rails", "~> 0.2.4"

@@ -93,4 +93,9 @@ FactoryGirl.define do
     shop_url   'http://shop12345.taobao.com'
     shop_desc  'this is my shop'
   end
+  #客户反馈
+  factory :feedback do
+    nick 'sandbox_cdh'
+    feedback_message "this is a test feedback"
+  end
 end
