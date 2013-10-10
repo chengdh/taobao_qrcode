@@ -212,6 +212,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    markdown-rails (0.2.1)
+      rails
+      rdiscount (>= 1.6.8, < 2.0)
     meta_request (0.2.8)
       callsite
       rack-contrib
@@ -278,6 +281,7 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
+    rdiscount (1.6.8)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -402,6 +406,7 @@ DEPENDENCIES
   jquery_notify_bar (~> 1.0.0)
   launchy (~> 2.3.0)
   less-rails (~> 2.4.0)
+  markdown-rails (~> 0.2.1)
   meta_request (~> 0.2.8)
   mysql2 (~> 0.3.13)
   nokogiri (~> 1.6.0)

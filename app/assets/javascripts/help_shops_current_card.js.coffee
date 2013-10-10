@@ -1,6 +1,4 @@
 $ ->
-  window.a = window.a + 1
-  console.log(window.a)
   #初始化shops/current帮助系统
   help_steps = []
   help_steps.push(->

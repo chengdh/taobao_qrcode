@@ -4,8 +4,7 @@
   %li.active
     = link_to "店铺名片",current_card_shops_path
 
-%h3 生成店铺名片二维码
-
+%h4 生成店铺名片二维码
 .row
   .span12
     .well.well-small.clearfix
@@ -69,12 +68,11 @@
 
         .alert.alert-info
           您可复制该URL到需要显示的地方
+
+%h4 评论
 .row
   .span12
-    .hero-unit
-      %h4 如何使用它?
-      %ul
-        %li 可以将它放到宝贝展示界面的缩略图中
-        %li 可以将它保存到淘宝图片空间
-        %li 可以将它分享到您的QQ空间/微博...
-        %li 方法很多,何不尝试一下?
+    .well
+      -#Duoshuo Comment BEGIN
+      .ds-thread{"data-title" => "店铺名片二维码"}
+      -#Duoshuo Comment END

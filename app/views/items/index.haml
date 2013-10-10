@@ -18,6 +18,12 @@
                 = render "shared/qr",:content => item.detail_url,:qr_label => nil,:logo_url => item.pic_url
     .pagination
       = will_paginate @items,renderer: BootstrapPagination::Rails
+
+    %h4 评论
+    .well
+      -#Duoshuo Comment BEGIN
+      .ds-thread{"data-title" => "商品列表二维码"}
+      -#Duoshuo Comment END
   
   .span3
     = render "sidebar"

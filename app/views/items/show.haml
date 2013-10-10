@@ -3,12 +3,12 @@
     = link_to "出售中的宝贝",items_path
   %li
     = link_to "橱窗推荐宝贝",items_path("search[has_showcase]" => true)
+%h4 
+  = @item.title
 
 .row
   .span12
     .well
-      %h3 
-        = @item.title
       .clearfix
         .large-qr.pull-left
           = render "shared/qr",:content => @item.detail_url,:qr_label => nil,:logo_url => @item.pic_url
@@ -64,12 +64,10 @@
         .alert.alert-info
           您可复制该URL到需要显示的地方
 
+%h4 评论这个功能
 .row
   .span12
-    .hero-unit
-      %h4 如何使用它?
-      %ul
-        %li 可以将它放到宝贝展示界面的缩略图中
-        %li 可以将它保存到淘宝图片空间
-        %li 可以将它分享到您的QQ空间/微博...
-        %li 方法很多,何不尝试一下?
+    .well
+      -#Duoshuo Comment BEGIN
+      .ds-thread{"data-title" => "商品二维码"}
+      -#Duoshuo Comment END

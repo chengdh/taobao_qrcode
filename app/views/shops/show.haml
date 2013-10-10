@@ -4,11 +4,12 @@
   %li
     = link_to "店铺名片",current_card_shops_path
 
+%h4 
+  = @shop.title
+
 .row
   .span12
     .well
-      %h3 
-        = @shop.title
       .clearfix
         .large-qr.pull-left
           = render "shared/qr",:content => shop_url(@shop.sid),:qr_label => nil,:logo_url => shop_logo_url(@shop.pic_path)
@@ -58,12 +59,10 @@
           您可复制该URL到需要显示的地方
 
 
+%h4 评论
 .row
   .span12
-    .hero-unit
-      %h4 如何使用它?
-      %ul
-        %li 可以将它放到宝贝展示界面的缩略图中
-        %li 可以将它保存到淘宝图片空间
-        %li 可以将它分享到您的QQ空间/微博...
-        %li 方法很多,何不尝试一下?
+    .well
+      -#Duoshuo Comment BEGIN
+      .ds-thread{"data-title" => "店铺网址二维码"}
+      -#Duoshuo Comment END

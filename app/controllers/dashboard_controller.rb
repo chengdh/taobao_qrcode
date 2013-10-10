@@ -8,6 +8,8 @@ class DashboardController < ApplicationController
     @item_logs = ItemPictureUploadLog.recent_log(taobao_nick)
     @sn_list = get_sn_list
   end
+  #GET dashboard/faq
+  def faq;end
   private
   #获取当前用户社交工具列表
   def get_sn_list

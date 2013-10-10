@@ -21,6 +21,15 @@ $ ->
     $.getScript(bdshell_js_url)
 
   load_baidu_shared()
+  #load duoshuo javascript
+  #这里有一个bug，在第一次初始化时会产生一个错误
+  load_duoshuo = ->
+    if $('.ds-thread').length
+      el = $('.ds-thread').get(0)
+      DUOSHUO.EmbedThread(el)
+
+  load_duoshuo()
+
 
   #ZeroClipboard.destroy()
   clip = new ZeroClipboard($("#btn_clip"))

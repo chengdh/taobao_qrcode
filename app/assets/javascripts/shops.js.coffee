@@ -51,4 +51,4 @@ $ ->
     )
     $('.shop-card-qr').on('refresh',->  shop_card_qr_config.generate_css())
 
-  # end process .sjop-card-qr
+  # end process .shop-card-qr
