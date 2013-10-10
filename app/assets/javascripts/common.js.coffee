@@ -66,15 +66,17 @@ $ ->
     step : 1
     handles: 1
     connect: "lower"
-    slide : -> $(this).trigger('font-size-slide')
-  )
+    slide : -> $('.font-size-badge').html($(this).val())
+  ).change(-> $(this).trigger('unit-size-slide'))
+
   $(".unit-size-slider").noUiSlider(
-    range: [4, 8]
+    range: [4, 15]
     start: 4
+    step: 1
     handles: 1
     connect: "lower"
-    slide : -> $(this).trigger('unit-size-slide')
-  )
+    slide : -> $('.unit-size-badge').html($(this).val())
+  ).change(-> $(this).trigger('unit-size-slide'))
 
 
   #是否圆角
@@ -83,13 +85,11 @@ $ ->
     start: 0
     step: 1
     handles: 1
-    slide : -> $(this).trigger('radius-slide')
-  )
+  ).change( -> $(this).trigger('radius-slide'))
   #是否显示logo
   $(".show-logo-slider").noUiSlider(
     range: [0, 1]
     start: 0
     step: 1
     handles: 1
-    slide : -> $(this).trigger('show-logo-slide')
-  )
+  ).change( -> $(this).trigger('show-logo-slide'))
