@@ -1,6 +1,8 @@
 #coding: utf-8
 #首页面板
 class DashboardController < ApplicationController
+  #设置多说的cookie
+  before_filter :set_duoshuo_cookie,only: :index
   #GET dashboard/index
   #获取首页信息
   def index
@@ -22,5 +24,12 @@ class DashboardController < ApplicationController
       "sina_weibo" => shop_card.try(:sina_weibo)
     } if shop_card.present?
     ret
+  end
+  def set_duoshuo_cookie
+    short_name = Settings[:duoshuo][:short_name]
+    secret = Settings[:duoshuo][:secret]
+    token = {short_name: short_name, user_key: taobao_nick, name: taobao_nick}
+    duoshuo_token = JWT.encode(token, secret)
+    cookies[:duoshuo_token] = duoshuo_token
   end
 end

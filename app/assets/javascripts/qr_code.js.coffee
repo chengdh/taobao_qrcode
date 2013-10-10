@@ -228,9 +228,12 @@ $ ->
   
     #二维码设置变化处理
     on_qr_config_change : =>
+      $(@qr_wrapper_el).block(message : '处理中...')
       style_hash = @qr_config.css2style()
       $(@qr_wrapper_el).find(".qr-label").html(@qr_config.label)
       $(@qr_wrapper_el).find(".qr-logo").attr('src',@qr_config.logo_url)
       for selector of style_hash
         $(@qr_wrapper_el).find(".#{selector}").attr('style','').attr('style',style_hash[selector])
+
+      $(@qr_wrapper_el).unblock()
   

@@ -99,6 +99,8 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 #vcard及vcalendar生成
 gem "vpim", "~> 0.695"
 gem "markdown-rails", "~> 0.2.1"
+gem "jwt", "~> 0.1.8"
+gem "rails_config", "~> 0.3.3"
 
 group :development, :test do
   gem 'debugger', "~> 1.6.1"
