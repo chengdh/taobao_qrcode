@@ -55,9 +55,6 @@ end
 # Use unicorn as the app server
 gem 'unicorn',"~> 4.6.3"
 
-# Use Capistrano for deployment
-gem 'capistrano',"~> 2.15.5", group: :development
-
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 # Miscellanea
@@ -110,6 +107,12 @@ group :development, :test do
   gem 'pry-rails', "~> 0.3.2"
   gem 'awesome_print', "~> 1.1.0"
   gem 'rspec-rails', "~> 2.14.0"
+  # Use Capistrano for deployment
+  gem 'capistrano',"~> 2.15.5",require: false
+  gem "capistrano-rbenv", "~> 1.0.5"
+  gem "capistrano-unicorn", "~> 0.1.10"
+  gem "capistrano-rails", "~> 1.0.0"
+  gem 'capistrano-cook', :git => 'https://github.com/subsis/capistrano-cook.git', :require => false
 end
 
 group :development do

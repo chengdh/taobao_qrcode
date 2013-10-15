@@ -13,11 +13,15 @@
  *= require jquery.simplecolorpicker
  *= require jquery.fileupload-ui
  *= reqiore vcard/style
- *= require_self
  *= require_tree .
+ *= require_self
  */
 body{
   background: #00FF00 url(/assets/dimension.png) repeat;
+}
+/*重设brand样式*/
+.navbar .brand{
+  padding: 5px 20px 5px;
 }
 
 /*主界面登录*/

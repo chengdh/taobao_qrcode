@@ -48,7 +48,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">淘宝二维通</a>
+          <a class="brand" href="#">
+            <%= image_tag "logo.png",size: '30x18',class: 'img-rounded' %>
+            淘宝二维通
+          </a>
           <div class='login-info'>
             <i class="icon-user"></i>
             <%= session[:taobao_access_token]['taobao_user_nick'] %>
