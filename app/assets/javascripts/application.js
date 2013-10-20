@@ -21,6 +21,9 @@
 //= require jquery.nouislider
 //= require jquery.simplecolorpicker
 //= require jquery-fileupload
+//= require jquery.ellipsis
+//= require jquery.ellipsis.unobtrusive
+//= require jquery-fileupload
 //= require qr_code
 //= require helps
 //= require_tree .

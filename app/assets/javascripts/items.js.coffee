@@ -1,4 +1,6 @@
 $ ->
+  $('.item-title').ellipsis({maxWidth: 60,maxLine: 2})
+
   #绑定商品选择事件
   $('.cbx-select-item').on('click',(evt) ->
     el = $(evt.target)

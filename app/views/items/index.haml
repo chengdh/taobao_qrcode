@@ -13,7 +13,8 @@
             .thumbnail.small-qr
               %label.checkbox
                 %input.cbx-select-item{:type=>:checkbox,:value => item.num_iid} 
-                =item.title
+                %span.item-title.label.label-info
+                  =item.title
               %a{:href => item_path(:id => item.num_iid),:class =>""}
                 = render "shared/qr",:content => item.detail_url,:qr_label => nil,:logo_url => item.pic_url
     .pagination
