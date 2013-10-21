@@ -18,7 +18,7 @@
               %a{:href => item_path(:id => item.num_iid),:class =>""}
                 = render "shared/qr",:content => item.detail_url,:qr_label => nil,:logo_url => item.pic_url
     .pagination
-      = will_paginate @items,renderer: BootstrapPagination::Rails
+      = will_paginate @items,renderer: BootstrapPagination::Rails,previous_label: "&#9668;",next_label: "&#9658;"
 
     %h4 评论
     .well
