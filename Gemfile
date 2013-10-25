@@ -73,7 +73,8 @@ gem 'jquery-turbolinks',"~> 2.0.1"
 gem 'less-rails', "~> 2.4.0"
 gem 'therubyracer', "~> 0.12.0"
 gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 'fontawesome-3.2.1'
-
+gem "shortener", github: "fmbiete/shortener"
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 #taobaoSDK
 #NOTE 先在本地安装
 gem 'taobaoSDK',path: "~/myproject/taobaoSDK"

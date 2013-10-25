@@ -34,6 +34,7 @@
             "data-toggle" => "tooltip",:title => "下载二维码图片到本地"}
               %i.icon-download-alt
               下载到本地
+              =short_url(public_qr_code_service_shops_url(content: shop_url(@shop.sid)))
 
         .pull-right.qr-operates-share
           <!-- Baidu Button BEGIN -->

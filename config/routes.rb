@@ -9,6 +9,8 @@ TaobaoQrcode::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'dashboard#index'
   get 'dashboard/faq' => 'dashboard#faq',as: :faq
+  get '/:id' => "shortener/shortened_urls#show"
+  post 'short_url/generate' => "short_url#generate"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

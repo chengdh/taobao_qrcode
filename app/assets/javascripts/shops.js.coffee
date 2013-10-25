@@ -31,7 +31,9 @@ $ ->
       #复制二维码地址
       origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
       new_share_url = origin_qr_code_img_url+"&"+params
-      $('#qr_code_img_url').html(new_share_url)
+      $.post("/short_url/generate.json",{origin_url : new_share_url}).then((ret)-> 
+        $('#qr_code_img_url').html(ret.short_url)
+        set_bdshare('.shop-card-share',ret.short_url) if $('.shop-card-share').length)
 
       #百度分享链接
       set_bdshare = (el_class,share_url)-> 
@@ -39,8 +41,6 @@ $ ->
         bdshare_data.pic = share_url
         bdshare_data.url = share_url
         $(el_class).attr('data',JSON.stringify(bdshare_data))
-
-      set_bdshare('.shop-card-share',new_share_url) if $('.shop-card-share').length
     )
     #trigger event
     shop_card_qr_config.generate_css()

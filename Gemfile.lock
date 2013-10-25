@@ -10,6 +10,22 @@ GIT
       railties (>= 3.1)
 
 GIT
+  remote: git://github.com/fmbiete/shortener.git
+  revision: 7ea75e368d6b64c6d328609fd96659c943b37f87
+  specs:
+    shortener (0.2.0)
+      rails (>= 3.0.7)
+
+GIT
+  remote: git://github.com/rails/activerecord-session_store.git
+  revision: a0753820f0032dec7c37441be93ffc76b9dce3d0
+  specs:
+    activerecord-session_store (0.1.0)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
+
+GIT
   remote: git://github.com/rusanu/blockuijs-rails.git
   revision: 5deb1d36a861327dd54002d559fcd0e6197a3c83
   specs:
@@ -396,6 +412,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-session_store!
   awesome_print (~> 1.1.0)
   better_errors
   binding_of_caller (~> 0.7.2)
@@ -451,6 +468,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc (~> 0.3.20)
   selenium-webdriver (~> 2.35.1)
+  shortener!
   simplecov (~> 0.7.1)
   spork-rails!
   taobaoSDK!
