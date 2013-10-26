@@ -46,7 +46,8 @@
           <!-- Baidu Button END -->
       .well.well-small.qr-url
         .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
-          %span.add-on 链接
+          %span.add-on
+            %i.icon-link
           %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => public_qr_code_service_shops_url(content: shop_url(@shop.sid))} 
             = public_qr_code_service_shops_url(content: shop_url(@shop.sid))
           %a#btn_clip.btn.btn-clip{"data-clipboard-target" => 'qr_code_img_url',:type => :button}

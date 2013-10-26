@@ -54,13 +54,12 @@
           -# Baidu Button END
       .well.well-small.qr-url
         .input-prepend.input-append{"data-toggle" => "tooltip","data-placement" => "bottom",:title => "拷贝图片网址到剪贴板"}
-          %span.add-on 链接
+          %span.add-on
+            %i.icon-link
           %span#qr_code_img_url.span8.uneditable-input{"data-origin-url" => public_qr_code_service_shops_url(content: @shop_card.build_vcard.to_s)} 
             = public_qr_code_service_shops_url(content: @shop_card.build_vcard.to_s)
-
           %a#btn_clip.btn.btn-clip{"data-clipboard-target" => 'qr_code_img_url',:type => :button}
             %i.icon-copy
-
         .alert.alert-success.clip-success{style: 'display : none;'}
           %button.close{type: "button","data-dismiss" => "alert"} &times;
           已将二维码网址复制到剪贴版
