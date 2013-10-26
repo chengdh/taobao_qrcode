@@ -134,7 +134,12 @@ $ ->
       #复制二维码地址
       origin_qr_code_img_url = $('#qr_code_img_url').data('origin-url')
       new_share_url = origin_qr_code_img_url+"&"+params 
-      $('#qr_code_img_url').html(new_share_url)
+
+      $.post("/short_url/generate.json",{origin_url : new_share_url}).then((ret)-> 
+        $('#qr_code_img_url').html(ret.short_url)
+        set_bdshare('.shop-card-share',ret.short_url) if $('.shop-card-share').length
+        set_bdshare('.shop-url-share',ret.short_url) if $('.shop-url-share').length
+        set_bdshare('.item-share',ret.short_url) if $('.item-share').length)
 
       #百度分享链接
       set_bdshare = (el_class,share_url)-> 
@@ -142,15 +147,11 @@ $ ->
         bdshare_data.pic = share_url
         bdshare_data.url = share_url
         $(el_class).attr('data',JSON.stringify(bdshare_data))
-
-      set_bdshare('.shop-url-share',new_share_url) if $('.shop-url-share').length
-      set_bdshare('.item-share',new_share_url) if $('.item-share').length
     )
     #trigger event
     qr_config.generate_css()
 
   ## end process .large-qr
-
 
   #针对批量上传图片时,只能使用默认样式
   for qr_el in $('.small-qr .qr-wrapper')
