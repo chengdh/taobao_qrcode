@@ -31,7 +31,7 @@ describe FeedbacksController do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # FeedbacksController. Be sure to keep this updated too.
-
+=begin
   describe "GET index" do
     it "assigns all feedbacks as @feedbacks" do
       feedback = Feedback.create! valid_attributes
@@ -158,4 +158,5 @@ describe FeedbacksController do
       response.should redirect_to(feedbacks_url)
     end
   end
+=end
 end

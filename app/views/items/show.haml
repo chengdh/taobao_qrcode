@@ -21,6 +21,7 @@
             "data-origin-href" =>  img_upload_item_path(:id => @item.num_iid,:format => :js),
             "data-method" => :put,
             "data-remote" => true,:rel => "nofollow",
+            "data-disable-with" => "正在上传...",
             "data-toggle" => "tooltip",:title => "将二维码放入宝贝详情页面的图片中"}
               %i.icon-arrow-up
               更新到宝贝图片
@@ -29,6 +30,7 @@
             "data-origin-href" =>  picture_upload_item_path(:id => @item.num_iid,:format => :js),
             "data-method" => :put,
             "data-remote" => true,:rel => "nofollow",
+            "data-disable-with" => "正在上传...",
             "data-toggle" => "tooltip",:title => "将二维码放入淘宝图片空间"}
               %i.icon-cloud-upload
               上传到淘宝图片空间
