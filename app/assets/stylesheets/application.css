@@ -19,9 +19,12 @@
 body{
   background: #00FF00 url(/assets/dimension.png) repeat;
 }
-/*重设brand样式*/
-.navbar .brand{
-  padding: 5px 20px 5px;
+.brand{
+  background : #A72722;
+}
+.brand .brand-text{
+  color : #FFF;
+  text-shadow : 0;
 }
 
 /*主界面登录*/
