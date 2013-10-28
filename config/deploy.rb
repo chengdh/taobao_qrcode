@@ -4,9 +4,9 @@ require "bundler/capistrano"
 
 require "capistrano-cook"
 
-server "106.186.112.108", :app, :web, :db, :primary => true
+server "mzhanggui.ssapp.net", :app, :web, :db, :primary => true
 #server "219.147.55.69", :app, :web, :db, :primary => true
-set :domain,    "www.2wm.com"
+set :domain,    "ssapp.net"
 set :rails_env, :production
 
 set :application, "taobao_qr"
@@ -23,6 +23,10 @@ set :root_user,     'root'
 
 default_run_options[:pty]   = true
 ssh_options[:forward_agent] = true
+
+#unicorn var
+set :unicorn_workers,8
+set :monit_mem_restart,"500.0 MB"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"

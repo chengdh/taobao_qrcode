@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/chengdh/taobaoSDK.git
+  revision: 63c3a7746376d52d444862e99414003a1493a633
+  specs:
+    taobaoSDK (0.1.1)
+      json (~> 1.8.0)
+      rest-client (~> 1.6.7)
+      xml-mapping
+
+GIT
   remote: git://github.com/diowa/twitter-bootstrap-rails.git
   revision: 05f7e9fa7f1c7d7101d2f177169e8d632b9b9e65
   branch: fontawesome-3.2.1
@@ -47,14 +56,6 @@ GIT
     capistrano-cook (0.0.9)
       capistrano (>= 2.5.9)
       capistrano-ext (>= 1.2.1)
-
-PATH
-  remote: ~/myproject/taobaoSDK
-  specs:
-    taobaoSDK (0.1.1)
-      json (~> 1.8.0)
-      rest-client (~> 1.6.7)
-      xml-mapping
 
 GEM
   remote: http://ruby.taobao.org/

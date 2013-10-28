@@ -77,7 +77,8 @@ gem "shortener", github: "fmbiete/shortener"
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 #taobaoSDK
 #NOTE 先在本地安装
-gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
+#gem 'taobaoSDK',path: "~/myproject/taobaoSDK"
+gem 'taobaoSDK',github: "chengdh/taobaoSDK"
 
 gem "will_paginate", "~> 3.0.4"
 gem "will_paginate-bootstrap", "~> 0.2.4"
