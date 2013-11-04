@@ -55,3 +55,17 @@ production:
   username: root
   password:
   host: localhost
+
+#sandbox test use
+sandbox:
+  adapter: mysql2
+  encoding: utf8
+  database: taobao_qrcode_sandbox
+  pool: 5
+  username: root
+  password:
+  host: localhost
+  socket: <%=socket%>
+  port: <%=port%>
+
+

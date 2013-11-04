@@ -1,15 +1,12 @@
 require "bundler/capistrano"
+set :stages, %w(production sandbox)
+set :default_stage, "production"
+require 'capistrano/ext/multistage'
 #require "capistrano-rbenv"
 #require "capistrano-unicorn"
 
 require "capistrano-cook"
 
-#server "ssapp.co", :app, :web, :db, :primary => true
-server "106.186.18.163", :app, :web, :db, :primary => true
-set :domain,    "mazg.ssapp.net"
-set :rails_env, :production
-
-set :application, "taobao_qr"
 set :user,        "taobao_qr"
 
 set :scm,         "git"
@@ -24,9 +21,6 @@ set :root_user,     'root'
 default_run_options[:pty]   = true
 ssh_options[:forward_agent] = true
 
-#unicorn var
-set :unicorn_workers,8
-set :monit_mem_restart,"500.0 MB"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
