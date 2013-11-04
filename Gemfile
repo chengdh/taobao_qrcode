@@ -1,7 +1,6 @@
+=begin
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
-#source 'https://rubygems.org'
-source 'http://ruby.taobao.org'
 
 case HOST_OS
   when /darwin/i
@@ -15,8 +14,10 @@ case HOST_OS
     gem 'win32console', :group => :development
     gem 'rb-notifu', :group => :development
 end
+=end
 
 
+source 'http://ruby.taobao.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
