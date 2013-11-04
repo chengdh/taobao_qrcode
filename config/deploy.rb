@@ -1,18 +1,19 @@
-require "bundler/capistrano"
 set :stages, %w(production sandbox)
 set :default_stage, "production"
-require 'capistrano/ext/multistage'
 #require "capistrano-rbenv"
 #require "capistrano-unicorn"
-
+require 'capistrano/ext/multistage'
+require "bundler/capistrano"
 require "capistrano-cook"
+
+set(:application) {"taobao_qr_#{stage}"}
 
 set :user,        "taobao_qr"
 
 set :scm,         "git"
 set :repository,  "git@github.com:chengdh/taobao_qrcode.git"
 set :branch,      "master"
-set :deploy_to,   "/var/www/#{application}"
+set(:deploy_to)  {"/var/www/#{application}"}
 set :deploy_via,  :remote_cache
 
 set :use_sudo,      true
