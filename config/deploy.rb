@@ -4,7 +4,7 @@ require "bundler/capistrano"
 
 require "capistrano-cook"
 
-server "mzhanggui.ssapp.net", :app, :web, :db, :primary => true
+server "mazhanggui.ssapp.co", :app, :web, :db, :primary => true
 #server "219.147.55.69", :app, :web, :db, :primary => true
 set :domain,    "ssapp.net"
 set :rails_env, :production

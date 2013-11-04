@@ -62,22 +62,25 @@ ActiveRecord::Schema.define(version: 20131025105205) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "shop_cards", force: true do |t|
-    t.integer  "sid",        limit: 8,   null: false
-    t.string   "nick",       limit: 60,  null: false
-    t.string   "title",      limit: 60,  null: false
-    t.string   "email",      limit: 60
-    t.string   "phone",      limit: 30
-    t.string   "qq",         limit: 30
-    t.string   "wangwang",   limit: 30
-    t.string   "weixin",     limit: 30
-    t.string   "sina_weibo", limit: 30
-    t.string   "shop_url",   limit: 200
-    t.string   "address",    limit: 60
-    t.text     "qr_options"
+    t.integer  "sid",         limit: 8,   null: false
+    t.string   "nick",        limit: 60,  null: false
+    t.string   "title",       limit: 60,  null: false
+    t.string   "email",       limit: 60
+    t.string   "phone",       limit: 30
+    t.string   "qq",          limit: 30
+    t.string   "wangwang",    limit: 30
+    t.string   "weixin",      limit: 30
+    t.string   "sina_weibo",  limit: 30
+    t.string   "shop_url",    limit: 200
+    t.string   "address",     limit: 60
+    t.text     "qr_code_img"
     t.text     "shop_desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "shop_cards", ["nick"], name: "index_shop_cards_on_nick", unique: true, using: :btree
+  add_index "shop_cards", ["sid"], name: "index_shop_cards_on_sid", unique: true, using: :btree
 
   create_table "shortened_urls", force: true do |t|
     t.integer  "owner_id"
