@@ -4,9 +4,9 @@ require "bundler/capistrano"
 
 require "capistrano-cook"
 
-server "mazhanggui.ssapp.co", :app, :web, :db, :primary => true
-#server "219.147.55.69", :app, :web, :db, :primary => true
-set :domain,    "ssapp.net"
+#server "ssapp.co", :app, :web, :db, :primary => true
+server "106.186.18.163", :app, :web, :db, :primary => true
+set :domain,    "mazg.ssapp.net"
 set :rails_env, :production
 
 set :application, "taobao_qr"
