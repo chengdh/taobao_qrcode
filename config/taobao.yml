@@ -31,7 +31,7 @@ production:
   #oauth获取授权地址
   authorize:  "https://oauth.taobao.com/authorize"
   #oauth获取令牌地址
-  token: " https://oauth.taobao.com/token" 
+  token: "https://oauth.taobao.com/token" 
   #获取授权码回调uri
   authorize_redirect_uri: "http://mazg.ssapp.co/authorize/after_authorize"
   #获取令牌回调uri
