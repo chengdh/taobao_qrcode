@@ -13,8 +13,7 @@
  *= require jquery.simplecolorpicker
  *= require jquery.fileupload-ui
  *= reqire vcard/style
- *= reqire override
  *= require_tree .
- *= require_self
+ *= reqire override
  */
 
