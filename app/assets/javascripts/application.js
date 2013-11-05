@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require fancybox
@@ -27,4 +26,3 @@
 //= require qr_code
 //= require helps
 //= require_tree .
-//= require turbolinks

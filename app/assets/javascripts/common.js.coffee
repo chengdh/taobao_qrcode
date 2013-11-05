@@ -1,36 +1,20 @@
 #turbolinks spinner
 #参考http://stackoverflow.com/questions/14045428/zeroclipboard-not-working-in-a-rails-app-flash-bridge-error-works-locally-of
 #ZeroClipboard在使用turbolinks需要先销毁
-$(document).on("page:before-change", ->
-  ZeroClipboard.destroy()
-)
-$(document).on('page:fetch', -> 
-  $.blockUI(message : "")
-  $.fancybox.showLoading()
-)
-$(document).on('page:change', -> 
-  $.unblockUI()
-  $.fancybox.hideLoading()
-)
+
+#$(document).on("page:before-change", ->
+#  ZeroClipboard.destroy()
+#)
+#$(document).on('page:fetch', -> 
+#  $.blockUI(message : "")
+#  $.fancybox.showLoading()
+#)
+#$(document).on('page:change', -> 
+#  $.unblockUI()
+#  $.fancybox.hideLoading()
+#)
 #通用操作
 $ ->
-  load_baidu_shared = ->
-    #先删除上次的css
-    $('link[href*="bdsstyle.css"').remove()
-    bdshell_js_url = "http://bdimg.share.baidu.com/static/js/bds_s_v2.js?cdnversion="+Math.ceil(new Date()/3600000)
-    $.getScript(bdshell_js_url)
-
-  load_baidu_shared()
-  #load duoshuo javascript
-  #这里有一个bug，在第一次初始化时会产生一个错误
-  load_duoshuo = ->
-    if $('.ds-thread').length
-      el = $('.ds-thread').get(0)
-      DUOSHUO.EmbedThread(el)
-
-  load_duoshuo()
-
-
   #ZeroClipboard.destroy()
   clip = new ZeroClipboard($("#btn_clip"))
   clip.on('complete', -> $('.clip-success').show())
@@ -56,7 +40,7 @@ $ ->
         submit_label: "确认发送"
         close_on_click_outisde: true	
 
-  fm.init(fm_options)
+  #fm.init(fm_options)
 
   $('[data-toggle="tooltip"]').tooltip()
   $('.colorpicker').simplecolorpicker()

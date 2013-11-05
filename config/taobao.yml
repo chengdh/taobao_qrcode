@@ -7,9 +7,9 @@ development:
   #oauth获取令牌地址
   token: "https://oauth.tbsandbox.com/token" 
   #获取授权码回调uri
-  authorize_redirect_uri: "http://127.0.0.1:3000/authorize/after_authorize"
+  authorize_redirect_uri: "http://192.168.0.216:3000/authorize/after_authorize"
   #获取令牌回调uri
-  token_redirect_uri: "http://127.0.0.1:3000/authorize/after_token"
+  token_redirect_uri: "http://192.168.0.216:3000/authorize/after_token"
 
 test:
   app_key:    '1021585439'
