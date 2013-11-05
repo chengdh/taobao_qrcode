@@ -1,6 +1,5 @@
-server "ssapp.co", :app, :web, :db, :primary => true
+server "mazg.ssapp.co", :app, :web, :db, :primary => true
 set :domain,"mazg.ssapp.co"
-set :application, "taobao_qr"
 set :rails_env, :production
 
 #unicorn var
