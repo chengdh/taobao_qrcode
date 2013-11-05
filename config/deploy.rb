@@ -6,10 +6,8 @@ require 'capistrano/ext/multistage'
 require "bundler/capistrano"
 require "capistrano-cook"
 
-set(:application) {"taobao_qr_#{stage}"}
-
+set(:application) {"tbqr_#{environment}"}
 set :user,        "taobao_qr"
-
 set :scm,         "git"
 set :repository,  "git@github.com:chengdh/taobao_qrcode.git"
 set :branch,      "master"
