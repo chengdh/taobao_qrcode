@@ -50,10 +50,10 @@ GIT
       spork (>= 1.0rc0)
 
 GIT
-  remote: https://github.com/subsis/capistrano-cook.git
-  revision: 74e935c2b7d74887b12d190f145ce90243e6a477
+  remote: https://github.com/chengdh/capistrano-cook.git
+  revision: 25b8b2203ed30f43e5fef660d37195667b759e72
   specs:
-    capistrano-cook (0.0.9)
+    capistrano-cook (0.0.11)
       capistrano (>= 2.5.9)
       capistrano-ext (>= 1.2.1)
 

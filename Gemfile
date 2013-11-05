@@ -115,7 +115,7 @@ group :development, :test do
   gem "capistrano-rbenv", "~> 1.0.5"
   gem "capistrano-unicorn", "~> 0.1.10"
   gem "capistrano-rails", "~> 1.0.0"
-  gem 'capistrano-cook', :git => 'https://github.com/subsis/capistrano-cook.git', :require => false
+  gem 'capistrano-cook', :git => 'https://github.com/chengdh/capistrano-cook.git', :require => false
 end
 
 group :development do
