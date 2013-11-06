@@ -41,8 +41,6 @@ $ ->
         close_on_click_outisde: true	
 
   #fm.init(fm_options)
-
-  $('[data-toggle="tooltip"]').tooltip()
   $('.colorpicker').simplecolorpicker()
   $(".font-size-slider").noUiSlider(
     range: [12, 20]
