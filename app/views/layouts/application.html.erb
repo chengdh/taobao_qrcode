@@ -33,7 +33,6 @@
       <%= javascript_include_tag 'html5shiv-printshiv' %>
       <%= respond_include_tags %>
     <![endif]-->
-    <%= javascript_include_tag "application" %>
   </head>
   <body>
     <div class="navbar navbar-application-top">
@@ -82,5 +81,6 @@
         <%= render "shared/google_analytics" %>
       </footer>
     </div> <!-- /container -->
+    <%= javascript_include_tag "application" %>
     </body>
 </html>
