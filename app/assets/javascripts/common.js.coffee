@@ -2,20 +2,20 @@
 #参考http://stackoverflow.com/questions/14045428/zeroclipboard-not-working-in-a-rails-app-flash-bridge-error-works-locally-of
 #ZeroClipboard在使用turbolinks需要先销毁
 
-#$(document).on("page:before-change", ->
-#  ZeroClipboard.destroy()
-#)
-#$(document).on('page:fetch', -> 
-#  $.blockUI(message : "")
-#  $.fancybox.showLoading()
-#)
-#$(document).on('page:change', -> 
-#  $.unblockUI()
-#  $.fancybox.hideLoading()
-#)
+$(document).ajaxStart( -> 
+  $.blockUI(message : "")
+  $.fancybox.showLoading()
+)
+$(document).ajaxStop( -> 
+  $.unblockUI()
+  $.fancybox.hideLoading()
+)
 #通用操作
 $ ->
-  #ZeroClipboard.destroy()
+  $.blockUI.defaults.overlayCSS =  { 
+    backgroundColor: '#FFF'
+    opacity:         0.2
+  }
   clip = new ZeroClipboard($("#btn_clip"))
   clip.on('complete', -> $('.clip-success').show())
 
