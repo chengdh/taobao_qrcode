@@ -103,6 +103,7 @@ gem "jwt", "~> 0.1.8"
 gem "rails_config", "~> 0.3.3"
 #修正·ie8问题
 gem "respond-rails", "~> 1.0"
+gem 'html5shiv-rails'
 
 group :development, :test do
   gem 'debugger', "~> 1.6.1"
