@@ -41,9 +41,9 @@ $ ->
         close_on_click_outisde: true	
 
   #fm.init(fm_options)
-  $('.front-colorpicker').simplecolorpicker()
-  $('.back-colorpicker').simplecolorpicker()
-  $('.font-colorpicker').simplecolorpicker()
+  #$('.front-colorpicker').simplecolorpicker()
+  #$('.back-colorpicker').simplecolorpicker()
+  #$('.font-colorpicker').simplecolorpicker()
   $(".font-size-slider").noUiSlider(
     range: [12, 20]
     start: 12 
