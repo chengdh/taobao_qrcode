@@ -11,7 +11,7 @@
   - @item_logs.each do |i|
     %li
       %a.thumbnail{href: i.picture_path,title: i.title,class: "fancybox"}
-        = image_tag i.picture_path,size: "150x150"
+        = image_tag i.picture_path,class: "img-150"
       .text-center
         %span.label.label-info
           = i.title

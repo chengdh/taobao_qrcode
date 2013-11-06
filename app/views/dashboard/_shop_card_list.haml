@@ -10,7 +10,7 @@
   - @shop_card_logs.each do |sc|
     %li
       %a.thumbnail{href: sc.picture_path,title: sc.title,class: "fancybox"}
-        = image_tag sc.picture_path,size: "150x150"
+        = image_tag sc.picture_path,class: "img-150"
       .text-center
         %span.label.label-info
           = sc.title
