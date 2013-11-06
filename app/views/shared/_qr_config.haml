@@ -1,11 +1,10 @@
-<!--设置qr的样式--!>
+-#设置qr的样式
 .tabbable.qr-config
   %ul.nav.nav-tabs
     %li.active
       %a{:href => "#tab_basic", "data-toggle" => "tab"} 基本样式
     %li
       %a{:href => "#tab_insert", "data-toggle" => "tab"} 文本
-
     %li
       %a{:href => "#tab_logo", "data-toggle" => "tab"} 图标
 
@@ -16,7 +15,7 @@
           %label.control-label  前景色 
           .controls
             %select.colorpicker.front-colorpicker
-              <!-- Colors from Google Calendar -->
+              -# Colors from Google Calendar
               %option(value="#000000") black
               %option(value="#7bd148") Green
               %option(value="#5484ed") Bold blue
