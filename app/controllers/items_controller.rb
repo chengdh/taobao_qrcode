@@ -15,7 +15,8 @@ class ItemsController < ApplicationController
     args.merge!(params[:search]) if params[:search]
     taobao_response = TaobaoSDK::Session.invoke(args)
     num_iids= taobao_response.items.collect {|item| item.num_iid}
-    items = taobao_items_list_get(num_iids)
+    items =[]
+    items = taobao_items_list_get(num_iids) if num_iids.present?
     @items = create_paginate_collection(taobao_response,items,params[:page],per_page)
   end
   #GET items/:id
