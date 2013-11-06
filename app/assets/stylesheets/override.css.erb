@@ -29,15 +29,7 @@ body{
   text-align : center;
 }
 /*image 在ie8下不缩放的问题*/
-img {
-  /* Responsive images (ensure images don't scale beyond their parents) */
-  max-width: 100%; /* Part 1: Set a maxium relative to the parent */
-  height: auto; /* Part 2: Scale the height according to the width, otherwise you get stretching */
-  min-width: auto\9; /* IE7-8 need help adjusting responsive images */
-  vertical-align: middle;
-  border: 0;
-  -ms-interpolation-mode: bicubic;
-}
-img[width] {
-  min-width: 0; /* Overwrite min-width: auto when img width set */
+.img-30{
+  width : 30px;
+  height : 30px
 }
