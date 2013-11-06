@@ -101,6 +101,8 @@ gem "vpim", "~> 0.695"
 gem "markdown-rails", "~> 0.2.1"
 gem "jwt", "~> 0.1.8"
 gem "rails_config", "~> 0.3.3"
+#修正·ie8问题
+gem "respond-rails", "~> 1.0"
 
 group :development, :test do
   gem 'debugger', "~> 1.6.1"
