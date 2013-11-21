@@ -1,6 +1,6 @@
 development:
-  app_key:    '1021585439'
-  secret_key: 'sandboxe0ff3ffa6a4027424c7f2c49b'
+  app_key:    '1012095462'
+  secret_key: 'sandbox92912e2f8b83b2f2f1128177e'
   endpoint:   "http://gw.api.tbsandbox.com/router/rest"
   #oauth获取授权地址
   authorize:  "https://oauth.tbsandbox.com/authorize"
@@ -12,8 +12,8 @@ development:
   token_redirect_uri: "http://127.0.0.1:3000/authorize/after_token"
 
 test:
-  app_key:    '1021585439'
-  secret_key: 'sandboxe0ff3ffa6a4027424c7f2c49b'
+  app_key:    '1012095462'
+  secret_key: 'sandbox92912e2f8b83b2f2f1128177e'
   endpoint:   "http://gw.api.tbsandbox.com/router/rest"
   #oauth获取授权地址
   authorize:  "https://oauth.tbsandbox.com/authorize"
@@ -25,8 +25,8 @@ test:
   token_redirect_uri: "http://127.0.0.1:3000/authorize/after_token"
 
 production:
-  app_key:    '21585439'
-  secret_key: '31bd508e0ff3ffa6a4027424c7f2c49b'
+  app_key:    '12095462'
+  secret_key: '8ae1ea892912e2f8b83b2f2f1128177e'
   endpoint:   "http://gw.api.taobao.com/router/rest"
   #oauth获取授权地址
   authorize:  "https://oauth.taobao.com/authorize"
@@ -39,8 +39,8 @@ production:
 
 #在服务器上测试沙箱
 sandbox:
-  app_key:    '1021585439'
-  secret_key: 'sandboxe0ff3ffa6a4027424c7f2c49b'
+  app_key:    '1012095462'
+  secret_key: 'sandbox92912e2f8b83b2f2f1128177e'
   endpoint:   "http://gw.api.tbsandbox.com/router/rest"
   #oauth获取授权地址
   authorize:  "https://oauth.tbsandbox.com/authorize"
