@@ -22,9 +22,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  def taobao_nick
-    session[:taobao_access_token]['taobao_user_nick']
-  end
   def save_visit_log
     nick = taobao_nick
     vl =  VisitLog.find_or_create_by(nick: nick,controller: params[:controller],action: params[:action]) if nick.present?
