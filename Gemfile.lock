@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/chengdh/taobaoSDK.git
-  revision: 96bbc4cdc4b119cad585b73647733eee797f4f0a
+  revision: 569be31b9eb9eda6ca45c4a8f56c58740d9b4c2f
   specs:
     taobaoSDK (0.1.1)
       json (~> 1.8.0)
