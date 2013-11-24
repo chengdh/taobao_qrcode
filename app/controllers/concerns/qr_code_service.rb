@@ -17,7 +17,7 @@ module QrCodeService
       method: 'taobao.picture.upload',
       session: session_key,
       picture_category_id: 0,
-      image: img,
+      img: img,
       image_input_title: "#{title}.jpg"
       }
     taobao_response = TaobaoSDK::Session.invoke(args)
