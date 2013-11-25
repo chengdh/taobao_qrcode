@@ -5,7 +5,7 @@ module ApplicationHelper
     session[:taobao_access_token]['taobao_user_nick']
   end
 
-  #NOTE 不再使用
+  #<b>DEPRECATED:</b> 
   def get_data_uri(image_url)
     require 'open-uri'
     img_type = image_url.split('.')[-1]
@@ -14,7 +14,7 @@ module ApplicationHelper
     img_data = ::Base64.encode64(img_binary).gsub("\n", '')
     "data:image/#{img_type};base64,#{img_data}"
   end
-  def qrcode(content,size = 20,level = :m)
+  def qrcode(content,size = 17,level = :m)
     RQRCode::QRCode.new(content, size: size, level:  level )
   end
   #判断是否第一次进入action

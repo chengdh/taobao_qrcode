@@ -1,4 +1,5 @@
 TaobaoQrcode::Application.routes.draw do
+
   resources :feedbacks
 
   resources :logos
@@ -7,7 +8,7 @@ TaobaoQrcode::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'dashboard#index'
+  root 'shops#current'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -53,6 +54,7 @@ TaobaoQrcode::Application.routes.draw do
     end
   end
   get 'dashboard/faq' => 'dashboard#faq',as: :faq
+  get 'dashboard/history' => 'dashboard#index',as: :history
   get '/:id' => "shortener/shortened_urls#show"
   post 'short_url/generate' => "short_url#generate"
 

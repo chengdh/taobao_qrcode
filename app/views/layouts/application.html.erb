@@ -26,7 +26,7 @@
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag :rel => 'shortcut icon' %>
+    <%= favicon_link_tag %>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -53,17 +53,17 @@
 
           <div class="container nav-collapse">
             <ul class="nav">
-              <li class="<%= set_nav_active("dashboard") %>">
-                <%= link_to "首页", root_path  %>
-              </li>
               <li class="<%= set_nav_active("shops") %>" >
                 <%= link_to "店铺", current_shops_path  %>
               </li>
               <li class="<%= set_nav_active("items") %>" >
-              <%= link_to "商品", items_path  %>
+                <%= link_to "商品", items_path  %>
+              </li>
+              <li class="<%= set_nav_active("dashboard") %>">
+                <%= link_to "上传历史", history_path  %>
               </li>
               <li>
-              <%= link_to "FAQ", faq_path  %>
+                <%= link_to "FAQ", faq_path  %>
               </li>
             </ul>
           </div><!--/.nav-collapse -->
