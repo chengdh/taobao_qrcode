@@ -61,7 +61,8 @@ gem 'unicorn',"~> 4.6.3"
 # Miscellanea
 # gem 'google-analytics-rails'
 gem 'haml-rails', "~> 0.4"
-gem "rqrcode", "~> 0.4.2"
+#gem "rqrcode", "~> 0.4.2"
+gem "rqrcode-with-patches", "~> 0.5.4",require: "rqrcode"
 # gem 'http_accept_language'
 gem 'nokogiri', "~> 1.6.0"
 # gem 'resque', require: 'resque/server' # Resque web interface

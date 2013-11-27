@@ -14,8 +14,11 @@ module ApplicationHelper
     img_data = ::Base64.encode64(img_binary).gsub("\n", '')
     "data:image/#{img_type};base64,#{img_data}"
   end
-  def qrcode(content,size = 17,level = :m)
-    RQRCode::QRCode.new(content, size: size, level:  level )
+  def qrcode(content)
+    #RQRCode::QRCode.new(content, size: size, level:  level )
+    qr = RQRCode::QRCode.new(content)
+    qr = RQRCode::QRCode.new(content,size: 14) if qr.version < 14
+    qr
   end
   #判断是否第一次进入action
   def first_visit?

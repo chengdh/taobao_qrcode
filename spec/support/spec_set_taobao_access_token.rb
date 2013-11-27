@@ -1,7 +1,7 @@
 #coding: utf-8
 #测试时,设置taobao_access_token
 module  Taobao
-  TAOBAO_TOKEN = {"w2_expires_in" => 1800, 
+  TAOBAO_TOKEN = HashWithIndifferentAccess.new({"w2_expires_in" => 1800, 
             "taobao_user_id" => "3600300860", 
             "taobao_user_nick" => "sandbox_cdh", 
             "w1_expires_in" => 12960000, 
@@ -11,7 +11,7 @@ module  Taobao
             "token_type" => "Bearer", 
             "refresh_token" => "620110248bdf55ac8ce3d3ef0ed539eeb671584376824683600300860", 
             "access_token" => "6202202fb9ZZ5c14fd720000853757717f856a651ea46463600300860", 
-            "r1_expires_in" => 12960000}
+            "r1_expires_in" => 12960000})
 
   def set_taobao_access_token
     session[:taobao_access_token] = TAOBAO_TOKEN
