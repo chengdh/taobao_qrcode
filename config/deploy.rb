@@ -2,6 +2,7 @@ set :stages, %w(production sandbox)
 set :default_stage, "production"
 #require "capistrano-rbenv"
 #require "capistrano-unicorn"
+require "capistrano-cook/rbenv"
 require 'capistrano/ext/multistage'
 require "bundler/capistrano"
 require "capistrano-cook"
